@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getForecast ()
     {
-        //
-        String URL = "https://api.openweathermap.org/data/2.5/weather?q=Gliwice,pl&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+
+        //API Call
+        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=current,minutely,hourly&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
 
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -89,29 +90,50 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
+
+                    // Get the array of daily data from JSON Array.
+                    // It looks like: 'array "daily"[{day0(today)}{day1}{day2}{day3}]'
+                    // Each of day1,day2,day3 has its fields 'temp','pressure','humm' etc;
+                    JSONArray dailyArray = response.getJSONArray("daily");
+
+                    // Getting the day0 (TODAY) object from the daily array.
+                    JSONObject day0 = dailyArray.getJSONObject(0);
+
+                    // Getting the day1 (TOMORROW) object from the daily array.
+                    JSONObject day01 = dailyArray.getJSONObject(1);
+
+                    // And so on...
+                    JSONObject day02 = dailyArray.getJSONObject(2);
+                    JSONObject day03 = dailyArray.getJSONObject(3);
+                    JSONObject day04 = dailyArray.getJSONObject(4);
+                    JSONObject day05 = dailyArray.getJSONObject(4);
+                    JSONObject day06 = dailyArray.getJSONObject(5);
+
+                    // Now we got all of the days needed.
+
                     //Getting JSON objects
-                    JSONObject obj_main = response.getJSONObject("main");//for everything
-                    JSONObject obj_wind = response.getJSONObject("wind");//for "speed"
-                    JSONObject obj_sys = response.getJSONObject("sys");//for "sunrise\sunset"
-                    JSONArray array = response.getJSONArray("weather");//for "description"
-                    JSONObject obj = array.getJSONObject(0);
-
-
-                    //Assigning STRING variables (From TOP to BOTTOM)
-                    String city = response.getString("name");//From response
-
-                    String temperature = String.valueOf(obj_main.getInt("temp"));
-                    String temp_min = String.valueOf(obj_main.getInt("temp_min"));
-                    String temp_max = String.valueOf(obj_main.getInt("temp_max"));
-
-                    String feels_like = String.valueOf(obj_main.getInt("feels_like"));
-                    String description = obj.getString("description");
-
-                    String pressure = String.valueOf(obj_main.getInt("pressure"));
-                    String humidity = String.valueOf(obj_main.getInt("humidity"));
-                    String windSpeed = String.valueOf(obj_wind.getInt("speed"));
-                    int sunrise = obj_sys.getInt("sunrise");
-                    int sunset = obj_sys.getInt("sunset");
+//                    JSONObject obj_current = response.getJSONObject("current");//
+//                    JSONObject obj_wind = response.getJSONObject("wind");//for "speed"
+//                    JSONObject obj_sys = response.getJSONObject("sys");//for "sunrise\sunset"
+//                    JSONArray array = response.getJSONArray("weather");//for "description"
+//                    JSONObject obj = array.getJSONObject(0);
+//
+//
+//                    //Assigning STRING variables (From TOP to BOTTOM)
+//                    String city = response.getString("name");//From response
+//
+//                    String temperature = String.valueOf(obj_current.getInt("temp"));
+//                    String temp_min = String.valueOf(obj_current.getInt("temp_min"));
+//                    String temp_max = String.valueOf(obj_current.getInt("temp_max"));
+//
+//                    String feels_like = String.valueOf(obj_main.getInt("feels_like"));
+//                    String description = obj.getString("description");
+//
+//                    String pressure = String.valueOf(obj_main.getInt("pressure"));
+//                    String humidity = String.valueOf(obj_main.getInt("humidity"));
+//                    String windSpeed = String.valueOf(obj_wind.getInt("speed"));
+//                    int sunrise = obj_sys.getInt("sunrise");
+//                    int sunset = obj_sys.getInt("sunset");
 
 
 
@@ -122,32 +144,32 @@ public class MainActivity extends AppCompatActivity {
 
                     //Assigning STRING variables to LABELS (From TOP to BOTTOM)
                     //For CALENDAR (CURRENT DATE)
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
-                    String formatted_date = dateFormat.format(calendar.getTime());
-                    tv_day.setText(formatted_date);
-                    tv_region.setText(city);
-
-                    tv_temperature.setText(temperature+"°C");
-                    tv_min_max.setText(temp_min+"°... "+temp_max+'°');
-
-                    tv_details.setText("Feels like " + feels_like + ", " +description);
-
-                    tv_pressure.setText("Pressure: " + pressure + " mb");
-                    tv_humidity.setText("Humidity: " + humidity + "%");
-                    tv_windSpeed.setText("Wind Speed: " + windSpeed + " km/h");
-
-                    //Calendar calendar = Calendar.getInstance();
-                    TimeZone tz = TimeZone.getDefault();
-                    calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    java.util.Date SRTime=new java.util.Date(sunrise*1000);
-                    java.util.Date SSTime=new java.util.Date(sunset*1000);
-
-                    //Toast.makeText(TimeStampChkActivity.this, sdf.format(currenTimeZone), Toast.LENGTH_SHORT).show();
-                    tv_sunrise.setText("Sunrise: " + sdf.format(SRTime));
-                    tv_sunset.setText("Sunset: " + sdf.format(SSTime));
-
+//                    Calendar calendar = Calendar.getInstance();
+//                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
+//                    String formatted_date = dateFormat.format(calendar.getTime());
+//                    tv_day.setText(formatted_date);
+//                    tv_region.setText(city);
+//
+//                    tv_temperature.setText(temperature+"°C");
+//                    tv_min_max.setText(temp_min+"°... "+temp_max+'°');
+//
+//                    tv_details.setText("Feels like " + feels_like + ", " +description);
+//
+//                    tv_pressure.setText("Pressure: " + pressure + " mb");
+//                    tv_humidity.setText("Humidity: " + humidity + "%");
+//                    tv_windSpeed.setText("Wind Speed: " + windSpeed + " km/h");
+//
+//                    //Calendar calendar = Calendar.getInstance();
+//                    TimeZone tz = TimeZone.getDefault();
+//                    calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//                    java.util.Date SRTime=new java.util.Date(sunrise*1000);
+//                    java.util.Date SSTime=new java.util.Date(sunset*1000);
+//
+//                    //Toast.makeText(TimeStampChkActivity.this, sdf.format(currenTimeZone), Toast.LENGTH_SHORT).show();
+//                    tv_sunrise.setText("Sunrise: " + sdf.format(SRTime));
+//                    tv_sunset.setText("Sunset: " + sdf.format(SSTime));
+//
 
 
 
