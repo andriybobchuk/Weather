@@ -3,10 +3,10 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
 <solid
-android:color = "#211f1f"
+android:color = "#242222"
 />
 <corners
-android:radius="8dp"
+android:radius="10dp"
 />
 
-        </shape>
+</shape>
