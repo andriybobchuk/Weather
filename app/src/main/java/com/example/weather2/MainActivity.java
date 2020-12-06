@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Getting the day1 (TOMORROW) object from the daily array.
                     JSONObject day01 = dailyArray.getJSONObject(1);
-                    tv_temperature.setText(day01.getDouble("temp")+"°C");
+
 
                     // And so on...
                     JSONObject day02 = dailyArray.getJSONObject(2);
@@ -228,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject day04 = dailyArray.getJSONObject(4);
                     JSONObject day05 = dailyArray.getJSONObject(4);
                     JSONObject day06 = dailyArray.getJSONObject(5);
-
                     // Now we got all of the days needed.
+
 
                     //Getting JSON objects
                     JSONObject obj_current = response.getJSONObject("current");//
@@ -251,25 +251,13 @@ public class MainActivity extends AppCompatActivity {
                     String city = "[Gliwice]";
                     tv_region.setText(city);
 
-                  //  String temperature = String.valueOf(obj_current.getInt("temp"));
-                    //String temperature = String.valueOf(day0.getInt("temp"));
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
+                    String formatted_date = dateFormat.format(calendar.getTime());
+                   // tv_day.setText(dateFormat.format(day0.getInt("dt")));
 
-
-
-
-
-                   // if(btn_day0.isSelected())
-                    //{
-
-                   // }
-
-                    /* ==========================================================================================================*/
-                    /* |                                  3-Set labels                                                           */
-                    /* ==========================================================================================================*/
-
-
-
-
+                    String pressure = String.valueOf(day0.getInt("pressure"));
+                    tv_pressure.setText("Pressure: " + pressure + " mb");
 
 
 
@@ -279,19 +267,13 @@ public class MainActivity extends AppCompatActivity {
 //                    String feels_like = String.valueOf(obj_main.getInt("feels_like"));
 //                    String description = obj.getString("description");
 //
-//                    String pressure = String.valueOf(obj_main.getInt("pressure"));
+//
 //                    String humidity = String.valueOf(obj_main.getInt("humidity"));
 //                    String windSpeed = String.valueOf(obj_wind.getInt("speed"));
 //                    int sunrise = obj_sys.getInt("sunrise");
 //                    int sunset = obj_sys.getInt("sunset");
 
-
-
-
 ////////////////////////////////////////////
-
-
-
 
                     //Assigning STRING variables to LABELS (From TOP to BOTTOM)
                     //For CALENDAR (CURRENT DATE)
@@ -306,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    tv_details.setText("Feels like " + feels_like + ", " +description);
 //
-//                    tv_pressure.setText("Pressure: " + pressure + " mb");
+//
 //                    tv_humidity.setText("Humidity: " + humidity + "%");
 //                    tv_windSpeed.setText("Wind Speed: " + windSpeed + " km/h");
 //
@@ -321,11 +303,6 @@ public class MainActivity extends AppCompatActivity {
 //                    tv_sunrise.setText("Sunrise: " + sdf.format(SRTime));
 //                    tv_sunset.setText("Sunset: " + sdf.format(SSTime));
 //
-
-
-
-
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
