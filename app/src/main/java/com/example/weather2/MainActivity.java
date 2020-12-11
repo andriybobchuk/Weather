@@ -7,39 +7,71 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.android.volley.Request;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
     /* Variable init */
-    TextView tv_day, tv_temperature, tv_region, tv_time, tv_details, tv_min_max, tv_pressure, tv_humidity, tv_windSpeed;
-    TextView tv_sunrise, tv_sunset;
+    TextView tv_day, tv_temperature, tv_region, tv_details, tv_min_max;
+    TextView tv_sunrise, tv_sunset, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;;
 
-    ImageButton btn_options, btn_back_from_options;
+    ImageButton btn_options;
 
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
-    //int dayIndex = 0; // Declaration & init of the 'default_day_index' (0 is 'today')
 
 
-    public void open()
-    {
+
+    /**
+     * Function for filling the bottom navigation panel with the first letters of week days
+     * @param response
+     * @throws JSONException
+     */
+    public void daysOfWeekPanel(JSONObject response) throws JSONException {
+
+        btn_day0 = findViewById(R.id.btn_day0);
+        btn_day1 = findViewById(R.id.btn_day1);
+        btn_day2 = findViewById(R.id.btn_day2);
+        btn_day3 = findViewById(R.id.btn_day3);
+        btn_day4 = findViewById(R.id.btn_day4);
+        btn_day5 = findViewById(R.id.btn_day5);
+        btn_day6 = findViewById(R.id.btn_day6);
+        Button daysButtons[] = { btn_day0, btn_day1, btn_day2, btn_day3, btn_day4, btn_day5, btn_day6 };
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("E");
+
+        for(int i=0; i<=6; i++)
+        {
+            Date date = new Date((response.getJSONArray("daily").getJSONObject(i).getLong("dt"))*1000);
+            String currentDayName = String.valueOf(dateFormat.format(date));
+            daysButtons[i].setText(String.valueOf(currentDayName.charAt(0)));
+        }
+    }
+
+
+    public void openOptions() {
         Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
+
+
+    @Override
+    public void onClick(View v)
+    {
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getForecast();
-
 
         /* initialization of labels */
         tv_day = findViewById(R.id.tv_day);
@@ -57,23 +88,26 @@ public class MainActivity extends AppCompatActivity {
         tv_details = findViewById(R.id.tv_details);
         tv_pressure = findViewById(R.id.tv_pressure);
         tv_humidity = findViewById(R.id.tv_humidity);
-        tv_windSpeed = findViewById(R.id.tv_windSpeed);
-        tv_sunrise = findViewById(R.id.tv_sunrise);
-        tv_sunset = findViewById(R.id.tv_sunset);
+        tv_wind = findViewById(R.id.tv_wind);
+        tv_uvi = findViewById(R.id.tv_uvi);
+        tv_clouds = findViewById(R.id.tv_clouds);
+//        tv_sunrise = findViewById(R.id.tv_sunrise);
+//        tv_sunset = findViewById(R.id.tv_sunset);
 
 
-        /* ==========================================================================================================*/
-        /* |                                  HANDLE BUTTON CLICKS                                                   */
-        /* ==========================================================================================================*/
 
         /* For button OPTIONS */
         btn_options = findViewById((R.id.btn_options));
         btn_options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                open();
+                openOptions();
             }
         });
+
+
+
+
 
 //        btn_day0 = findViewById((R.id.btn_day0));
 //        btn_day0.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +228,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
     public void getForecast ()
     {
 
@@ -207,102 +246,25 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    /* ==========================================================================================================*/
-                    /* |                                  1-GET JSON ARRAY AND ITS OBJECTS                                       */
-                    /* ==========================================================================================================*/
-                    // Get the array of daily data from JSON Array.
-                    // It looks like: 'array "daily"[{day0(today)}{day1}{day2}{day3}]'
-                    // Each of day1,day2,day3 has its fields 'temp','pressure','humm' etc;
-                    JSONArray dailyArray = response.getJSONArray("daily");
+                    daysOfWeekPanel(response);
 
-                    // Getting the day0 (TODAY) object from the daily array.
-                    JSONObject day0 = dailyArray.getJSONObject(0);
-
-                    // Getting the day1 (TOMORROW) object from the daily array.
-                    JSONObject day01 = dailyArray.getJSONObject(1);
-
-
-                    // And so on...
-                    JSONObject day02 = dailyArray.getJSONObject(2);
-                    JSONObject day03 = dailyArray.getJSONObject(3);
-                    JSONObject day04 = dailyArray.getJSONObject(4);
-                    JSONObject day05 = dailyArray.getJSONObject(4);
-                    JSONObject day06 = dailyArray.getJSONObject(5);
-                    // Now we got all of the days needed.
-
-
-                    //Getting JSON objects
-                    JSONObject obj_current = response.getJSONObject("current");//
-//                    JSONObject obj_wind = response.getJSONObject("wind");//for "speed"
-//                    JSONObject obj_sys = response.getJSONObject("sys");//for "sunrise\sunset"
-                    JSONArray array = response.getJSONArray("weather");//for "description"
-                    JSONObject obj = array.getJSONObject(0);
-//
-//
-
-
-
-
-                    /* ==========================================================================================================*/
-                    /* |                                  2-ASSIGN STRINGS USING JSON OBJECTS                                    */
-                    /* ==========================================================================================================*/
-
-                    //Assigning STRINGs (TOP to BOTTOM)
-                    String city = "[Gliwice]";
-                    tv_region.setText(city);
-
+                    //
                     Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
-                    String formatted_date = dateFormat.format(calendar.getTime());
-                   // tv_day.setText(dateFormat.format(day0.getInt("dt")));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd, HH");
+                    dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+1"));
+                    //
+                    JSONObject current = response.getJSONObject("current");
+                    //JSONArray dailyArray = response.getJSONArray("daily");
+                    Date date = new Date(current.getLong("dt")*1000);
+                    tv_day.setText(dateFormat.format(date));
 
-                    String pressure = String.valueOf(day0.getInt("pressure"));
-                    tv_pressure.setText("Pressure: " + pressure + " mb");
+                    tv_temperature.setText(current.getInt("temp")+"°C");
+                    tv_min_max.setText(String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("min"))+"°/"+String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("max"))+"°");
+
+                    tv_details.setText("Feels like " + String.valueOf(current.get("feels_like"))+"°, " + String.valueOf(current.getJSONArray("weather").getJSONObject(0).getInt("description")));
 
 
 
-//                    String temp_min = String.valueOf(obj_current.getInt("temp_min"));
-//                    String temp_max = String.valueOf(obj_current.getInt("temp_max"));
-//
-//                    String feels_like = String.valueOf(obj_main.getInt("feels_like"));
-//                    String description = obj.getString("description");
-//
-//
-//                    String humidity = String.valueOf(obj_main.getInt("humidity"));
-//                    String windSpeed = String.valueOf(obj_wind.getInt("speed"));
-//                    int sunrise = obj_sys.getInt("sunrise");
-//                    int sunset = obj_sys.getInt("sunset");
-
-////////////////////////////////////////////
-
-                    //Assigning STRING variables to LABELS (From TOP to BOTTOM)
-                    //For CALENDAR (CURRENT DATE)
-//                    Calendar calendar = Calendar.getInstance();
-//                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
-//                    String formatted_date = dateFormat.format(calendar.getTime());
-//                    tv_day.setText(formatted_date);
-//                    tv_region.setText(city);
-//
-//                    tv_temperature.setText(temperature+"°C");
-//                    tv_min_max.setText(temp_min+"°... "+temp_max+'°');
-//
-//                    tv_details.setText("Feels like " + feels_like + ", " +description);
-//
-//
-//                    tv_humidity.setText("Humidity: " + humidity + "%");
-//                    tv_windSpeed.setText("Wind Speed: " + windSpeed + " km/h");
-//
-//                    //Calendar calendar = Calendar.getInstance();
-//                    TimeZone tz = TimeZone.getDefault();
-//                    calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-//                    java.util.Date SRTime=new java.util.Date(sunrise*1000);
-//                    java.util.Date SSTime=new java.util.Date(sunset*1000);
-//
-//                    //Toast.makeText(TimeStampChkActivity.this, sdf.format(currenTimeZone), Toast.LENGTH_SHORT).show();
-//                    tv_sunrise.setText("Sunrise: " + sdf.format(SRTime));
-//                    tv_sunset.setText("Sunset: " + sdf.format(SSTime));
-//
 
                 } catch (JSONException e) {
                     e.printStackTrace();
