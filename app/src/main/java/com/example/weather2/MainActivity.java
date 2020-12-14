@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
     ImageView iv_theme;
+
+    SwipeRefreshLayout swiperefresh;
+
 
 
     /**
@@ -200,6 +204,15 @@ public class MainActivity extends AppCompatActivity {
                 btn_day4.setSelected(false);
                 btn_day5.setSelected(false);
                 btn_day0.setSelected(false);
+            }
+        });
+
+        swiperefresh = findViewById(R.id.swiperefresh);
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                tv_day.setText("TU COCHYB");
+                swiperefresh.setRefreshing(false);
             }
         });
 

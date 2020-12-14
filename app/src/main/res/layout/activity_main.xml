@@ -7,6 +7,20 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity" android:background="#0F0E10">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="394dp"
