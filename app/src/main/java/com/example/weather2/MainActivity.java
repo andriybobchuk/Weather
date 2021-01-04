@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
+
         getForecast();
 
         /* For button OPTIONS */
@@ -277,10 +279,10 @@ public class MainActivity extends AppCompatActivity {
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
 
-        tv_morning = findViewById(R.id.tv_morning);
-        tv_afternoon = findViewById(R.id.tv_afternoon);
-        tv_eve = findViewById(R.id.tv_eve);
-        tv_night = findViewById(R.id.tv_night);
+//        tv_morning = findViewById(R.id.tv_morning);
+//        tv_afternoon = findViewById(R.id.tv_afternoon);
+//        tv_eve = findViewById(R.id.tv_eve);
+//        tv_night = findViewById(R.id.tv_night);
 
         if (dayIndex == 0)
         {
