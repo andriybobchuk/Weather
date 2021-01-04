@@ -27,15 +27,21 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tv_day, tv_temperature, tv_region, tv_details, tv_min_max, tv_hint, tv_sunrise, tv_sunset,
-            tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds, tv_pop, tv_morning, tv_afternoon,
-            tv_eve, tv_night;
-    ImageButton btn_options;
-    Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
-    ImageView iv_theme;
-    SwipeRefreshLayout swiperefresh;
+    /* Main part (top) */
+    SwipeRefreshLayout refreshLayout;
+    ImageButton btn_options; // round circle in the top right corner
+    ImageView iv_theme; // background image with wizard
+    TextView tv_day, tv_region, tv_temperature, tv_min_max, tv_details, tv_myWeatherDescription;
 
-    boolean firstCall = true; // to avoid problem with refreshing
+    /* Horizontal ScrollView */
+    TextView tv_pop, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;
+
+    /* Bar under the horizontal ScrollView */
+    TextView tv_sunrise, tv_sunset;
+
+    /* Bottom navigation panel (Day of the week) */
+    Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
+
 
 
     /**
@@ -64,23 +70,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void openOptions() {
         Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
 
 
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         getForecast();
 
@@ -109,14 +108,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "ChannelA")
-                .setSmallIcon(R.drawable.clouds_icon)
-                .setContentTitle("Title")
-                .setContentText("textttttjkhbh.")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-        final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
         btn_day1 = findViewById((R.id.btn_day1));
         btn_day1.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 btn_day4.setSelected(false);
                 btn_day5.setSelected(false);
                 btn_day6.setSelected(false);
-                notificationManager.notify(100, builder.build());
             }
         });
         btn_day3 = findViewById((R.id.btn_day3));
@@ -217,49 +207,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        swiperefresh = findViewById(R.id.swiperefresh);
-        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout = findViewById(R.id.swiperefresh);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //tv_day.setText("TU COCHYB");
                 getForecast();
-                swiperefresh.setRefreshing(false);
+                refreshLayout.setRefreshing(false);
             }
         });
 
     }
 
 
-//TODO: make a loading of UI like in spotify - at first the weather data loads, then UI. Thus on start we will see nothing
+
+    /** Function sets the background with the wizard and my description of the weather depending on theme */
     public  void setTheme(int dayIndex, String[] arr_theme)
     {
-        tv_hint = findViewById(R.id.tv_hint);
+        tv_myWeatherDescription = findViewById(R.id.tv_hint);
         iv_theme = findViewById(R.id.iv_theme);
         switch(arr_theme[dayIndex])
         {
             case "Clouds":
-                tv_hint.setText("Not the nicest weather");
+                tv_myWeatherDescription.setText("Not the nicest weather");
                 iv_theme.setImageResource(R.drawable.clouds);
                 break;
             case "Clear":
-                tv_hint.setText("The weather's just perfect!");
+                tv_myWeatherDescription.setText("The weather's just perfect!");
                 iv_theme.setImageResource(R.drawable.theme_sunny);
                 break;
             case "Rain":
-                tv_hint.setText("Take ur umbrella with you!");
+                tv_myWeatherDescription.setText("Take ur umbrella with you!");
                 iv_theme.setImageResource(R.drawable.theme_rain);
                 break;
             case "Snow":
-                tv_hint.setText("All the weather outside is frightful..");
+                tv_myWeatherDescription.setText("All the weather outside is frightful..");
                 iv_theme.setImageResource(R.drawable.theme_snow);
                 break;
             default:
-                tv_hint.setText("It's strange outside");
+                tv_myWeatherDescription.setText("It's strange outside");
                 iv_theme.setImageResource(R.drawable.clouds);
         }
     }
 
 
+    /** Fills all labels using all arrays */
     public void setForecastData(int dayIndex)
     {
 
@@ -279,10 +270,6 @@ public class MainActivity extends AppCompatActivity {
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
 
-//        tv_morning = findViewById(R.id.tv_morning);
-//        tv_afternoon = findViewById(R.id.tv_afternoon);
-//        tv_eve = findViewById(R.id.tv_eve);
-//        tv_night = findViewById(R.id.tv_night);
 
         if (dayIndex == 0)
         {
@@ -304,10 +291,6 @@ public class MainActivity extends AppCompatActivity {
         tv_sunset.setText(arr_sunset[dayIndex]);
         tv_pop.setText(arr_pop[dayIndex]);
 
-        tv_morning.setText(arr_morning[dayIndex]);
-        tv_afternoon.setText(arr_afternoon[dayIndex]);
-        tv_eve.setText(arr_eve[dayIndex]);
-        tv_night.setText(arr_night[dayIndex]);
 
         setTheme(dayIndex, arr_theme);
 
@@ -331,10 +314,7 @@ public class MainActivity extends AppCompatActivity {
     String [ ] arr_sunset = new String [7];
     String [ ] arr_pop = new String [7];
 
-    String [ ] arr_morning = new String [7];
-    String [ ] arr_afternoon = new String [7];
-    String [ ] arr_eve = new String [7];
-    String [ ] arr_night = new String [7];
+
 
     public void getForecast ()
     {
@@ -382,10 +362,7 @@ public class MainActivity extends AppCompatActivity {
                         arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+" mb");
                         arr_theme[dayIndex] = response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("main");
 
-                        arr_morning[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("morn") + "°C in the morning");
-                        arr_afternoon[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day") + "°C in the afternoon");
-                        arr_eve[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("eve") + "°C in the evening");
-                        arr_night[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("night") + "°C at night");
+
                     }
                     today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
 
