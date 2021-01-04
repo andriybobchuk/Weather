@@ -338,61 +338,73 @@
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView29"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp0"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView28"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp1"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView27"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp2"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView26"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp3"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView25"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp4"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView24"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp5"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView23"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp6"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView22"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp7"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView21"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp8"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView20"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp9"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
+                                android:paddingBottom="35dp" android:textColor="#FFFF"/>
+                        <TextView
+                                android:text="8°C"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp10"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
+                                android:paddingBottom="35dp" android:textColor="#FFFF"/>
+                        <TextView
+                                android:text="8°C"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_tmp11"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                     </LinearLayout>
@@ -424,7 +436,7 @@
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp"
                             android:id="@+id/linearLayout3">
                         <TextView
-                                android:text="02:00"
+                                android:text="00:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView43"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
@@ -436,61 +448,61 @@
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="04:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView8"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="06:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView9"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="08:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView7"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="10:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView6"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="12:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView5"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="14:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView4"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="16:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView3"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="18:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView2"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="20:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                         <TextView
-                                android:text="02:00"
+                                android:text="22:00"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView11"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
@@ -502,85 +514,99 @@
                             android:rotation="90" app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="40dp"
                             android:layout_marginTop="320dp" android:max="12" android:progress="5"
-                            android:progressTint="#159442" android:thumb="#1ED760"/>
+                            android:progressTint="#1ED760"/>
                     <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="89dp"
-                            android:layout_height="619dp"
+                            android:layout_width="95dp"
+                            android:layout_height="624dp"
                             app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp"
+                            android:id="@+id/linearLayout6">
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript0"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript1"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript2"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript3"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/ttv_descript4"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript5"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript6"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript7"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript8"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript9"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript10"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                        <TextView
+                                android:text="rain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/tv_descript11"
+                                android:paddingBottom="35dp" android:paddingStart="25dp"
+                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="72dp"
+                            android:layout_height="629dp"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout6"
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp">
                         <TextView
-                                android:text="rain"
+                                android:text="1002mb"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView40"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView39"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView38"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView37"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView36"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView35"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView34"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView33"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView32"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView31"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView30"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView13"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
+                                android:layout_height="wrap_content" android:id="@+id/textView46"
+                                android:paddingBottom="35dp" android:fontFamily="@font/gotham_medium"
+                                android:textSize="15.7sp"/>
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
