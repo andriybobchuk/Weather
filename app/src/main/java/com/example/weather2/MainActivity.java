@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     /* Bar under the horizontal ScrollView */
     TextView tv_sunrise, tv_sunset;
 
+
+
+
     /* Bottom navigation panel (Day of the week) */
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
@@ -270,10 +273,30 @@ public class MainActivity extends AppCompatActivity {
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
 
+        /* Hourly forecast panel */
+        TextView tv_time0 = findViewById(R.id.tv_time0);
+        TextView tv_time1 = findViewById(R.id.tv_time1);
+        TextView tv_time2 = findViewById(R.id.tv_time2);
+        TextView tv_time3 = findViewById(R.id.tv_time3);
+        TextView tv_time4 = findViewById(R.id.tv_time4);
+        TextView tv_time5 = findViewById(R.id.tv_time5);
+        TextView tv_time6 = findViewById(R.id.tv_time6);
+        TextView tv_time7 = findViewById(R.id.tv_time7);
+        TextView tv_time8 = findViewById(R.id.tv_time8);
+        TextView tv_time9 = findViewById(R.id.tv_time9);
+        TextView tv_time10 = findViewById(R.id.tv_time10);
+        TextView tv_time11 = findViewById(R.id.tv_time11);
+        TextView _12_timeLabels[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
+                tv_time8,tv_time9,tv_time10,tv_time11 };
 
         if (dayIndex == 0)
         {
             tv_temperature.setText(today_temperature + "°C");
+            for(int i=0; i<=11; i++)
+            {
+                _12_timeLabels[i].setText(arr_time[i]);
+            }
+
         }
         else
         {
@@ -313,14 +336,23 @@ public class MainActivity extends AppCompatActivity {
     String [ ] arr_sunrise = new String [7];
     String [ ] arr_sunset = new String [7];
     String [ ] arr_pop = new String [7];
+    ///
+    String[] arr_time = new String [12];
+    String[] arr_temp = new String [12];
+    String[] arr_rain = new String [12];
+    String[] arr_pres = new String [12];
+    ///
 
 
+
+    /** 2D array for everything in the "Inside the day" block for current day */
+    String[][] hourlyData = new String[3][12]; //3 for 3 fields to update; 12 for 12 hours
 
     public void getForecast ()
     {
 
         //API Call
-        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely,hourly&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
 
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -333,12 +365,13 @@ public class MainActivity extends AppCompatActivity {
 
                     /** === Here save ALL THE DATA to 7-days arrays of data strings for filling labels === **/
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MM.dd");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d");
                     dateFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + response.getInt("timezone_offset")/3600)));
 
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm aa");
-                    timeFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + response.getInt("timezone_offset")/3600)));
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm");//One time format for all app
+                    timeFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + response.getInt("timezone_offset")/3600))); //One time zone for all app
                     Date timeOfRefresh = new Date((response.getJSONObject("current").getLong("dt"))*1000);
+
                     tv_region = findViewById(R.id.tv_region);
                     tv_region.setText("[region], UPD  " + String.valueOf(timeFormat.format(timeOfRefresh)));
 
@@ -367,6 +400,13 @@ public class MainActivity extends AppCompatActivity {
                     today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
 
 
+                    for(int time = 0; time <= 11; time++)
+                    {
+                        arr_time[time] = String.valueOf(timeFormat.format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
+
+                    }
+
+                    //Ми можемо винести цей блок в OnCreate щоб усунути баг з викидом на нульовий день
                     setForecastData(0);
                     btn_day0.setSelected(true);
                     btn_day1.setSelected(false);
