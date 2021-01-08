@@ -125,7 +125,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="7dp" app:layout_constraintTop_toBottomOf="@+id/tv_hint"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="820dp" android:scrollbarSize="0dp"
+                        android:layout_marginBottom="1220dp" android:scrollbarSize="0dp"
                         android:id="@+id/horizontalScrollView">
                     <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                                   android:orientation="horizontal">
@@ -320,91 +320,93 @@
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="378dp"
-                        android:layout_height="660dp"
+                        android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:background="@drawable/cards" android:layout_marginStart="15dp"
+                        android:background="@drawable/bgrate" android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp" app:layout_constraintTop_toBottomOf="@+id/iulfhdihdflifdh"
                         android:layout_marginTop="17dp"
-                >
+                        android:visibility="visible"
+                        android:id="@+id/cl_insideTheDaySimplified">
 
                     <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="51dp"
-                            android:layout_height="634dp"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-                            android:id="@+id/linearLayout5">
+                            android:layout_width="69dp"
+                            android:layout_height="631dp"
+                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="32dp"
+                            android:id="@+id/ll_temp"
+                            android:visibility="visible" android:layout_marginStart="9dp"
+                            app:layout_constraintStart_toEndOf="@+id/ll_time">
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp0"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp0"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp1"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp1"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp2"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp2"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp3"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp3"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp4"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp4"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp5"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp5"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp6"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp6"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp7"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp7"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp8"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp8"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp9"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp9"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp10"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp10"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                         <TextView
                                 android:text="8°C"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_tmp11"
+                                android:layout_height="wrap_content" android:id="@+id/tv_temp11"
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:textColor="#FFFF"/>
                     </LinearLayout>
@@ -412,29 +414,65 @@
                             android:orientation="vertical"
                             android:layout_width="24dp"
                             android:layout_height="624dp"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="19dp"
-                            android:id="@+id/linearLayout4"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout5">
-                        <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" app:srcCompat="@drawable/clouds_icon"
-                                android:id="@+id/imageView3"/>
-                        <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" app:srcCompat="@drawable/summer_icon"
-                                android:id="@+id/imageView4"/>
+                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+                            android:id="@+id/ll_icos"
+                            android:layout_marginStart="18dp" app:layout_constraintStart_toEndOf="@+id/ll_temp">
                         <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
-                                android:id="@+id/imageView5"/>
+                                android:id="@+id/iv_ico0" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico1" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico2" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico3" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico4" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico5" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico6" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico7" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico8" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/clouds_icon"
+                                android:id="@+id/iv_ico9" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/summer_icon"
+                                android:id="@+id/iv_ico10" android:paddingBottom="3dp"/>
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/rain_icon"
+                                android:id="@+id/iv_ico11" android:paddingBottom="3dp"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="71dp"
-                            android:layout_height="653dp"
-                            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="22dp"
+                            android:layout_width="82dp"
+                            android:layout_height="613dp"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="39dp"
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp"
-                            android:id="@+id/linearLayout3">
+                            android:id="@+id/ll_time">
                         <TextView
                                 android:text="00:00"
                                 android:layout_width="match_parent"
@@ -508,101 +546,15 @@
                                 android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"
                                 android:paddingBottom="35dp" android:layout_gravity="center_vertical"/>
                     </LinearLayout>
-                    <SeekBar
-                            android:layout_width="640dp"
-                            android:layout_height="47dp" android:id="@+id/seekBar3"
-                            android:rotation="90" app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="40dp"
-                            android:layout_marginTop="320dp" android:max="12" android:progress="5"
-                            android:progressTint="#1ED760"/>
                     <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="95dp"
-                            android:layout_height="624dp"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp"
-                            android:id="@+id/linearLayout6">
+                            android:layout_width="88dp"
+                            android:layout_height="631dp"
+                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="32dp"
+                            android:id="@+id/ll_pres" android:layout_marginStart="33dp"
+                            app:layout_constraintStart_toEndOf="@+id/ll_icos">
                         <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript0"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript1"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript2"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript3"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/ttv_descript4"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript5"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript6"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript7"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript8"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript9"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript10"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                        <TextView
-                                android:text="rain"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/tv_descript11"
-                                android:paddingBottom="35dp" android:paddingStart="25dp"
-                                android:fontFamily="@font/gotham_medium" android:textSize="15.7sp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="72dp"
-                            android:layout_height="629dp"
-                            app:layout_constraintStart_toEndOf="@+id/linearLayout6"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp">
-                        <TextView
-                                android:text="1002mb"
+                                android:text="1002 mb"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/tv_pressure0"
                                 android:paddingBottom="35dp" android:fontFamily="@font/gotham_medium"
@@ -674,6 +626,19 @@
                                 android:paddingBottom="35dp" android:fontFamily="@font/gotham_medium"
                                 android:textSize="15.7sp"/>
                     </LinearLayout>
+                    <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="100dp" tools:srcCompat="@tools:sample/avatars"
+                            android:id="@+id/imageView3" app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="2dp" app:layout_constraintTop_toTopOf="parent"
+                            android:visibility="visible"/>
+                    <TextView
+                            android:text="TextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintStart_toEndOf="@+id/ll_icos" app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="2dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

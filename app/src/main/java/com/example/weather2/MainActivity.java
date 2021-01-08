@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -84,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         getForecast();
 
         /* For button OPTIONS */
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_day0.setSelected(true);btn_day1.setSelected(false);btn_day2.setSelected(false);btn_day3.setSelected(false);btn_day4.setSelected(false);btn_day5.setSelected(false);btn_day6.setSelected(false);
 
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
+
 
 
             }
@@ -274,6 +274,11 @@ public class MainActivity extends AppCompatActivity {
         tv_sunset = findViewById(R.id.tv_sunset);
 
         /* Hourly forecast panel */
+        LinearLayout ll_time = findViewById(R.id.ll_time);
+        LinearLayout ll_temp = findViewById(R.id.ll_temp);
+        LinearLayout ll_icos = findViewById(R.id.ll_icos);
+        LinearLayout ll_pres = findViewById(R.id.ll_pres);
+
         TextView tv_time0 = findViewById(R.id.tv_time0);
         TextView tv_time1 = findViewById(R.id.tv_time1);
         TextView tv_time2 = findViewById(R.id.tv_time2);
@@ -289,17 +294,92 @@ public class MainActivity extends AppCompatActivity {
         TextView _12_timeLabels[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
                 tv_time8,tv_time9,tv_time10,tv_time11 };
 
+        TextView tv_temp0 = findViewById(R.id.tv_temp0);
+        TextView tv_temp1 = findViewById(R.id.tv_temp1);
+        TextView tv_temp2 = findViewById(R.id.tv_temp2);
+        TextView tv_temp3 = findViewById(R.id.tv_temp3);
+        TextView tv_temp4 = findViewById(R.id.tv_temp4);
+        TextView tv_temp5 = findViewById(R.id.tv_temp5);
+        TextView tv_temp6 = findViewById(R.id.tv_temp6);
+        TextView tv_temp7 = findViewById(R.id.tv_temp7);
+        TextView tv_temp8 = findViewById(R.id.tv_temp8);
+        TextView tv_temp9 = findViewById(R.id.tv_temp9);
+        TextView tv_temp10 = findViewById(R.id.tv_temp10);
+        TextView tv_temp11 = findViewById(R.id.tv_temp11);
+        TextView _12_tempLabels[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
+                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
+
+        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
+        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
+        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
+        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
+        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
+        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
+        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
+        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
+        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
+        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
+        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
+        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
+        TextView _12_pressureLabels[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
+                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
+
+        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
+        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
+        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
+        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
+        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
+        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
+        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
+        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
+        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
+        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
+        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
+        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
+        ImageView _12_icosLabels[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
+                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
+
+
         if (dayIndex == 0)
         {
             tv_temperature.setText(today_temperature + "°C");
-            for(int i=0; i<=11; i++)
-            {
-                _12_timeLabels[i].setText(arr_time[i]);
-            }
 
+            ll_time.setVisibility(View.VISIBLE);
+            ll_temp.setVisibility(View.VISIBLE);
+            ll_icos.setVisibility(View.VISIBLE);
+            ll_pres.setVisibility(View.VISIBLE  );
+
+            for(int i=0; i<=11; i++) {
+                _12_timeLabels[i].setText(arr_time[i]);
+                _12_tempLabels[i].setText(arr_temp[i]);
+                _12_pressureLabels[i].setText(arr_pres[i]);
+
+                switch (arr_descript[i]) {
+                    case "Clouds":
+                        _12_icosLabels[i].setImageResource(R.drawable.clouds_icon);
+                        break;
+                    case "Clear":
+                        _12_icosLabels[i].setImageResource(R.drawable.sun);
+                        break;
+                    case "Rain":
+                        _12_icosLabels[i].setImageResource(R.drawable.rain_icon);
+                        break;
+                    case "Snow":
+                        _12_icosLabels[i].setImageResource(R.drawable.snow_icon);
+                        break;
+                    default:
+                        iv_theme.setImageResource(R.drawable.clouds_icon);
+                }
+            }
         }
         else
         {
+            ll_time.setVisibility(View.GONE);
+            ll_temp.setVisibility(View.GONE);
+            ll_icos.setVisibility(View.GONE);
+            ll_pres.setVisibility(View.GONE);
+
+
             tv_temperature.setText(arr_temperature[dayIndex] + "°C");
         }
         tv_day.setText(arr_day[dayIndex]);
@@ -339,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
     ///
     String[] arr_time = new String [12];
     String[] arr_temp = new String [12];
-    String[] arr_rain = new String [12];
+    String[] arr_descript = new String [12];
     String[] arr_pres = new String [12];
     ///
 
@@ -403,7 +483,9 @@ public class MainActivity extends AppCompatActivity {
                     for(int time = 0; time <= 11; time++)
                     {
                         arr_time[time] = String.valueOf(timeFormat.format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
-
+                        arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°C";
+                        arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
+                        arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
                     }
 
                     //Ми можемо винести цей блок в OnCreate щоб усунути баг з викидом на нульовий день
