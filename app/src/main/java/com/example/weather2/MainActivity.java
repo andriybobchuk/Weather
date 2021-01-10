@@ -340,6 +340,13 @@ public class MainActivity extends AppCompatActivity {
                 iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
 
 
+        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
+        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
+        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
+        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
+        LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
+
+
         if (dayIndex == 0)
         {
             tv_temperature.setText(today_temperature + "°C");
@@ -347,7 +354,9 @@ public class MainActivity extends AppCompatActivity {
             ll_time.setVisibility(View.VISIBLE);
             ll_temp.setVisibility(View.VISIBLE);
             ll_icos.setVisibility(View.VISIBLE);
-            ll_pres.setVisibility(View.VISIBLE  );
+            ll_pres.setVisibility(View.VISIBLE);
+            ll_InsideTheDayShortened.setVisibility(View.GONE);
+
 
             for(int i=0; i<=11; i++) {
                 _12_timeLabels[i].setText(arr_time[i]);
@@ -378,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
             ll_temp.setVisibility(View.GONE);
             ll_icos.setVisibility(View.GONE);
             ll_pres.setVisibility(View.GONE);
+            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
 
 
             tv_temperature.setText(arr_temperature[dayIndex] + "°C");
@@ -393,6 +403,11 @@ public class MainActivity extends AppCompatActivity {
         tv_sunrise.setText(arr_sunrise[dayIndex]);
         tv_sunset.setText(arr_sunset[dayIndex]);
         tv_pop.setText(arr_pop[dayIndex]);
+
+        tv_temp_morning.setText(arr_morning[dayIndex]);
+        tv_temp_afternoon.setText(arr_afternoon[dayIndex]);
+        tv_temp_evening.setText(arr_eve[dayIndex]);
+        tv_temp_night.setText(arr_night[dayIndex]);
 
 
         setTheme(dayIndex, arr_theme);
@@ -422,6 +437,10 @@ public class MainActivity extends AppCompatActivity {
     String[] arr_descript = new String [12];
     String[] arr_pres = new String [12];
     ///
+    String [ ] arr_morning = new String [7];
+    String [ ] arr_afternoon = new String [7];
+    String [ ] arr_eve = new String [7];
+    String [ ] arr_night = new String [7];
 
 
 
@@ -453,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
                     Date timeOfRefresh = new Date((response.getJSONObject("current").getLong("dt"))*1000);
 
                     tv_region = findViewById(R.id.tv_region);
-                    tv_region.setText("[region], UPD  " + String.valueOf(timeFormat.format(timeOfRefresh)));
+                    tv_region.setText("[region] at " + String.valueOf(timeFormat.format(timeOfRefresh)));
 
                     for(int dayIndex = 0; dayIndex <= 6; dayIndex++)
                     {
@@ -475,6 +494,10 @@ public class MainActivity extends AppCompatActivity {
                         arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+" mb");
                         arr_theme[dayIndex] = response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("main");
 
+                        arr_morning[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("morn") + "°");
+                        arr_afternoon[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day") + "°");
+                        arr_eve[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("eve") + "°");
+                        arr_night[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("night") + "°");
 
                     }
                     today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
