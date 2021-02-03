@@ -5,33 +5,199 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".OptionsActivity" android:background="#121212">
+        tools:context=".OptionsActivity" android:background="#101010">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="414dp"
-            android:layout_height="52dp"
-            android:background="#2F2F2F" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+    <ScrollView
+            android:layout_width="413dp"
+            android:layout_height="735dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+    >
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="415dp"
+                    android:layout_height="58dp"
+                    android:background="#1B1B1B"
+                    android:id="@+id/constraintLayout2"
+            >
 
-        <ImageButton
-                android:layout_width="23dp"
-                android:layout_height="20dp"
-                android:id="@+id/btn_back_from_options" android:layout_weight="1"
-                android:background="@drawable/abc_vector_test"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="22dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="17dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="20dp" app:layout_constraintVertical_bias="0.857"/>
-        <TextView
-                android:text="Options"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_weight="1"
-                android:fontFamily="@font/gotham_bold" android:textSize="15sp" android:textColor="#FFFFFF"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="22dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="22dp"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                        android:layout_width="23dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/btn_back_from_options" android:layout_weight="1"
+                        android:background="@drawable/abc_vector_test"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="22dp" app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="17dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="20dp" app:layout_constraintVertical_bias="0.857"/>
+                <TextView
+                        android:text="Options"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:fontFamily="@font/gotham_bold" android:textSize="15sp" android:textColor="#FFFFFF"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="22dp" app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="22dp"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="414dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp" android:layout_marginTop="1dp"
+                    android:id="@+id/constraintLayout3">
+
+                <TextView
+                        android:text="Change location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView"
+                        android:fontFamily="@font/gotham_medium" android:textSize="17sp"
+                        android:textColor="#ffffff" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="30dp"/>
+                <EditText
+                        android:layout_width="264dp"
+                        android:layout_height="47dp"
+                        android:inputType="textPersonName"
+                        android:text="City name"
+                        android:ems="18"
+                        android:id="@+id/editTextTextPersonName"
+                        android:textSize="15sp" android:fontFamily="@font/gotham_medium"
+                        android:textColor="#8B8B8B" app:layout_constraintTop_toBottomOf="@+id/textView"
+                        android:layout_marginTop="10dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp"
+                        android:theme="@style/MyEditTextTheme"/>
+                <Button
+                        android:text="Save"
+                        android:layout_width="81dp"
+                        android:layout_height="30dp" android:id="@+id/button"
+                        android:background="@drawable/semi_transparent_background"
+                        android:textColor="@android:color/black" app:layout_constraintTop_toBottomOf="@+id/textView"
+                        android:layout_marginTop="24dp" app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+                        android:layout_marginStart="15dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp">
+
+                <TextView
+                        android:text="Annoying notifications every day, no matter how the weather looks like"
+                        android:layout_width="312dp"
+                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
+                <TextView
+                        android:text="Notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView3"
+                        android:fontFamily="@font/gotham_medium" android:textSize="17sp"
+                        android:textColor="#ffffff" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"/>
+                <TextView
+                        android:text="Daily Overview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
+                        android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp"/>
+                <CheckBox
+                        android:layout_width="31dp"
+                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        android:layout_marginTop="34dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="30dp"
+                        android:theme="@style/MyEditTextTheme"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="84dp">
+
+                <TextView
+                        android:text="We will tell you when you should take your  umbrella"
+                        android:layout_width="312dp"
+                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
+                <TextView
+                        android:text="Rain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
+                        android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
+                <CheckBox
+                        android:layout_width="31dp"
+                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="15dp"
+                        android:theme="@style/MyEditTextTheme"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="83dp">
+
+                <TextView
+                        android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
+                        android:layout_width="312dp"
+                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
+                <TextView
+                        android:text="Low/High temperatures"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
+                        android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
+                <CheckBox
+                        android:layout_width="31dp"
+                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="15dp"
+                        android:theme="@style/MyEditTextTheme"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
+                        android:layout_width="312dp"
+                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
+                <TextView
+                        android:text="Strong winds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
+                        android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
+                <CheckBox
+                        android:layout_width="31dp"
+                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="15dp"
+                        android:theme="@style/MyEditTextTheme"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

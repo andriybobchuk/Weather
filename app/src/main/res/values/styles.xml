@@ -2,5 +2,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar"/>
 
+    <style name="MyEditTextTheme">
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#1ED760</item>
+        <item name="colorControlHighlight">#1ED760</item>
+    </style>
+
 
 </resources>

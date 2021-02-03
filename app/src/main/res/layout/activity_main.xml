@@ -813,7 +813,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -824,7 +824,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -835,7 +835,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -846,7 +846,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -857,7 +857,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -868,7 +868,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
                 android:text="M"
@@ -879,7 +879,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/gotham_medium"
                 android:background="@drawable/select_butn_style"
-                android:textColor="@color/btn_background_color"
+                android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
