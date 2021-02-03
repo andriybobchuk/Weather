@@ -894,7 +894,7 @@
             android:layout_width="367dp"
             android:layout_height="355dp"
             android:background="@drawable/semi_transparent_background"
-            android:id="@+id/cl_setRegion" android:visibility="visible"
+            android:id="@+id/cl_setRegion" android:visibility="gone"
             tools:layout_editor_absoluteY="189dp" tools:layout_editor_absoluteX="22dp">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
