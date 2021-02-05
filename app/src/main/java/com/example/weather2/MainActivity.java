@@ -3,6 +3,7 @@ package com.example.weather2;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -58,7 +59,22 @@ public class MainActivity extends AppCompatActivity {
     /* Bottom navigation panel (Day of the week) */
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
-
+    /**     this should be executed as soon as the app has been started (Notification channel creation) **/
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Channel #1 (MAIN)";
+            String description = "Channel description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CH_ID", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
     /**
      * Function for filling the bottom navigation panel with the first letters of week days
@@ -96,6 +112,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CH_ID")
+                .setSmallIcon(R.drawable.clouds_icon)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(0, builder.build());
 
 
         getForecast();
@@ -142,24 +178,9 @@ public class MainActivity extends AppCompatActivity {
                 btn_day5.setSelected(false);
                 btn_day6.setSelected(false);
 
-
-                // Create an explicit intent for an Activity in your app
-//                Intent intent = new Intent(this, AlertDetails.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-
             }
         });
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CH_ID")
-                .setSmallIcon(R.drawable.clouds_icon)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                // Set the intent that will fire when the user taps the notification
-//                .setContentIntent(pendingIntent)
-//                .setAutoCancel(true);
         btn_day2 = findViewById((R.id.btn_day2));
         btn_day2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -605,22 +626,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**     this should be executed as soon as the app has been started (Notification channel creation) **/
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Channel #1 (MAIN)";
-            String description = "Channel description";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CH_ID", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
+
 
     /** FOR BLURRED BG
      * https://stackoverflow.com/questions/19311192/blur-background-behind-alertdialog **/
