@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" android:background="#0F0E10">
+        tools:context=".Activities.MainActivity" android:background="#0F0E10">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -99,7 +99,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:fontFamily="@font/gotham_bold" android:fontFamily="@font/gotham_bold"
+                        app:fontFamily="@font/gotham_medium" android:fontFamily="@font/gotham_medium"
                         android:text="[Region]"
                         android:textSize="15sp" android:textColor="#8C8C8C"
                         android:id="@+id/tv_region"
@@ -724,64 +724,25 @@
                         android:layout_marginStart="18dp" android:textSize="17.5sp"
                         android:fontFamily="@font/gotham_medium" android:textColor="#FFF"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="409dp"
-                        android:layout_height="398dp"
+                        android:layout_width="407dp"
+                        android:layout_height="496dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="15dp" app:layout_constraintTop_toBottomOf="@+id/widggggg">
-                    <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="407dp"
-                            android:layout_height="396dp"
+                        android:layout_marginTop="15dp" app:layout_constraintTop_toBottomOf="@+id/widggggg"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="100dp">
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/widgets_pane"
+                            android:id="@+id/imageView4"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-                        <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="207dp"
-                                android:layout_height="394dp"
-                        >
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="198dp" android:background="@drawable/bgrate"
-                                    android:layout_marginLeft="15dp" android:layout_marginRight="7dp"
-                                    android:layout_marginBottom="7dp">
-
-                                <TextView
-                                        android:text="3 x 1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" android:id="@+id/textView8"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        android:layout_marginTop="14dp" android:fontFamily="@font/gotham_medium"
-                                        android:textSize="13sp" app:layout_constraintEnd_toEndOf="parent"
-                                        android:layout_marginEnd="14dp"/>
-                                <TextView
-                                        android:text="Minimized"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" android:id="@+id/textView2"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="14dp"
-                                        android:layout_marginTop="14dp" android:fontFamily="@font/gotham_medium"
-                                        android:textSize="13sp"/>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" android:background="@drawable/bgrate"
-                                    android:layout_marginLeft="15dp" android:layout_marginTop="7dp"
-                                    android:layout_marginRight="7dp">
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </LinearLayout>
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="181dp"
-                                android:layout_height="match_parent" android:background="@drawable/bgrate"
-                                android:paddingLeft="15dp" android:paddingRight="15dp" android:paddingBottom="15dp"
-                                android:paddingTop="15dp" android:layout_marginLeft="7dp"
-                                android:layout_marginRight="15dp">
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                    <Button
+                            android:text="ADD"
+                            android:layout_width="83dp"
+                            android:layout_height="40dp" android:id="@+id/ghjkppppp"
+                            tools:layout_editor_absoluteY="191dp" tools:layout_editor_absoluteX="68dp"
+                            android:background="@drawable/semi_transparent_background" android:textColor="#000"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -893,4 +854,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

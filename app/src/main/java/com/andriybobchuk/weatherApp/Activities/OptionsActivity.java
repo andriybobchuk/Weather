@@ -1,10 +1,11 @@
-package com.example.weather2;
+package com.andriybobchuk.weatherApp.Activities;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.andriybobchuk.weatherApp.R;
 
 public class OptionsActivity extends AppCompatActivity {
 

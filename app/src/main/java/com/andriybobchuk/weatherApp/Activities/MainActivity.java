@@ -1,32 +1,20 @@
-package com.example.weather2;
+package com.andriybobchuk.weatherApp.Activities;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.andriybobchuk.weatherApp.R;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* Bar under the horizontal ScrollView */
     TextView tv_sunrise, tv_sunset;
+
+   // ScrollView sv_main = findViewById(R.id.sv_main);
+    //ConstraintLayout cl_widgets = findViewById(R.id.cl_widgets);
 
 
 
@@ -113,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+//        sv_main.postDelayed(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                sv_main.smoothScrollTo(0, cl_widgets.getBottom());
+//            }
+//        }, 2000);
+        
 
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, MainActivity.class);
@@ -535,6 +536,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void getForecast ()
     {
+
+        //TODO Find user's location: lat, lon
+
+
 
         //API Call
         String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";

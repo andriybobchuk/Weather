@@ -1,4 +1,4 @@
-package com.example.weather2;
+package com.andriybobchuk.weatherApp;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
