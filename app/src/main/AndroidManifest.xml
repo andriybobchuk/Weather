@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.andriybobchuk.weatherApp" >
+          package="com.andriybobchuk.weatherApp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/icon"
-        android:label="Weather"
-        android:roundIcon="@mipmap/icon"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name="com.andriybobchuk.weatherApp.Activities.OptionsActivity" >
+            android:allowBackup="true"
+            android:icon="@mipmap/icon"
+            android:label="Weather"
+            android:roundIcon="@mipmap/icon"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <receiver android:name=".Widgets.Widget_B">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/widget__b_info"/>
+        </receiver>
+        <receiver android:name=".Widgets.Widget_A">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/widget__a_info"/>
+        </receiver>
+
+        <activity android:name=".Activities.OptionsActivity">
         </activity>
         <activity
-            android:name="com.andriybobchuk.weatherApp.Activities.MainActivity"
-            android:screenOrientation="portrait" >
+                android:name=".Activities.MainActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
