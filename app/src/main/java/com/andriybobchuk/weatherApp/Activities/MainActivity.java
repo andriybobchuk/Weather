@@ -1,9 +1,6 @@
 package com.andriybobchuk.weatherApp.Activities;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -12,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.andriybobchuk.weatherApp.R;
+
+import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.Structures.WeatherData;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.android.volley.Request;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -44,29 +44,11 @@ public class MainActivity extends AppCompatActivity {
     /* Bottom navigation panel (Day of the week) */
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
-    /**     this should be executed as soon as the app has been started (Notification channel creation) **/
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Channel #1 (MAIN)";
-            String description = "Channel description";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CH_ID", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
     /**
      * Function for filling the bottom navigation panel with the first letters of week days
-     * @param response
-     * @throws JSONException
      */
-    public void daysOfWeekPanel(JSONObject response) throws JSONException {
+    public void daysOfWeekPanel(String [] arr_date) throws JSONException {
 
         btn_day0 = findViewById(R.id.btn_day0);
         btn_day1 = findViewById(R.id.btn_day1);
@@ -77,13 +59,9 @@ public class MainActivity extends AppCompatActivity {
         btn_day6 = findViewById(R.id.btn_day6);
         Button daysButtons[] = { btn_day0, btn_day1, btn_day2, btn_day3, btn_day4, btn_day5, btn_day6 };
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("E");
-
         for(int i=0; i<=6; i++)
         {
-            Date date = new Date((response.getJSONArray("daily").getJSONObject(i).getLong("dt"))*1000);
-            String currentDayName = String.valueOf(dateFormat.format(date));
-            daysButtons[i].setText(String.valueOf(currentDayName.charAt(0)));
+            daysButtons[i].setText(String.valueOf(arr_date[i].charAt(0)));
         }
     }
 
@@ -120,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(0);
+                updateUI(0);
                 btn_day0.setSelected(true);btn_day1.setSelected(false);btn_day2.setSelected(false);btn_day3.setSelected(false);btn_day4.setSelected(false);btn_day5.setSelected(false);btn_day6.setSelected(false);
 
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -135,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(1);
+                updateUI(1);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day1.setSelected(true);
 
@@ -153,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(2);
+                updateUI(2);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day2.setSelected(true);
 
@@ -169,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(3);
+                updateUI(3);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day3.setSelected(true);
 
@@ -185,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(4);
+                updateUI(4);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day4.setSelected(true);
 
@@ -201,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(5);
+                updateUI(5);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day5.setSelected(true);
 
@@ -217,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setForecastData(6);
+                updateUI(6);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day6.setSelected(true);
 
@@ -276,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /** Fills all labels using all arrays */
-    public void setForecastData(int dayIndex)
+    public void updateUI(int dayIndex)
     {
 
         /* initialization of labels */
@@ -294,6 +272,9 @@ public class MainActivity extends AppCompatActivity {
 
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
+
+        tv_region = findViewById(R.id.tv_region);
+        tv_region.setText("Gliwice at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         /* Hourly forecast panel */
         LinearLayout ll_time = findViewById(R.id.ll_time);
@@ -437,36 +418,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /** ARRAYS WITH WEATHER DATA STRINGS **/
-//    String [ ] arr_date = new String [7];
-//    //String [ ] arr_min_max = new String [7];
-////    String [ ] arr_details = new String [7];
-////    String [ ] arr_humidity = new String [7];
-////    String [ ] arr_clouds = new String [7];
-////    String [ ] arr_uvi = new String [7];
-////    String [ ] arr_wind = new String [7];
-////    String [ ] arr_temperature = new String [7];
-////    String [ ] arr_pressure = new String [7];
-////    String [ ] arr_theme = new String [7];
-////    String [ ] arr_sunrise = new String [7];
-////    String [ ] arr_sunset = new String [7];
-////    String [ ] arr_pop = new String [7];
-//    ///
-//    String[] arr_time = new String [12];
-//    String[] arr_temp = new String [12];
-//    String[] arr_descript = new String [12];
-//    String[] arr_pres = new String [12];
-//    ///
-//    String [ ] arr_morning = new String [7];
-//    String [ ] arr_afternoon = new String [7];
-//    String [ ] arr_eve = new String [7];
-//    String [ ] arr_night = new String [7];
-//
-//    /// For widgets
-//    String today_temperature;
-
-
-
 
     public void getForecast ()
     {
@@ -483,29 +434,25 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
-                    daysOfWeekPanel(response);
 
+                    new TimeAndDate().setTimezone_offset(response.getInt("timezone_offset")/3600); // timezone offset in hours
+                    new TimeAndDate().setCurrentDateAndTime(response.getJSONObject("current").getLong("dt")*1000); // time of last API call
 
-                    /** === Here save ALL THE DATA to 7-days arrays of data strings for filling labels === **/
-
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d");
-                    dateFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + response.getInt("timezone_offset")/3600)));
-
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm");//One time format for all app
-                    timeFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + response.getInt("timezone_offset")/3600))); //One time zone for all app
-                    Date timeOfRefresh = new Date((response.getJSONObject("current").getLong("dt"))*1000);
-
-                    tv_region = findViewById(R.id.tv_region);
-                    tv_region.setText("Gliwice at " + String.valueOf(timeFormat.format(timeOfRefresh)));
 
                     for(int dayIndex = 0; dayIndex <= 6; dayIndex++)
                     {
+
                         Date date = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("dt"))*1000);
-                        new WeatherData().arr_date[dayIndex] = String.valueOf(dateFormat.format(date));
+                        new WeatherData().arr_date[dayIndex] = String.valueOf(new TimeAndDate().getDateFormat().format(date));
+
+
                         Date sunriseTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunrise"))*1000);
-                        new WeatherData().arr_sunrise[dayIndex] = String.valueOf(timeFormat.format(sunriseTime));
+                        new WeatherData().arr_sunrise[dayIndex] = String.valueOf(new TimeAndDate().getTimeFormat().format(sunriseTime));
+
+
                         Date sunsetTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunset"))*1000);
-                        new WeatherData().arr_sunset[dayIndex] = String.valueOf(timeFormat.format(sunsetTime));
+                        new WeatherData().arr_sunset[dayIndex] = String.valueOf(new TimeAndDate().getTimeFormat().format(sunsetTime));
+
 
                         new WeatherData().arr_pop[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pop") * 100 +"%");
                         new WeatherData().arr_temperature[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day"));
@@ -527,16 +474,20 @@ public class MainActivity extends AppCompatActivity {
                     new WeatherData().today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
 
 
+                    /* INSIDE THE DAY (long) */
                     for(int time = 0; time <= 11; time++)
                     {
-                        new WeatherData().arr_time[time] = String.valueOf(timeFormat.format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
+                        new WeatherData().arr_time[time] = String.valueOf(new TimeAndDate().getTimeFormat().format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
                         new WeatherData().arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°C";
                         new WeatherData().arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
                         new WeatherData().arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
                     }
 
+
+
+                    ///---------------------------------------------------------------
                     //Ми можемо винести цей блок в OnCreate щоб усунути баг з викидом на нульовий день
-                    setForecastData(0);
+                    updateUI(0);
                     btn_day0.setSelected(true);
                     btn_day1.setSelected(false);
                     btn_day2.setSelected(false);
@@ -545,6 +496,7 @@ public class MainActivity extends AppCompatActivity {
                     btn_day5.setSelected(false);
                     btn_day6.setSelected(false);
 
+                    daysOfWeekPanel(new WeatherData().arr_date);
 
 
                 } catch (JSONException e) {

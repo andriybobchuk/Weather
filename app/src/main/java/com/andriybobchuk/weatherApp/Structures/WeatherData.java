@@ -1,5 +1,6 @@
 package com.andriybobchuk.weatherApp.Structures;
 
+
 public class WeatherData {
 
     /**
@@ -15,6 +16,7 @@ public class WeatherData {
      * I know it's bad to do like this, so I'll improve this code later with getters and setters so my
      * variables can be private
      */
+
 
     /** ARRAYS WITH WEATHER DATA STRINGS **/
     public static String [ ] arr_date = new String [7];
