@@ -2,7 +2,6 @@ package com.andriybobchuk.weatherApp.Activities;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.VibrationEffect;
@@ -11,10 +10,9 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weatherApp.Structures.WeatherData;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     /* Bar under the horizontal ScrollView */
     TextView tv_sunrise, tv_sunset;
-
-    // ScrollView sv_main = findViewById(R.id.sv_main);
-    //ConstraintLayout cl_widgets = findViewById(R.id.cl_widgets);
-
 
 
 
@@ -105,24 +99,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CH_ID")
-                .setSmallIcon(R.drawable.clouds_icon)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(0, builder.build());
 
 
         getForecast();
@@ -394,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (dayIndex == 0)
         {
-            tv_temperature.setText(today_temperature + "°C");
+            tv_temperature.setText(new WeatherData().today_temperature + "°C");
 
             ll_time.setVisibility(View.VISIBLE);
             ll_temp.setVisibility(View.VISIBLE);
@@ -404,11 +381,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             for(int i=0; i<=11; i++) {
-                _12_timeLabels[i].setText(arr_time[i]);
-                _12_tempLabels[i].setText(arr_temp[i]);
-                _12_pressureLabels[i].setText(arr_pres[i]);
+                _12_timeLabels[i].setText(new WeatherData().arr_time[i]);
+                _12_tempLabels[i].setText(new WeatherData().arr_temp[i]);
+                _12_pressureLabels[i].setText(new WeatherData().arr_pres[i]);
 
-                switch (arr_descript[i]) {
+                switch (new WeatherData().arr_descript[i]) {
                     case "Clouds":
                         _12_icosLabels[i].setImageResource(R.drawable.clouds_icon);
                         break;
@@ -435,67 +412,66 @@ public class MainActivity extends AppCompatActivity {
             ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
 
 
-            tv_temperature.setText(arr_temperature[dayIndex] + "°C");
+            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
         }
-        tv_day.setText(arr_day[dayIndex]);
-        tv_min_max.setText(arr_min_max[dayIndex]);
-        tv_details.setText(arr_details[dayIndex]);
-        tv_humidity.setText(arr_humidity[dayIndex]);
-        tv_clouds.setText(arr_clouds[dayIndex]);
-        tv_uvi.setText(arr_uvi[dayIndex]);
-        tv_wind.setText(arr_wind[dayIndex]);
-        tv_pressure.setText(arr_pressure[dayIndex]);
-        tv_sunrise.setText(arr_sunrise[dayIndex]);
-        tv_sunset.setText(arr_sunset[dayIndex]);
-        tv_pop.setText(arr_pop[dayIndex]);
+        tv_day.setText(new WeatherData().arr_date[dayIndex]);
+        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
+        tv_details.setText(new WeatherData().arr_details[dayIndex]);
+        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
+        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
+        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
+        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
+        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
+        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
+        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
+        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
 
-        tv_temp_morning.setText(arr_morning[dayIndex]);
-        tv_temp_afternoon.setText(arr_afternoon[dayIndex]);
-        tv_temp_evening.setText(arr_eve[dayIndex]);
-        tv_temp_night.setText(arr_night[dayIndex]);
+        tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
+        tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
+        tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
+        tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
 
 
-        setTheme(dayIndex, arr_theme);
+        setTheme(dayIndex, new WeatherData().arr_theme);
 
     }
 
 
     /** ARRAYS WITH WEATHER DATA STRINGS **/
-    String [ ] arr_day = new String [1000];
-    String [ ] arr_min_max = new String [7];
-    String [ ] arr_details = new String [7];
-    String [ ] arr_humidity = new String [7];
-    String [ ] arr_clouds = new String [7];
-    String [ ] arr_uvi = new String [7];
-    String [ ] arr_wind = new String [7];
-    String [ ] arr_temperature = new String [7];
-    String today_temperature;
-    String [ ] arr_pressure = new String [7];
-    String [ ] arr_theme = new String [7];
-    String [ ] arr_sunrise = new String [7];
-    String [ ] arr_sunset = new String [7];
-    String [ ] arr_pop = new String [7];
-    ///
-    String[] arr_time = new String [12];
-    String[] arr_temp = new String [12];
-    String[] arr_descript = new String [12];
-    String[] arr_pres = new String [12];
-    ///
-    String [ ] arr_morning = new String [7];
-    String [ ] arr_afternoon = new String [7];
-    String [ ] arr_eve = new String [7];
-    String [ ] arr_night = new String [7];
+//    String [ ] arr_date = new String [7];
+//    //String [ ] arr_min_max = new String [7];
+////    String [ ] arr_details = new String [7];
+////    String [ ] arr_humidity = new String [7];
+////    String [ ] arr_clouds = new String [7];
+////    String [ ] arr_uvi = new String [7];
+////    String [ ] arr_wind = new String [7];
+////    String [ ] arr_temperature = new String [7];
+////    String [ ] arr_pressure = new String [7];
+////    String [ ] arr_theme = new String [7];
+////    String [ ] arr_sunrise = new String [7];
+////    String [ ] arr_sunset = new String [7];
+////    String [ ] arr_pop = new String [7];
+//    ///
+//    String[] arr_time = new String [12];
+//    String[] arr_temp = new String [12];
+//    String[] arr_descript = new String [12];
+//    String[] arr_pres = new String [12];
+//    ///
+//    String [ ] arr_morning = new String [7];
+//    String [ ] arr_afternoon = new String [7];
+//    String [ ] arr_eve = new String [7];
+//    String [ ] arr_night = new String [7];
+//
+//    /// For widgets
+//    String today_temperature;
 
 
 
-    /** 2D array for everything in the "Inside the day" block for current day */
-    String[][] hourlyData = new String[3][12]; //3 for 3 fields to update; 12 for 12 hours
 
     public void getForecast ()
     {
 
         //TODO Find user's location: lat, lon
-
 
 
         //API Call
@@ -525,38 +501,38 @@ public class MainActivity extends AppCompatActivity {
                     for(int dayIndex = 0; dayIndex <= 6; dayIndex++)
                     {
                         Date date = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("dt"))*1000);
-                        arr_day[dayIndex] = String.valueOf(dateFormat.format(date));
+                        new WeatherData().arr_date[dayIndex] = String.valueOf(dateFormat.format(date));
                         Date sunriseTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunrise"))*1000);
-                        arr_sunrise[dayIndex] = String.valueOf(timeFormat.format(sunriseTime));
+                        new WeatherData().arr_sunrise[dayIndex] = String.valueOf(timeFormat.format(sunriseTime));
                         Date sunsetTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunset"))*1000);
-                        arr_sunset[dayIndex] = String.valueOf(timeFormat.format(sunsetTime));
+                        new WeatherData().arr_sunset[dayIndex] = String.valueOf(timeFormat.format(sunsetTime));
 
-                        arr_pop[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pop") * 100 +"%");
-                        arr_temperature[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day"));
-                        arr_min_max[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("min")+"°... "+response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("max")+"°");
-                        arr_details[dayIndex] = String.valueOf("Feels like " + String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("feels_like").getInt("day")) + "°, " + response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("description"));
-                        arr_humidity[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("humidity")+"%");
-                        arr_clouds[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("clouds")+"%");
-                        arr_uvi[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("uvi")+"%");
-                        arr_wind[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("wind_speed")+" kmh");
-                        arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+" mb");
-                        arr_theme[dayIndex] = response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("main");
+                        new WeatherData().arr_pop[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pop") * 100 +"%");
+                        new WeatherData().arr_temperature[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day"));
+                        new WeatherData().arr_min_max[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("min")+"°... "+response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("max")+"°");
+                        new WeatherData().arr_details[dayIndex] = String.valueOf("Feels like " + String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("feels_like").getInt("day")) + "°, " + response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("description"));
+                        new WeatherData().arr_humidity[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("humidity")+"%");
+                        new WeatherData().arr_clouds[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("clouds")+"%");
+                        new WeatherData().arr_uvi[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("uvi")+"%");
+                        new WeatherData().arr_wind[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("wind_speed")+" kmh");
+                        new WeatherData().arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+" mb");
+                        new WeatherData().arr_theme[dayIndex] = response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("main");
 
-                        arr_morning[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("morn") + "°");
-                        arr_afternoon[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day") + "°");
-                        arr_eve[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("eve") + "°");
-                        arr_night[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("night") + "°");
+                        new WeatherData().arr_morning[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("morn") + "°");
+                        new WeatherData().arr_afternoon[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day") + "°");
+                        new WeatherData().arr_eve[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("eve") + "°");
+                        new WeatherData().arr_night[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("night") + "°");
 
                     }
-                    today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
+                    new WeatherData().today_temperature = String.valueOf(response.getJSONObject("current").getInt("temp"));
 
 
                     for(int time = 0; time <= 11; time++)
                     {
-                        arr_time[time] = String.valueOf(timeFormat.format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
-                        arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°C";
-                        arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
-                        arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
+                        new WeatherData().arr_time[time] = String.valueOf(timeFormat.format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
+                        new WeatherData().arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°C";
+                        new WeatherData().arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
+                        new WeatherData().arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
                     }
 
                     //Ми можемо винести цей блок в OnCreate щоб усунути баг з викидом на нульовий день
@@ -586,6 +562,10 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jor);
 
     }
+
+
+
+
 
 
 

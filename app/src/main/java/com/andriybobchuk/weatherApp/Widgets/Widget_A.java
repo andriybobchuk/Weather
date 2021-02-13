@@ -9,7 +9,15 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
+import com.andriybobchuk.weatherApp.Network.SimpleWeatherCall;
 import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weatherApp.Structures.WidgetsData;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -22,27 +30,59 @@ import java.util.Date;
  */
 public class Widget_A extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    String time;
+    String desc;
 
-        new MainActivity().getForecast();
-
+    void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                         int appWidgetId) {
 
 
         // Time of update
         String timeString = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
 
 
+        //API Call
+        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely,hourly,daily,alerts&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+
+//                    new WidgetsData().setTemp(String.valueOf(response.getJSONObject("current").getInt("temp") + "°"));
+//                    new WidgetsData().setDesc(String.valueOf(response.getJSONObject("current").getJSONArray("weather").getJSONObject(0).getJSONObject("main")));
+
+                    time = String.valueOf(response.getJSONObject("current").getInt("temp") + "°");
+                    desc = String.valueOf(response.getJSONObject("current").getInt("temp") + "r");
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        new SimpleWeatherCall().getSimpleForecast();
+
+
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget__a);
-        views.setTextViewText(R.id.appwidget_text_temp, "-12°");
-        views.setTextViewText(R.id.appwidget_text_description, timeString);
+
+        views.setTextViewText(R.id.appwidget_text_temp, time);
+        views.setTextViewText(R.id.appwidget_text_description, desc);
 
         //Create an Intent with the AppWidgetManager.ACTION_APPWIDGET_UPDATE action//
         Intent intentUpdate = new Intent(context, Widget_A.class);
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
-        //Update the current widget instance only, by creating an array that contains the widget’s unique ID//
+        //Update the current widget instance only, by creating an array that contains the widget’s unique ID
         int[] idArray = new int[]{appWidgetId};
         intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
 
