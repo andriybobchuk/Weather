@@ -8,7 +8,6 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.andriybobchuk.weatherApp.Network.GetForecast;
 import com.andriybobchuk.weatherApp.R;
 
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
@@ -22,50 +21,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.android.volley.Request;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
+
+/** This class updates User interface
+ *
+ * NOTE:
+ * This class ONLY updates User interface **/
 
 public class MainActivity extends AppCompatActivity {
 
-    /* Main part (top) */
-    SwipeRefreshLayout refreshLayout;
-    ImageButton btn_options; // round circle in the top right corner
-    ImageView iv_theme; // background image with wizard
-    TextView tv_myWeatherDescription;
 
-    /* Horizontal ScrollView */
-    TextView tv_pop, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;
-
-    /* Bar under the horizontal ScrollView */
-    TextView tv_sunrise, tv_sunset;
-
-
-
-    /* Bottom navigation panel (Day of the week) */
+    /* Bottom M T W T F S S panel
+    Used in OnCreate() and updateButtonPanel(), thus global */
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
 
-    /**
-     * Function for filling the bottom navigation panel with the first letters of week days
-     */
-    public void daysOfWeekPanel(String [] arr_date) throws JSONException {
 
-        btn_day0 = findViewById(R.id.btn_day0);
-        btn_day1 = findViewById(R.id.btn_day1);
-        btn_day2 = findViewById(R.id.btn_day2);
-        btn_day3 = findViewById(R.id.btn_day3);
-        btn_day4 = findViewById(R.id.btn_day4);
-        btn_day5 = findViewById(R.id.btn_day5);
-        btn_day6 = findViewById(R.id.btn_day6);
-        Button daysButtons[] = { btn_day0, btn_day1, btn_day2, btn_day3, btn_day4, btn_day5, btn_day6 };
-
-        for(int i=0; i<=6; i++)
-        {
-            daysButtons[i].setText(String.valueOf(arr_date[i].charAt(0)));
-        }
-    }
-
+    /** Opens Options Activity on button click **/
     public void openOptions() {
         Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
@@ -78,15 +50,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-
-
-        //getForecast();
-        loadApp();
+        /** 1st GETFORECAST() call out of 2 **/
+        getForecast();
 
 
         /* For button OPTIONS */
-        btn_options = findViewById((R.id.btn_options));
+        ImageButton btn_options = findViewById((R.id.btn_options));
         btn_options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         btn_day0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(0);
+                loadUI(0);
+
+
                 btn_day0.setSelected(true);btn_day1.setSelected(false);btn_day2.setSelected(false);btn_day3.setSelected(false);btn_day4.setSelected(false);btn_day5.setSelected(false);btn_day6.setSelected(false);
 
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -116,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         btn_day1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(1);
+                loadUI(1);
+
+
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day1.setSelected(true);
 
@@ -134,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
         btn_day2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(2);
+                loadUI(2);
+
+
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day2.setSelected(true);
 
@@ -150,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
         btn_day3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(3);
+                loadUI(3);
+
+
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day3.setSelected(true);
 
@@ -166,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
         btn_day4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(4);
+                loadUI(4);
+
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day4.setSelected(true);
 
@@ -182,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
         btn_day5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(5);
+                loadUI(5);
+
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day5.setSelected(true);
 
@@ -198,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         btn_day6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUI(6);
+                loadUI(6);
                 vibrator.vibrate(VibrationEffect.createOneShot(42, VibrationEffect.DEFAULT_AMPLITUDE));
                 btn_day6.setSelected(true);
 
@@ -212,13 +191,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        refreshLayout = findViewById(R.id.swiperefresh);
+        final SwipeRefreshLayout refreshLayout = findViewById(R.id.swiperefresh);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                //getForecast();
-                loadApp();
+                /** 2nd GETFORECAST() call out of 2 **/
+                getForecast();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -227,13 +206,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /** Sets M T W T F S S button sequence **/
+    public void updateButtonPanel() {
 
-    /** Function sets the background with the wizard and my description of the weather depending on theme */
-    public  void setTheme(int dayIndex, String[] arr_theme)
+        /**
+         * 1 - Function for filling the bottom 7-days button panel with the first letters of week days.
+         * 2 - It also highlights the 0-th day button and unhighlights the rest
+         *
+         * NOTE:
+         * Should be executed only once on app start or restart but not on button clicks ↓
+         * → That is why I call it only in RE-loadUI(), not in normal loadUI(dayIndex)
+         */
+
+        btn_day0 = findViewById(R.id.btn_day0);
+        btn_day1 = findViewById(R.id.btn_day1);
+        btn_day2 = findViewById(R.id.btn_day2);
+        btn_day3 = findViewById(R.id.btn_day3);
+        btn_day4 = findViewById(R.id.btn_day4);
+        btn_day5 = findViewById(R.id.btn_day5);
+        btn_day6 = findViewById(R.id.btn_day6);
+        Button daysButtons[] = { btn_day0, btn_day1, btn_day2, btn_day3, btn_day4, btn_day5, btn_day6 };
+
+        // sets buttons highlighting
+        btn_day0 = findViewById(R.id.btn_day0);
+        btn_day0.setSelected(true);
+        btn_day1.setSelected(false);
+        btn_day2.setSelected(false);
+        btn_day3.setSelected(false);
+        btn_day4.setSelected(false);
+        btn_day5.setSelected(false);
+        btn_day6.setSelected(false);
+
+        for(int i=0; i<=6; i++)
+        {
+            daysButtons[i].setText(String.valueOf(new WeatherData().arr_date[i].charAt(0)));
+        }
+    }
+
+
+    /** Sets background Zing image and description label */
+    public  void updateBackground(int dayIndex)
     {
-        tv_myWeatherDescription = findViewById(R.id.tv_hint);
-        iv_theme = findViewById(R.id.iv_theme);
-        switch(arr_theme[dayIndex])
+        TextView tv_myWeatherDescription = findViewById(R.id.tv_hint);
+        ImageView iv_theme = findViewById(R.id.iv_theme);
+        switch(new WeatherData().arr_theme[dayIndex])
         {
             case "Clouds":
                 tv_myWeatherDescription.setText("Not the nicest weather");
@@ -259,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /** Fills all labels using all arrays */
-    public void updateUI(int dayIndex)
+    public void updateData(int dayIndex)
     {
         /**
          * 1 - This function takes day index from pressed button (0-6) or from loadApp()(0)
@@ -272,32 +288,60 @@ public class MainActivity extends AppCompatActivity {
          * on the app screen (one after another).
          */
 
-        TextView tv_day = findViewById(R.id.tv_day);        // Tuesday, Feb 13
+        // Tuesday, Feb 13
+        TextView tv_day = findViewById(R.id.tv_day);
+        tv_day.setText(new WeatherData().arr_date[dayIndex]);
 
 
+        // Gliwice at 13:45
+        TextView tv_region = findViewById(R.id.tv_region);
+        tv_region.setText("Gliwice at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
 
+        //  -9°C
+        TextView tv_temperature = findViewById(R.id.tv_temperature);
+        if (dayIndex == 0) {
+            tv_temperature.setText(new WeatherData().today_temperature + "°C");
+        } else {
+            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+        }
 
 
+        //-3°...0°
+        TextView tv_min_max = findViewById(R.id.tv_min_max);
+        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
 
 
-                tv_region, tv_temperature, tv_min_max, tv_details
-
-
-
-
-
-
-
-
-
+//TODO:------------------------------------------------------------------------------------------
+//        /* Horizontal ScrollView */
+//        TextView tv_pop, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;
+//
+//                tv_region, tv_temperature, tv_min_max, tv_details
+//
+//
+//
+//        tv_details.setText(new WeatherData().arr_details[dayIndex]);
+//        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
+//        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
+//        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
+//        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
+//        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
+//        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
+//        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
+//        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
+//
+//
+//
+//        /* Bar under the horizontal ScrollView */
+//        TextView tv_sunrise, tv_sunset;
+//
+//
 
 
 
         //TODO:------------------------------------------------------------------------------------------
 
-        /* initialization of labels */
-//        tv_day = findViewById(R.id.tv_day);
+
 //        tv_temperature = findViewById(R.id.tv_temperature);
 //        tv_min_max = findViewById(R.id.tv_min_max);
 //
@@ -313,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
 //        tv_sunset = findViewById(R.id.tv_sunset);
 
         //tv_region = findViewById(R.id.tv_region);
-        //tv_region.setText("Gliwice at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
+        //
 
         /* Hourly forecast panel */
 //        LinearLayout ll_time = findViewById(R.id.ll_time);
@@ -437,17 +481,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        tv_day.setText(new WeatherData().arr_date[dayIndex]);
-//        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
-//        tv_details.setText(new WeatherData().arr_details[dayIndex]);
-//        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
-//        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
-//        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
-//        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
-//        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
-//        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
-//        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
-//        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
+
+
 
 
 
@@ -462,32 +497,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void loadApp () {
-        // Reload buttons highlights (Костыль)
-//        btn_day0 = findViewById(R.id.btn_day0);
-//        btn_day0.setSelected(true);
-//        btn_day1.setSelected(false);
-//        btn_day2.setSelected(false);
-//        btn_day3.setSelected(false);
-//        btn_day4.setSelected(false);
-//        btn_day5.setSelected(false);
-//        btn_day6.setSelected(false);
 
-        //TODO: 1 - getForecast()
-        getForecast();
+    /** Updates UI on RESTART **/
+    public void reloadUI() {
 
-        //TODO: 2 - updateUI(0)
-        updateUI(0);
+        /**
+         * Runs ONLY on app START or RESTART. (getForecast() calls it)
+         *
+         * 1 - updates all text labels with data for the CURRENT DAY.
+         * 2 - updates background image of Zing with weather condition for the CURRENT DAY.
+         * 3 - updates bottom button panel setting the CURRENT day letter first in a row. (Also highlights it)
+         */
 
+        updateData(0);
 
+        updateBackground(0);
 
-        //TODO: daysOfWeekPanel(new WeatherData().arr_date);
-        //daysOfWeekPanel(new WeatherData().arr_date);
-
-
-        //TODO: updateBackground();
-        // ...
+        updateButtonPanel();
     }
+
+
+    /**  Updates UI ANYTIME **/
+    public void loadUI(int dayIndex) {
+
+        /**
+         * Runs EVERY TIME you change the day. (called after button clicks)
+         *
+         * 1 - updates all text labels with data for the CHOSEN DAY.
+         * 2 - updates background image of Zing with weather condition for the CHOSEN DAY.
+         */
+
+        updateData(dayIndex);
+
+        updateBackground(dayIndex);
+
+    }
+
 
 
 
@@ -500,12 +545,12 @@ public class MainActivity extends AppCompatActivity {
          * And that's all.
          * Nothing else.
          * ...
+         * And reloads User Interface;)
          * like it should do.
          */
 
 
         //TODO Find user's location: lat, lon
-
 
         //API Call which is an important part of this block!!!
         String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
@@ -571,6 +616,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                reloadUI();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -580,15 +628,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //is "this" same as "MainActivity"?
+
+        //TODO: is "this" same as "MainActivity"? - Yes, I suppose
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jor);
 
+
     }
-
-
-
-
 
 
 
