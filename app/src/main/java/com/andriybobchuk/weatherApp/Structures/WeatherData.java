@@ -18,7 +18,7 @@ public class WeatherData {
      */
 
 
-    /** ARRAYS WITH WEATHER DATA STRINGS **/
+    /** ARRAYS WITH WEATHER 7-day DATA STRINGS **/
     public static String [ ] arr_date = new String [7];
     public static String [ ] arr_min_max = new String [7];
     public static String [ ] arr_details = new String [7];
@@ -32,12 +32,14 @@ public class WeatherData {
     public static String [ ] arr_sunrise = new String [7];
     public static String [ ] arr_sunset = new String [7];
     public static String [ ] arr_pop = new String [7];
-    ///
+
+    /** ARRAYS WITH 12-HOUR WEATHER DATA FOR "INSIDE THE DAY LONG PANEL" **/
     public static String[] arr_time = new String [12];
     public static String[] arr_temp = new String [12];
     public static String[] arr_descript = new String [12];
     public static String[] arr_pres = new String [12];
-    ///
+
+    /** ARRAYS WITH 7-day WEATHER DATA FOR "INSIDE THE DAY" SHORT PANEL **/
     public static String [ ] arr_morning = new String [7];
     public static String [ ] arr_afternoon = new String [7];
     public static String [ ] arr_eve = new String [7];

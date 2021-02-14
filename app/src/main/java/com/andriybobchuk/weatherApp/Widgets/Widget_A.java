@@ -5,13 +5,9 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
-import com.andriybobchuk.weatherApp.Network.SimpleWeatherCall;
 import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Structures.WidgetsData;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -69,7 +65,7 @@ public class Widget_A extends AppWidgetProvider {
 
             }
         });
-        new SimpleWeatherCall().getSimpleForecast();
+        //new SimpleWeatherCall().getSimpleForecast();
 
 
         // Construct the RemoteViews object

@@ -8,6 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.andriybobchuk.weatherApp.Network.GetForecast;
 import com.andriybobchuk.weatherApp.R;
 
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout refreshLayout;
     ImageButton btn_options; // round circle in the top right corner
     ImageView iv_theme; // background image with wizard
-    TextView tv_day, tv_region, tv_temperature, tv_min_max, tv_details, tv_myWeatherDescription;
+    TextView tv_myWeatherDescription;
 
     /* Horizontal ScrollView */
     TextView tv_pop, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;
@@ -80,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        getForecast();
+        //getForecast();
+        loadApp();
+
 
         /* For button OPTIONS */
         btn_options = findViewById((R.id.btn_options));
@@ -213,7 +216,9 @@ public class MainActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getForecast();
+
+                //getForecast();
+                loadApp();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -256,176 +261,253 @@ public class MainActivity extends AppCompatActivity {
     /** Fills all labels using all arrays */
     public void updateUI(int dayIndex)
     {
+        /**
+         * 1 - This function takes day index from pressed button (0-6) or from loadApp()(0)
+         * 2 - DECLARE and INITIALIZE LOCAL text labels with data from WeatherData
+         *
+         * And that's all. So simple
+         *
+         * NOTE:
+         * In order to avoid confusion, text labels will be initialized as they appear
+         * on the app screen (one after another).
+         */
+
+        TextView tv_day = findViewById(R.id.tv_day);        // Tuesday, Feb 13
+
+
+
+
+
+
+
+
+                tv_region, tv_temperature, tv_min_max, tv_details
+
+
+
+
+
+
+
+
+
+
+
+
+        //TODO:------------------------------------------------------------------------------------------
 
         /* initialization of labels */
-        tv_day = findViewById(R.id.tv_day);
-        tv_temperature = findViewById(R.id.tv_temperature);
-        tv_min_max = findViewById(R.id.tv_min_max);
+//        tv_day = findViewById(R.id.tv_day);
+//        tv_temperature = findViewById(R.id.tv_temperature);
+//        tv_min_max = findViewById(R.id.tv_min_max);
+//
+//        tv_details = findViewById(R.id.tv_details);
+//        tv_pressure = findViewById(R.id.tv_pressure);
+//        tv_humidity = findViewById(R.id.tv_humidity);
+//        tv_wind = findViewById(R.id.tv_wind);
+//        tv_uvi = findViewById(R.id.tv_uvi);
+//        tv_clouds = findViewById(R.id.tv_clouds);
+//        tv_pop = findViewById(R.id.tv_pop);
+//
+//        tv_sunrise = findViewById(R.id.tv_sunrise);
+//        tv_sunset = findViewById(R.id.tv_sunset);
 
-        tv_details = findViewById(R.id.tv_details);
-        tv_pressure = findViewById(R.id.tv_pressure);
-        tv_humidity = findViewById(R.id.tv_humidity);
-        tv_wind = findViewById(R.id.tv_wind);
-        tv_uvi = findViewById(R.id.tv_uvi);
-        tv_clouds = findViewById(R.id.tv_clouds);
-        tv_pop = findViewById(R.id.tv_pop);
-
-        tv_sunrise = findViewById(R.id.tv_sunrise);
-        tv_sunset = findViewById(R.id.tv_sunset);
-
-        tv_region = findViewById(R.id.tv_region);
-        tv_region.setText("Gliwice at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
+        //tv_region = findViewById(R.id.tv_region);
+        //tv_region.setText("Gliwice at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         /* Hourly forecast panel */
-        LinearLayout ll_time = findViewById(R.id.ll_time);
-        LinearLayout ll_temp = findViewById(R.id.ll_temp);
-        LinearLayout ll_icos = findViewById(R.id.ll_icos);
-        LinearLayout ll_pres = findViewById(R.id.ll_pres);
+//        LinearLayout ll_time = findViewById(R.id.ll_time);
+//        LinearLayout ll_temp = findViewById(R.id.ll_temp);
+//        LinearLayout ll_icos = findViewById(R.id.ll_icos);
+//        LinearLayout ll_pres = findViewById(R.id.ll_pres);
 
-        TextView tv_time0 = findViewById(R.id.tv_time0);
-        TextView tv_time1 = findViewById(R.id.tv_time1);
-        TextView tv_time2 = findViewById(R.id.tv_time2);
-        TextView tv_time3 = findViewById(R.id.tv_time3);
-        TextView tv_time4 = findViewById(R.id.tv_time4);
-        TextView tv_time5 = findViewById(R.id.tv_time5);
-        TextView tv_time6 = findViewById(R.id.tv_time6);
-        TextView tv_time7 = findViewById(R.id.tv_time7);
-        TextView tv_time8 = findViewById(R.id.tv_time8);
-        TextView tv_time9 = findViewById(R.id.tv_time9);
-        TextView tv_time10 = findViewById(R.id.tv_time10);
-        TextView tv_time11 = findViewById(R.id.tv_time11);
-        TextView _12_timeLabels[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
-                tv_time8,tv_time9,tv_time10,tv_time11 };
+//        TextView tv_time0 = findViewById(R.id.tv_time0);
+//        TextView tv_time1 = findViewById(R.id.tv_time1);
+//        TextView tv_time2 = findViewById(R.id.tv_time2);
+//        TextView tv_time3 = findViewById(R.id.tv_time3);
+//        TextView tv_time4 = findViewById(R.id.tv_time4);
+//        TextView tv_time5 = findViewById(R.id.tv_time5);
+//        TextView tv_time6 = findViewById(R.id.tv_time6);
+//        TextView tv_time7 = findViewById(R.id.tv_time7);
+//        TextView tv_time8 = findViewById(R.id.tv_time8);
+//        TextView tv_time9 = findViewById(R.id.tv_time9);
+//        TextView tv_time10 = findViewById(R.id.tv_time10);
+//        TextView tv_time11 = findViewById(R.id.tv_time11);
+//        TextView _12_timeLabels[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
+//                tv_time8,tv_time9,tv_time10,tv_time11 };
 
-        TextView tv_temp0 = findViewById(R.id.tv_temp0);
-        TextView tv_temp1 = findViewById(R.id.tv_temp1);
-        TextView tv_temp2 = findViewById(R.id.tv_temp2);
-        TextView tv_temp3 = findViewById(R.id.tv_temp3);
-        TextView tv_temp4 = findViewById(R.id.tv_temp4);
-        TextView tv_temp5 = findViewById(R.id.tv_temp5);
-        TextView tv_temp6 = findViewById(R.id.tv_temp6);
-        TextView tv_temp7 = findViewById(R.id.tv_temp7);
-        TextView tv_temp8 = findViewById(R.id.tv_temp8);
-        TextView tv_temp9 = findViewById(R.id.tv_temp9);
-        TextView tv_temp10 = findViewById(R.id.tv_temp10);
-        TextView tv_temp11 = findViewById(R.id.tv_temp11);
-        TextView _12_tempLabels[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
-                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
+//        TextView tv_temp0 = findViewById(R.id.tv_temp0);
+//        TextView tv_temp1 = findViewById(R.id.tv_temp1);
+//        TextView tv_temp2 = findViewById(R.id.tv_temp2);
+//        TextView tv_temp3 = findViewById(R.id.tv_temp3);
+//        TextView tv_temp4 = findViewById(R.id.tv_temp4);
+//        TextView tv_temp5 = findViewById(R.id.tv_temp5);
+//        TextView tv_temp6 = findViewById(R.id.tv_temp6);
+//        TextView tv_temp7 = findViewById(R.id.tv_temp7);
+//        TextView tv_temp8 = findViewById(R.id.tv_temp8);
+//        TextView tv_temp9 = findViewById(R.id.tv_temp9);
+//        TextView tv_temp10 = findViewById(R.id.tv_temp10);
+//        TextView tv_temp11 = findViewById(R.id.tv_temp11);
+//        TextView _12_tempLabels[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
+//                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
 
-        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
-        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
-        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
-        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
-        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
-        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
-        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
-        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
-        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
-        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
-        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
-        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
-        TextView _12_pressureLabels[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
-                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
+//        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
+//        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
+//        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
+//        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
+//        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
+//        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
+//        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
+//        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
+//        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
+//        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
+//        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
+//        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
+//        TextView _12_pressureLabels[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
+//                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
 
-        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
-        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
-        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
-        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
-        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
-        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
-        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
-        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
-        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
-        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
-        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
-        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
-        ImageView _12_icosLabels[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
-                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
-
-
-        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
-        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
-        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
-        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
-        LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
+//        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
+//        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
+//        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
+//        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
+//        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
+//        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
+//        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
+//        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
+//        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
+//        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
+//        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
+//        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
+//        ImageView _12_icosLabels[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
+//                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
 
 
-        if (dayIndex == 0)
-        {
-            tv_temperature.setText(new WeatherData().today_temperature + "°C");
-
-            ll_time.setVisibility(View.VISIBLE);
-            ll_temp.setVisibility(View.VISIBLE);
-            ll_icos.setVisibility(View.VISIBLE);
-            ll_pres.setVisibility(View.VISIBLE);
-            ll_InsideTheDayShortened.setVisibility(View.GONE);
+//        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
+//        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
+//        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
+//        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
+        //LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
 
 
-            for(int i=0; i<=11; i++) {
-                _12_timeLabels[i].setText(new WeatherData().arr_time[i]);
-                _12_tempLabels[i].setText(new WeatherData().arr_temp[i]);
-                _12_pressureLabels[i].setText(new WeatherData().arr_pres[i]);
+//        if (dayIndex == 0)
+//       // {
+//            tv_temperature.setText(new WeatherData().today_temperature + "°C");
 
-                switch (new WeatherData().arr_descript[i]) {
-                    case "Clouds":
-                        _12_icosLabels[i].setImageResource(R.drawable.clouds_icon);
-                        break;
-                    case "Clear":
-                        _12_icosLabels[i].setImageResource(R.drawable.sun);
-                        break;
-                    case "Rain":
-                        _12_icosLabels[i].setImageResource(R.drawable.rain_icon);
-                        break;
-                    case "Snow":
-                        _12_icosLabels[i].setImageResource(R.drawable.snow_icon);
-                        break;
-                    default:
-                        iv_theme.setImageResource(R.drawable.clouds_icon);
-                }
-            }
-        }
-        else
-        {
-            ll_time.setVisibility(View.GONE);
-            ll_temp.setVisibility(View.GONE);
-            ll_icos.setVisibility(View.GONE);
-            ll_pres.setVisibility(View.GONE);
-            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
+//            ll_time.setVisibility(View.VISIBLE);
+//            ll_temp.setVisibility(View.VISIBLE);
+//            ll_icos.setVisibility(View.VISIBLE);
+//            ll_pres.setVisibility(View.VISIBLE);
+//            ll_InsideTheDayShortened.setVisibility(View.GONE);
 
 
-            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
-        }
-        tv_day.setText(new WeatherData().arr_date[dayIndex]);
-        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
-        tv_details.setText(new WeatherData().arr_details[dayIndex]);
-        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
-        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
-        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
-        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
-        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
-        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
-        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
-        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
+//            for(int i=0; i<=11; i++) {
+//                _12_timeLabels[i].setText(new WeatherData().arr_time[i]);
+//                _12_tempLabels[i].setText(new WeatherData().arr_temp[i]);
+//                _12_pressureLabels[i].setText(new WeatherData().arr_pres[i]);
+//
+//                switch (new WeatherData().arr_descript[i]) {
+//                    case "Clouds":
+//                        _12_icosLabels[i].setImageResource(R.drawable.clouds_icon);
+//                        break;
+//                    case "Clear":
+//                        _12_icosLabels[i].setImageResource(R.drawable.sun);
+//                        break;
+//                    case "Rain":
+//                        _12_icosLabels[i].setImageResource(R.drawable.rain_icon);
+//                        break;
+//                    case "Snow":
+//                        _12_icosLabels[i].setImageResource(R.drawable.snow_icon);
+//                        break;
+//                    default:
+//                        iv_theme.setImageResource(R.drawable.clouds_icon);
+//                }
+//            }
+//        }
+//        else
+//        {
+//            ll_time.setVisibility(View.GONE);
+//            ll_temp.setVisibility(View.GONE);
+//            ll_icos.setVisibility(View.GONE);
+//            ll_pres.setVisibility(View.GONE);
+//            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
+//
+//
+//            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+//        }
 
-        tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
-        tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
-        tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
-        tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
 
 
-        setTheme(dayIndex, new WeatherData().arr_theme);
+//        tv_day.setText(new WeatherData().arr_date[dayIndex]);
+//        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
+//        tv_details.setText(new WeatherData().arr_details[dayIndex]);
+//        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
+//        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
+//        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
+//        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
+//        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
+//        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
+//        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
+//        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
+
+
+
+
+//        tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
+//        tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
+//        tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
+//        tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
+
+
+        //setTheme(dayIndex, new WeatherData().arr_theme);
 
     }
+
+    public void loadApp () {
+        // Reload buttons highlights (Костыль)
+//        btn_day0 = findViewById(R.id.btn_day0);
+//        btn_day0.setSelected(true);
+//        btn_day1.setSelected(false);
+//        btn_day2.setSelected(false);
+//        btn_day3.setSelected(false);
+//        btn_day4.setSelected(false);
+//        btn_day5.setSelected(false);
+//        btn_day6.setSelected(false);
+
+        //TODO: 1 - getForecast()
+        getForecast();
+
+        //TODO: 2 - updateUI(0)
+        updateUI(0);
+
+
+
+        //TODO: daysOfWeekPanel(new WeatherData().arr_date);
+        //daysOfWeekPanel(new WeatherData().arr_date);
+
+
+        //TODO: updateBackground();
+        // ...
+    }
+
 
 
 
     public void getForecast ()
     {
+        /**
+         * IMPORTANT NOTE:
+         * This function ONLY fills the WeatherData arrays.
+         * And that's all.
+         * Nothing else.
+         * ...
+         * like it should do.
+         */
+
 
         //TODO Find user's location: lat, lon
 
 
-        //API Call
+        //API Call which is an important part of this block!!!
         String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
 
 
@@ -485,19 +567,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    ///---------------------------------------------------------------
-                    //Ми можемо винести цей блок в OnCreate щоб усунути баг з викидом на нульовий день
-                    updateUI(0);
-                    btn_day0.setSelected(true);
-                    btn_day1.setSelected(false);
-                    btn_day2.setSelected(false);
-                    btn_day3.setSelected(false);
-                    btn_day4.setSelected(false);
-                    btn_day5.setSelected(false);
-                    btn_day6.setSelected(false);
-
-                    daysOfWeekPanel(new WeatherData().arr_date);
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -510,12 +579,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //is "this" same as "MainActivity"?
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jor);
 
     }
-
-
 
 
 

@@ -1,5 +1,7 @@
 package com.andriybobchuk.weatherApp.Structures;
 
+//WIP
+
 public class WidgetsData {
 
     private String temp;
