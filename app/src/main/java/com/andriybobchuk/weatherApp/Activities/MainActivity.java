@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.andriybobchuk.weatherApp.R;
 
@@ -619,17 +620,24 @@ public class MainActivity extends AppCompatActivity {
 
                 reloadUI();
 
+                // Remove internet failure msg box
+                ConstraintLayout cl_internetError = findViewById(R.id.cl_internetError);
+                cl_internetError.setVisibility(View.GONE);
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                // Internet failure msg box
+                ConstraintLayout cl_internetError = findViewById(R.id.cl_internetError);
+                cl_internetError.setVisibility(View.VISIBLE);
             }
         });
 
 
 
-        //TODO: is "this" same as "MainActivity"? - Yes, I suppose
+
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jor);
 
