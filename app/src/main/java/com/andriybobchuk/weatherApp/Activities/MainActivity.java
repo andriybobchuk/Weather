@@ -1,7 +1,6 @@
 package com.andriybobchuk.weatherApp.Activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.andriybobchuk.weatherApp.Features.UserPreferences;
+import com.andriybobchuk.weatherApp.Location.UserLocation;
 import com.andriybobchuk.weatherApp.R;
 
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
@@ -51,13 +52,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /** =============== ↓ IMPORTANT ZONE ↓ =======================================================
+         * So, the plan is the following:
+         *      - Get User's Location - We will get LON & LAT Doubles.
+         *      - [PROBABLY: call converter from LON\LAT to CITY]
+         *      - [PROBABLY: send this CITY to UserPrefs to set default]
+         *
+         *      - Get User's Prefs for the city - we will get either ANY city or DEFAULT city name
+         *      - We take this city name and convert to LON\LAT
+         *      - Call GetForecast with those values
+         * */
 
-        // Take user preferences at first
-        getUserPrefs();
+
+        // get the user's location first to use it then as the default value for userPref location
+        UserLocation.getUserLocation(this);
+
+        // Take user preferences (maybe he doesnt want our current location)
+        UserPreferences.getUserPrefs(this);
 
 
         /** 1st GETFORECAST() call out of 2 **/
         getForecast();
+
+
+        /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
+
+
+
+
+
+
+
+
+
+
 
 
         /* For button OPTIONS */
@@ -564,20 +592,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void getUserPrefs()
-    {
-        /**
-         * This function reads user preferences
-         * from the file for the later use
-         * */
 
-        // Define "preferences" as our file with user settings
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
-
-        // Load location variable from the userPrefs file
-        String location = sharedPreferences.getString("CITY", "Moscow");
-
-    }
 
 
 

@@ -763,9 +763,9 @@
                 <TextView
                         android:text="TextView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/gooba"
+                        android:layout_height="wrap_content" android:id="@+id/latlon"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="300dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="140dp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="50dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
