@@ -760,6 +760,13 @@
                             app:layout_constraintHorizontal_bias="0.512"
                             app:layout_constraintBottom_toBottomOf="parent" android:textColor="#FFFF"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/gooba"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="300dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="50dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -775,7 +782,7 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="7dp">
 
         <Button
-                android:text="W"
+                android:text="L"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day0"
@@ -786,7 +793,7 @@
                 android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
-                android:text="I"
+                android:text="O"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day1"
@@ -797,7 +804,7 @@
                 android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
-                android:text="L"
+                android:text="A"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day2"
@@ -808,7 +815,7 @@
                 android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
-                android:text="L"
+                android:text="D"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day3"
@@ -830,7 +837,7 @@
                 android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
-                android:text="A"
+                android:text="N"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day5"
@@ -841,7 +848,7 @@
                 android:textColor="@color/white_text_btn"
                 android:textAlignment="center"/>
         <Button
-                android:text="M"
+                android:text="G"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btn_day6"

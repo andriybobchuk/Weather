@@ -1,6 +1,7 @@
 package com.andriybobchuk.weatherApp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /* Bottom M T W T F S S panel
-    Used in OnCreate() and updateButtonPanel(), thus global */
+    Used in OnCreate() and updateButtonPanel(), thus declared global */
     Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
 
 
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // Take user preferences at first
+        getUserPrefs();
 
 
         /** 1st GETFORECAST() call out of 2 **/
@@ -266,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "Snow":
                 tv_myWeatherDescription.setText("All the weather outside is frightful..");
-                iv_theme.setImageResource(R.drawable.theme_snow);
+                iv_theme.setImageResource(R.drawable.d);
                 break;
             default:
                 tv_myWeatherDescription.setText("It's strange outside");
@@ -313,188 +318,211 @@ public class MainActivity extends AppCompatActivity {
         tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
 
 
-//TODO:------------------------------------------------------------------------------------------
-//        /* Horizontal ScrollView */
-//        TextView tv_pop, tv_pressure, tv_humidity, tv_wind, tv_uvi, tv_clouds;
-//
-//                tv_region, tv_temperature, tv_min_max, tv_details
-//
-//
-//
-//        tv_details.setText(new WeatherData().arr_details[dayIndex]);
-//        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
-//        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
-//        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
-//        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
-//        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
-//        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
-//        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
-//        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
-//
-//
-//
-//        /* Bar under the horizontal ScrollView */
-//        TextView tv_sunrise, tv_sunset;
-//
-//
+        // Feels like -5°, scattered clouds
+        TextView tv_details = findViewById(R.id.tv_details);
+        tv_details.setText(new WeatherData().arr_details[dayIndex]);
 
 
+        //POP
+        TextView tv_pop = findViewById(R.id.tv_pop);
+        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
 
-        //TODO:------------------------------------------------------------------------------------------
+        //Wind
+        TextView tv_wind = findViewById(R.id.tv_wind);
+        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
 
+        //Humidity
+        TextView tv_humidity = findViewById(R.id.tv_humidity);
+        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
 
-//        tv_temperature = findViewById(R.id.tv_temperature);
-//        tv_min_max = findViewById(R.id.tv_min_max);
-//
-//        tv_details = findViewById(R.id.tv_details);
-//        tv_pressure = findViewById(R.id.tv_pressure);
-//        tv_humidity = findViewById(R.id.tv_humidity);
-//        tv_wind = findViewById(R.id.tv_wind);
-//        tv_uvi = findViewById(R.id.tv_uvi);
-//        tv_clouds = findViewById(R.id.tv_clouds);
-//        tv_pop = findViewById(R.id.tv_pop);
-//
-//        tv_sunrise = findViewById(R.id.tv_sunrise);
-//        tv_sunset = findViewById(R.id.tv_sunset);
+        //UV
+        TextView tv_uvi = findViewById(R.id.tv_uvi);
+        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
 
-        //tv_region = findViewById(R.id.tv_region);
-        //
+        //Pressure
+        TextView tv_pressure = findViewById(R.id.tv_pressure);
+        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
 
-        /* Hourly forecast panel */
-//        LinearLayout ll_time = findViewById(R.id.ll_time);
-//        LinearLayout ll_temp = findViewById(R.id.ll_temp);
-//        LinearLayout ll_icos = findViewById(R.id.ll_icos);
-//        LinearLayout ll_pres = findViewById(R.id.ll_pres);
-
-//        TextView tv_time0 = findViewById(R.id.tv_time0);
-//        TextView tv_time1 = findViewById(R.id.tv_time1);
-//        TextView tv_time2 = findViewById(R.id.tv_time2);
-//        TextView tv_time3 = findViewById(R.id.tv_time3);
-//        TextView tv_time4 = findViewById(R.id.tv_time4);
-//        TextView tv_time5 = findViewById(R.id.tv_time5);
-//        TextView tv_time6 = findViewById(R.id.tv_time6);
-//        TextView tv_time7 = findViewById(R.id.tv_time7);
-//        TextView tv_time8 = findViewById(R.id.tv_time8);
-//        TextView tv_time9 = findViewById(R.id.tv_time9);
-//        TextView tv_time10 = findViewById(R.id.tv_time10);
-//        TextView tv_time11 = findViewById(R.id.tv_time11);
-//        TextView _12_timeLabels[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
-//                tv_time8,tv_time9,tv_time10,tv_time11 };
-
-//        TextView tv_temp0 = findViewById(R.id.tv_temp0);
-//        TextView tv_temp1 = findViewById(R.id.tv_temp1);
-//        TextView tv_temp2 = findViewById(R.id.tv_temp2);
-//        TextView tv_temp3 = findViewById(R.id.tv_temp3);
-//        TextView tv_temp4 = findViewById(R.id.tv_temp4);
-//        TextView tv_temp5 = findViewById(R.id.tv_temp5);
-//        TextView tv_temp6 = findViewById(R.id.tv_temp6);
-//        TextView tv_temp7 = findViewById(R.id.tv_temp7);
-//        TextView tv_temp8 = findViewById(R.id.tv_temp8);
-//        TextView tv_temp9 = findViewById(R.id.tv_temp9);
-//        TextView tv_temp10 = findViewById(R.id.tv_temp10);
-//        TextView tv_temp11 = findViewById(R.id.tv_temp11);
-//        TextView _12_tempLabels[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
-//                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
-
-//        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
-//        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
-//        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
-//        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
-//        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
-//        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
-//        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
-//        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
-//        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
-//        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
-//        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
-//        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
-//        TextView _12_pressureLabels[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
-//                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
-
-//        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
-//        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
-//        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
-//        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
-//        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
-//        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
-//        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
-//        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
-//        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
-//        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
-//        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
-//        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
-//        ImageView _12_icosLabels[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
-//                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
+        //Clouds
+        TextView tv_clouds = findViewById(R.id.tv_clouds);
+        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
 
 
-//        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
-//        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
-//        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
-//        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
-        //LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
+        //Sunrise
+        TextView tv_sunrise = findViewById(R.id.tv_sunrise);
+        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
+
+        //Sunset
+        TextView tv_sunset = findViewById(R.id.tv_sunset);
+        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
 
 
-//        if (dayIndex == 0)
-//       // {
-//            tv_temperature.setText(new WeatherData().today_temperature + "°C");
+        /**  =================================================================================================== **/
+        /**                INSIDE THE DAY PANELS                                                                 **/
+        /**  =================================================================================================== **/
 
-//            ll_time.setVisibility(View.VISIBLE);
-//            ll_temp.setVisibility(View.VISIBLE);
-//            ll_icos.setVisibility(View.VISIBLE);
-//            ll_pres.setVisibility(View.VISIBLE);
-//            ll_InsideTheDayShortened.setVisibility(View.GONE);
+        /** 1 - BIG inside the day panel (for current day) **/
+
+        /* Those four are layouts on which four data columns are situated */
+        LinearLayout ll_time = findViewById(R.id.ll_time);
+        LinearLayout ll_temp = findViewById(R.id.ll_temp);
+        LinearLayout ll_icos = findViewById(R.id.ll_icos);
+        LinearLayout ll_pres = findViewById(R.id.ll_pres);
+
+        /* Those are four 12-valued columns for big panel */
+        TextView tv_time0 = findViewById(R.id.tv_time0);
+        TextView tv_time1 = findViewById(R.id.tv_time1);
+        TextView tv_time2 = findViewById(R.id.tv_time2);
+        TextView tv_time3 = findViewById(R.id.tv_time3);
+        TextView tv_time4 = findViewById(R.id.tv_time4);
+        TextView tv_time5 = findViewById(R.id.tv_time5);
+        TextView tv_time6 = findViewById(R.id.tv_time6);
+        TextView tv_time7 = findViewById(R.id.tv_time7);
+        TextView tv_time8 = findViewById(R.id.tv_time8);
+        TextView tv_time9 = findViewById(R.id.tv_time9);
+        TextView tv_time10 = findViewById(R.id.tv_time10);
+        TextView tv_time11 = findViewById(R.id.tv_time11);
+        TextView timeColVals[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
+                tv_time8,tv_time9,tv_time10,tv_time11 };
+
+        TextView tv_temp0 = findViewById(R.id.tv_temp0);
+        TextView tv_temp1 = findViewById(R.id.tv_temp1);
+        TextView tv_temp2 = findViewById(R.id.tv_temp2);
+        TextView tv_temp3 = findViewById(R.id.tv_temp3);
+        TextView tv_temp4 = findViewById(R.id.tv_temp4);
+        TextView tv_temp5 = findViewById(R.id.tv_temp5);
+        TextView tv_temp6 = findViewById(R.id.tv_temp6);
+        TextView tv_temp7 = findViewById(R.id.tv_temp7);
+        TextView tv_temp8 = findViewById(R.id.tv_temp8);
+        TextView tv_temp9 = findViewById(R.id.tv_temp9);
+        TextView tv_temp10 = findViewById(R.id.tv_temp10);
+        TextView tv_temp11 = findViewById(R.id.tv_temp11);
+        TextView temperatureColVals[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
+                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
+
+        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
+        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
+        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
+        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
+        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
+        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
+        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
+        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
+        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
+        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
+        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
+        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
+        TextView pressureColVals[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
+                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
+
+        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
+        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
+        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
+        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
+        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
+        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
+        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
+        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
+        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
+        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
+        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
+        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
+        ImageView icosColVals[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
+                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
 
 
-//            for(int i=0; i<=11; i++) {
-//                _12_timeLabels[i].setText(new WeatherData().arr_time[i]);
-//                _12_tempLabels[i].setText(new WeatherData().arr_temp[i]);
-//                _12_pressureLabels[i].setText(new WeatherData().arr_pres[i]);
-//
-//                switch (new WeatherData().arr_descript[i]) {
-//                    case "Clouds":
-//                        _12_icosLabels[i].setImageResource(R.drawable.clouds_icon);
-//                        break;
-//                    case "Clear":
-//                        _12_icosLabels[i].setImageResource(R.drawable.sun);
-//                        break;
-//                    case "Rain":
-//                        _12_icosLabels[i].setImageResource(R.drawable.rain_icon);
-//                        break;
-//                    case "Snow":
-//                        _12_icosLabels[i].setImageResource(R.drawable.snow_icon);
-//                        break;
-//                    default:
-//                        iv_theme.setImageResource(R.drawable.clouds_icon);
-//                }
-//            }
-//        }
-//        else
-//        {
-//            ll_time.setVisibility(View.GONE);
-//            ll_temp.setVisibility(View.GONE);
-//            ll_icos.setVisibility(View.GONE);
-//            ll_pres.setVisibility(View.GONE);
-//            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
-//
-//
-//            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
-//        }
+        /** 2 - SMALL INSIDE THE DAY PANEL (ALL FOLLOWING DAYS) **/
+
+        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
+        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
+        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
+        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
+
+        LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
+
+        //--- END OF DECLARATION ----------------------------------------------------------------------------
+
+        /**
+         * Now it gets serious.
+         * if the day is TODAY (index 0), we have to:
+         *      - use variable "today_temperature" as it's more precise.
+         *      - set BIG "Inside the day panel" as it's more precise.
+         *
+         * if the day is any other (indices 1-6):
+         *      - use "arr_temperature" as we have accessto it.
+         *      - use SMALL "inside the day panel" as we have access only to it.
+         */
+
+        if (dayIndex == 0)
+        {
+            tv_temperature.setText(new WeatherData().today_temperature + "°C");
+
+            // Activate all 4 columns of big panel
+            ll_time.setVisibility(View.VISIBLE);
+            ll_temp.setVisibility(View.VISIBLE);
+            ll_icos.setVisibility(View.VISIBLE);
+            ll_pres.setVisibility(View.VISIBLE);
+
+            // Deactivate small panel
+            ll_InsideTheDayShortened.setVisibility(View.GONE);
 
 
+            /**
+             *  Attention!
+             *  here we assign each 12 values for each of 4 data columns:
+             *          - Time column vals with time array;
+             *          - Temperature column vals with temp array;
+             *          - pressure - with pressure;
+             *          BUT!
+             *          - Column "icos" we assign depending on arr_descript, thus SWITCH.
+             *          **/
+            for(int i=0; i<=11; i++) {
+                timeColVals[i].setText(new WeatherData().arr_time[i]);
+                temperatureColVals[i].setText(new WeatherData().arr_temp[i]);
+                pressureColVals[i].setText(new WeatherData().arr_pres[i]);
 
+                switch (new WeatherData().arr_descript[i]) {
+                    case "Clouds":
+                        icosColVals[i].setImageResource(R.drawable.clouds_icon);
+                        break;
+                    case "Clear":
+                        icosColVals[i].setImageResource(R.drawable.sun);
+                        break;
+                    case "Rain":
+                        icosColVals[i].setImageResource(R.drawable.rain_icon);
+                        break;
+                    case "Snow":
+                        icosColVals[i].setImageResource(R.drawable.snow_icon);
+                        break;
+                    default:
+                        icosColVals[i].setImageResource(R.drawable.clouds_icon);
+                }
+            }
+        }
+        else //  IF any other day (indexes (indices) 0-6):
+        {
+            // Temperature we get from array
+            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
 
+            // Deactivate all 4 cols of big panel
+            ll_time.setVisibility(View.GONE);
+            ll_temp.setVisibility(View.GONE);
+            ll_icos.setVisibility(View.GONE);
+            ll_pres.setVisibility(View.GONE);
 
+            // Activate small panel
+            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
 
+            // Assign values to SMALL panel:
+            tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
+            tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
+            tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
+            tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
 
-
-
-//        tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
-//        tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
-//        tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
-//        tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
-
-
-        //setTheme(dayIndex, new WeatherData().arr_theme);
+        }
+        /**  =================================================================================================== **/
+        /**               END OF INSIDE THE DAY PANELS                                                           **/
+        /**  =================================================================================================== **/
 
     }
 
@@ -534,6 +562,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void getUserPrefs()
+    {
+        /**
+         * This function reads user preferences
+         * from the file for the later use
+         * */
+
+        // Define "preferences" as our file with user settings
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
+
+        // Load location variable from the userPrefs file
+        String location = sharedPreferences.getString("CITY", "Moscow");
+
+    }
 
 
 

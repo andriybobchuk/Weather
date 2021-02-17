@@ -61,21 +61,20 @@
                         android:layout_width="264dp"
                         android:layout_height="47dp"
                         android:inputType="textPersonName"
-                        android:text="City name"
                         android:ems="18"
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/et_location"
                         android:textSize="15sp" android:fontFamily="@font/gotham_medium"
                         android:textColor="#8B8B8B" app:layout_constraintTop_toBottomOf="@+id/textView"
                         android:layout_marginTop="10dp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp"
                         android:theme="@style/MyEditTextTheme"/>
                 <Button
-                        android:text="Save"
+                        android:text="AUTO"
                         android:layout_width="81dp"
                         android:layout_height="30dp" android:id="@+id/button"
                         android:background="@drawable/semi_transparent_background"
                         android:textColor="@android:color/black" app:layout_constraintTop_toBottomOf="@+id/textView"
-                        android:layout_marginTop="24dp" app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+                        android:layout_marginTop="24dp" app:layout_constraintStart_toEndOf="@+id/et_location"
                         android:layout_marginStart="15dp" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="20dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
