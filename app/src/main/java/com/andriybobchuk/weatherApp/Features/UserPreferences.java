@@ -3,7 +3,9 @@ package com.andriybobchuk.weatherApp.Features;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.Activities.OptionsActivity;
 import com.andriybobchuk.weatherApp.R;
@@ -30,19 +32,19 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferences {
 
 
+    public static String currentCity = null; // We determine it by user's current location.
+    public static String prefCity = null; // getUserPrefs() determines it by pref file.
+
+
     /**
      * This function reads user preferences from the file for the later use.
      *
      * @param mainActivity*/
-   public static void getUserPrefs(MainActivity mainActivity)
+   public static String getPrefCity(MainActivity mainActivity)
    {
+       SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("haahSHARED_PREF", Context.MODE_PRIVATE);
 
-       // Define "preferences" as our file with user settings
-       SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
-
-       // Load location variable from the userPrefs file
-       String location = sharedPreferences.getString("CITY", "Moscow");
-
+       return sharedPreferences.getString("CITY", currentCity);
    }
 
 
@@ -55,13 +57,13 @@ public class UserPreferences {
     {
 
         // Define "preferences" as our file with user settings
-        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences("haahSHARED_PREF", Context.MODE_PRIVATE);
 
         // Declare EditText for user's city (location)
         EditText et_location = optionsActivity.findViewById(R.id.et_location);
 
         // Initialise
-        et_location.setText(sharedPreferences.getString("CITY", "Moscow"));
+        et_location.setText(sharedPreferences.getString("CITY", currentCity));
 
     }
 
@@ -75,7 +77,7 @@ public class UserPreferences {
          *      After it makes a Toast.**/
 
         // Define "preferences" as our file with user settings
-        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences("haahSHARED_PREF", Context.MODE_PRIVATE);
 
         // Initialize EditText for user's city (location)
         EditText et_location = optionsActivity.findViewById(R.id.et_location);
