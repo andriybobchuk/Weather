@@ -8,27 +8,20 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.andriybobchuk.weatherApp.Features.UserPreferences;
 import com.andriybobchuk.weatherApp.Location.UserLocation;
-import com.andriybobchuk.weatherApp.Network.GetForecast;
+import com.andriybobchuk.weatherApp.Network.ForecastGetter;
 import com.andriybobchuk.weatherApp.R;
 
-import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.Structures.WeatherData;
+import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
 
 
-/** This class updates User interface
+/* This class updates User interface
  *
  * NOTE:
- * This class ONLY updates User interface **/
+ * This class ONLY updates User interface */
 
 public class MainActivity extends AppCompatActivity {
-
-
-    /* Bottom M T W T F S S panel
-    Used in OnCreate() and updateButtonPanel(), thus declared global */
-    Button btn_day0,btn_day1,btn_day2,btn_day3,btn_day4,btn_day5,btn_day6;
-
 
 
 
@@ -38,14 +31,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //private ResultProfileBinding binding;
+    //For enabling binding: Declare binding object from binding class
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //binding = ResultProfileBinding.inflate(getLayoutInflater());
-        //View view = binding.getRoot();
-        setContentView(R.layout.activity_main);
+        //2 more lines for enabling binding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         /** =============== ↓ IMPORTANT ZONE ↓ =======================================================
          * So, the plan is the following:
@@ -72,14 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Gets the forecast for the given lon\lat
-        GetForecast.getForecast(this);
+        ForecastGetter.getForecast(this);
 
 
         /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
-
-
-
-
 
 
 
@@ -98,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        final RadioGroup group= (RadioGroup) findViewById(R.id.rg_dayOfTheWeek);
+        final RadioGroup group = (RadioGroup) findViewById(R.id.rg_dayOfTheWeek);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -139,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
 
                 /** 2nd GETFORECAST() call out of 2 **/
-                GetForecast.getForecast(MainActivity.this);
+                ForecastGetter.getForecast(MainActivity.this);
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -148,37 +139,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /** Sets M T W T F S S button sequence **/
+    /** Assigns right M T W T F S S sequence to RB-group + checks the 0th day **/
     public void updateButtonPanel() {
 
-        /**
-         * 1 - Function for filling the bottom 7-days button panel with the first letters of week days.
-         * 2 - It also highlights the 0-th day button and unhighlights the rest
-         *
-         * NOTE:
-         * Should be executed only once on app start or restart but not on button clicks ↓
-         * → That is why I call it only in RE-loadUI(), not in normal loadUI(dayIndex)
-         */
+        RadioButton daysRadioButtons[] = {
+                binding.rbMon,
+                binding.rbTue,
+                binding.rbWed,
+                binding.rbThr,
+                binding.rbFri,
+                binding.rbSat,
+                binding.rbSun
+        };
 
-        RadioButton rb_day0 = findViewById(R.id.rb_Mon);
-        RadioButton rb_day1 = findViewById(R.id.rb_Tue);
-        RadioButton rb_day2 = findViewById(R.id.rb_Wed);
-        RadioButton rb_day3 = findViewById(R.id.rb_Thr);
-        RadioButton rb_day4 = findViewById(R.id.rb_Fri);
-        RadioButton rb_day5 = findViewById(R.id.rb_Sat);
-        RadioButton rb_day6 = findViewById(R.id.rb_Sun);
-        RadioButton daysRadioButtons[] = { rb_day0, rb_day1, rb_day2, rb_day3, rb_day4, rb_day5, rb_day6 };
-
+        binding.rbMon.setChecked(true);
 
         for(int i=0; i<=6; i++)
         {
             daysRadioButtons[i].setText(String.valueOf(new WeatherData().arr_date[i].charAt(0)));
         }
     }
-
-
-
-
 
 
     /** Sets background Zing image and description label */
@@ -189,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         switch(new WeatherData().arr_theme[dayIndex])
         {
             case "Clouds":
-                tv_myWeatherDescription.setText("Not the nicest weather");
+                tv_myWeatherDescription.setText("Just a bit of clouds");
                 iv_theme.setImageResource(R.drawable.clouds);
                 break;
             case "Clear":
@@ -205,179 +185,104 @@ public class MainActivity extends AppCompatActivity {
                 iv_theme.setImageResource(R.drawable.d);
                 break;
             default:
-                tv_myWeatherDescription.setText("It's strange outside");
+                tv_myWeatherDescription.setText("It's kinda strange outside");
                 iv_theme.setImageResource(R.drawable.clouds);
         }
     }
 
 
-    /** Fills all labels using all arrays */
+    /**
+     * Fills all labels using all the data arrays
+     * 1 - This function takes day index from pressed button (0-6) or from loadApp()(0)
+     * 2 - DECLARE and INITIALIZE LOCAL text labels with data from WeatherData
+     *
+     * NOTE:
+     * In order to avoid confusion, text labels will be initialized as they appear
+     * on the app screen (one after another).
+     */
     public void updateData(int dayIndex)
     {
-        /**
-         * 1 - This function takes day index from pressed button (0-6) or from loadApp()(0)
-         * 2 - DECLARE and INITIALIZE LOCAL text labels with data from WeatherData
-         *
-         * And that's all. So simple
-         *
-         * NOTE:
-         * In order to avoid confusion, text labels will be initialized as they appear
-         * on the app screen (one after another).
-         */
 
         // Tuesday, Feb 13
-        TextView tv_day = findViewById(R.id.tv_day);
-        tv_day.setText(new WeatherData().arr_date[dayIndex]);
+        binding.tvDay.setText(new WeatherData().arr_date[dayIndex]);
 
 
+        //TODO - deal with tv_region
         // Gliwice at 13:45
-        TextView tv_region = findViewById(R.id.tv_region);
-        //UserLocation.getUserLocation(this);
-        //UserPreferences.getPrefCity(this);
+        // TextView tv_region = findViewById(R.id.tv_region);
+        // UserLocation.getUserLocation(this);
+        // UserPreferences.getPrefCity(this);
 
 //        tv_region.setText(UserLocation.getUserLocation(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
         UserLocation.getUserLocation(this);
 
 
-        //TODO the is a problem with finding user location. It appears from the second attemp ↑
+        //TODO there is a problem with finding user location. It appears from the second attemp ↑
 
         //  -9°C
-        TextView tv_temperature = findViewById(R.id.tv_temperature);
         if (dayIndex == 0) {
-            tv_temperature.setText(new WeatherData().today_temperature + "°C");
+            binding.tvTemperature.setText(new WeatherData().today_temperature + "°C");
         } else {
-            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+            binding.tvTemperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
         }
 
-
+        //TODO: I create a separate object WeatherData for every property. it
+        // will be better to instantiate one obj and use its properties
         //-3°...0°
-        TextView tv_min_max = findViewById(R.id.tv_min_max);
-        tv_min_max.setText(new WeatherData().arr_min_max[dayIndex]);
-
+        binding.tvMinMax.setText(new WeatherData().arr_min_max[dayIndex]);
 
         // Feels like -5°, scattered clouds
-        TextView tv_details = findViewById(R.id.tv_details);
-        tv_details.setText(new WeatherData().arr_details[dayIndex]);
+        binding.tvDetails.setText(new WeatherData().arr_details[dayIndex]);
 
+        // POP
+        binding.tvPop.setText(new WeatherData().arr_pop[dayIndex]);
 
-        //POP
-        TextView tv_pop = findViewById(R.id.tv_pop);
-        tv_pop.setText(new WeatherData().arr_pop[dayIndex]);
+        // Wind
+        binding.tvWind.setText(new WeatherData().arr_wind[dayIndex]);
 
-        //Wind
-        TextView tv_wind = findViewById(R.id.tv_wind);
-        tv_wind.setText(new WeatherData().arr_wind[dayIndex]);
+        // Humidity
+        binding.tvHumidity.setText(new WeatherData().arr_humidity[dayIndex]);
 
-        //Humidity
-        TextView tv_humidity = findViewById(R.id.tv_humidity);
-        tv_humidity.setText(new WeatherData().arr_humidity[dayIndex]);
+        // UV
+        binding.tvUvi.setText(new WeatherData().arr_uvi[dayIndex]);
 
-        //UV
-        TextView tv_uvi = findViewById(R.id.tv_uvi);
-        tv_uvi.setText(new WeatherData().arr_uvi[dayIndex]);
+        // Pressure
+        binding.tvPressure.setText(new WeatherData().arr_pressure[dayIndex]);
 
-        //Pressure
-        TextView tv_pressure = findViewById(R.id.tv_pressure);
-        tv_pressure.setText(new WeatherData().arr_pressure[dayIndex]);
+        // Clouds
+        binding.tvClouds.setText(new WeatherData().arr_clouds[dayIndex]);
 
-        //Clouds
-        TextView tv_clouds = findViewById(R.id.tv_clouds);
-        tv_clouds.setText(new WeatherData().arr_clouds[dayIndex]);
+        // Sunrise
+        binding.tvSunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
 
-
-        //Sunrise
-        TextView tv_sunrise = findViewById(R.id.tv_sunrise);
-        tv_sunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
-
-        //Sunset
-        TextView tv_sunset = findViewById(R.id.tv_sunset);
-        tv_sunset.setText(new WeatherData().arr_sunset[dayIndex]);
+        // Sunset
+        binding.tvSunset.setText(new WeatherData().arr_sunset[dayIndex]);
 
 
         /**  =================================================================================================== **/
         /**                INSIDE THE DAY PANELS                                                                 **/
         /**  =================================================================================================== **/
 
-        /** 1 - BIG inside the day panel (for current day) **/
+        TextView timeColVals[] = {
+                binding.tvTime0, binding.tvTime1, binding.tvTime2, binding.tvTime3, binding.tvTime4, binding.tvTime5,
+                binding.tvTime6, binding.tvTime7, binding.tvTime8, binding.tvTime9, binding.tvTime10, binding.tvTime11
+        };
 
-        /* Those four are layouts on which four data columns are situated */
-        LinearLayout ll_time = findViewById(R.id.ll_time);
-        LinearLayout ll_temp = findViewById(R.id.ll_temp);
-        LinearLayout ll_icos = findViewById(R.id.ll_icos);
-        LinearLayout ll_pres = findViewById(R.id.ll_pres);
+        TextView temperatureColVals[] = {
+                binding.tvTemp0, binding.tvTemp1, binding.tvTemp2, binding.tvTemp3, binding.tvTemp4, binding.tvTemp5,
+                binding.tvTemp6, binding.tvTemp7, binding.tvTemp8, binding.tvTemp9, binding.tvTemp10, binding.tvTemp11
+        };
 
-        /* Those are four 12-valued columns for big panel */
-        TextView tv_time0 = findViewById(R.id.tv_time0);
-        TextView tv_time1 = findViewById(R.id.tv_time1);
-        TextView tv_time2 = findViewById(R.id.tv_time2);
-        TextView tv_time3 = findViewById(R.id.tv_time3);
-        TextView tv_time4 = findViewById(R.id.tv_time4);
-        TextView tv_time5 = findViewById(R.id.tv_time5);
-        TextView tv_time6 = findViewById(R.id.tv_time6);
-        TextView tv_time7 = findViewById(R.id.tv_time7);
-        TextView tv_time8 = findViewById(R.id.tv_time8);
-        TextView tv_time9 = findViewById(R.id.tv_time9);
-        TextView tv_time10 = findViewById(R.id.tv_time10);
-        TextView tv_time11 = findViewById(R.id.tv_time11);
-        TextView timeColVals[] = { tv_time0, tv_time1, tv_time2, tv_time3, tv_time4, tv_time5, tv_time6, tv_time7,
-                tv_time8,tv_time9,tv_time10,tv_time11 };
+        TextView pressureColVals[] = {
+                binding.tvPressure0, binding.tvPressure1, binding.tvPressure2, binding.tvPressure3, binding.tvPressure4,
+                binding.tvPressure5, binding.tvPressure6, binding.tvPressure7, binding.tvPressure8, binding.tvPressure9,
+                binding.tvPressure10, binding.tvPressure11
+        };
 
-        TextView tv_temp0 = findViewById(R.id.tv_temp0);
-        TextView tv_temp1 = findViewById(R.id.tv_temp1);
-        TextView tv_temp2 = findViewById(R.id.tv_temp2);
-        TextView tv_temp3 = findViewById(R.id.tv_temp3);
-        TextView tv_temp4 = findViewById(R.id.tv_temp4);
-        TextView tv_temp5 = findViewById(R.id.tv_temp5);
-        TextView tv_temp6 = findViewById(R.id.tv_temp6);
-        TextView tv_temp7 = findViewById(R.id.tv_temp7);
-        TextView tv_temp8 = findViewById(R.id.tv_temp8);
-        TextView tv_temp9 = findViewById(R.id.tv_temp9);
-        TextView tv_temp10 = findViewById(R.id.tv_temp10);
-        TextView tv_temp11 = findViewById(R.id.tv_temp11);
-        TextView temperatureColVals[] = { tv_temp0, tv_temp1, tv_temp2, tv_temp3, tv_temp4, tv_temp5, tv_temp6, tv_temp7,
-                tv_temp8,tv_temp9,tv_temp10,tv_temp11 };
-
-        TextView tv_pressure0 = findViewById(R.id.tv_pressure0);
-        TextView tv_pressure1 = findViewById(R.id.tv_pressure1);
-        TextView tv_pressure2 = findViewById(R.id.tv_pressure2);
-        TextView tv_pressure3 = findViewById(R.id.tv_pressure3);
-        TextView tv_pressure4 = findViewById(R.id.tv_pressure4);
-        TextView tv_pressure5 = findViewById(R.id.tv_pressure5);
-        TextView tv_pressure6 = findViewById(R.id.tv_pressure6);
-        TextView tv_pressure7 = findViewById(R.id.tv_pressure7);
-        TextView tv_pressure8 = findViewById(R.id.tv_pressure8);
-        TextView tv_pressure9 = findViewById(R.id.tv_pressure9);
-        TextView tv_pressure10 = findViewById(R.id.tv_pressure10);
-        TextView tv_pressure11 = findViewById(R.id.tv_pressure11);
-        TextView pressureColVals[] = { tv_pressure0, tv_pressure1, tv_pressure2, tv_pressure3, tv_pressure4,
-                tv_pressure5, tv_pressure6, tv_pressure7, tv_pressure8,tv_pressure9,tv_pressure10,tv_pressure11 };
-
-        ImageView iv_ico0 = findViewById(R.id.iv_ico0);
-        ImageView iv_ico1 = findViewById(R.id.iv_ico1);
-        ImageView iv_ico2 = findViewById(R.id.iv_ico2);
-        ImageView iv_ico3 = findViewById(R.id.iv_ico3);
-        ImageView iv_ico4 = findViewById(R.id.iv_ico4);
-        ImageView iv_ico5 = findViewById(R.id.iv_ico5);
-        ImageView iv_ico6 = findViewById(R.id.iv_ico6);
-        ImageView iv_ico7 = findViewById(R.id.iv_ico7);
-        ImageView iv_ico8 = findViewById(R.id.iv_ico8);
-        ImageView iv_ico9 = findViewById(R.id.iv_ico9);
-        ImageView iv_ico10 = findViewById(R.id.iv_ico10);
-        ImageView iv_ico11 = findViewById(R.id.iv_ico11);
-        ImageView icosColVals[] = { iv_ico0, iv_ico1, iv_ico2, iv_ico3, iv_ico4, iv_ico5, iv_ico6, iv_ico7,
-                iv_ico8,iv_ico9,iv_ico10,iv_ico11 };
-
-
-        /** 2 - SMALL INSIDE THE DAY PANEL (ALL FOLLOWING DAYS) **/
-
-        TextView tv_temp_morning = findViewById(R.id.tv_temp_morning);
-        TextView tv_temp_evening = findViewById(R.id.tv_temp_evening);
-        TextView tv_temp_afternoon = findViewById(R.id.tv_temp_afternoon);
-        TextView tv_temp_night = findViewById(R.id.tv_temp_night);
-
-        LinearLayout ll_InsideTheDayShortened = findViewById(R.id.ll_InsideTheDayShortened);
-
-        //--- END OF DECLARATION ----------------------------------------------------------------------------
+        ImageView icosColVals[] = {
+                binding.ivIco0, binding.ivIco1, binding.ivIco2, binding.ivIco3, binding.ivIco4, binding.ivIco5,
+                binding.ivIco6, binding.ivIco7, binding.ivIco8, binding.ivIco9, binding.ivIco10, binding.ivIco11
+        };
 
         /**
          * Now it gets serious.
@@ -392,17 +297,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (dayIndex == 0)
         {
-            tv_temperature.setText(new WeatherData().today_temperature + "°C");
+            binding.tvTemperature.setText(new WeatherData().today_temperature + "°C");
 
             // Activate all 4 columns of big panel
-            ll_time.setVisibility(View.VISIBLE);
-            ll_temp.setVisibility(View.VISIBLE);
-            ll_icos.setVisibility(View.VISIBLE);
-            ll_pres.setVisibility(View.VISIBLE);
+            binding.llTime.setVisibility(View.VISIBLE);
+            binding.llTemp.setVisibility(View.VISIBLE);
+            binding.llIcos.setVisibility(View.VISIBLE);
+            binding.llPres.setVisibility(View.VISIBLE);
 
             // Deactivate small panel
-            ll_InsideTheDayShortened.setVisibility(View.GONE);
-
+            binding.llInsideTheDayShortened.setVisibility(View.GONE);
 
             /**
              *  Attention!
@@ -439,22 +343,22 @@ public class MainActivity extends AppCompatActivity {
         else //  IF any other day (indexes (indices) 0-6):
         {
             // Temperature we get from array
-            tv_temperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+            binding.tvTemperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
 
             // Deactivate all 4 cols of big panel
-            ll_time.setVisibility(View.GONE);
-            ll_temp.setVisibility(View.GONE);
-            ll_icos.setVisibility(View.GONE);
-            ll_pres.setVisibility(View.GONE);
+            binding.llTime.setVisibility(View.GONE);
+            binding.llTemp.setVisibility(View.GONE);
+            binding.llIcos.setVisibility(View.GONE);
+            binding.llPres.setVisibility(View.GONE);
 
             // Activate small panel
-            ll_InsideTheDayShortened.setVisibility(View.VISIBLE);
+            binding.llInsideTheDayShortened.setVisibility(View.VISIBLE);
 
             // Assign values to SMALL panel:
-            tv_temp_morning.setText(new WeatherData().arr_morning[dayIndex]);
-            tv_temp_afternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
-            tv_temp_evening.setText(new WeatherData().arr_eve[dayIndex]);
-            tv_temp_night.setText(new WeatherData().arr_night[dayIndex]);
+            binding.tvTempMorning.setText(new WeatherData().arr_morning[dayIndex]);
+            binding.tvTempAfternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
+            binding.tvTempEvening.setText(new WeatherData().arr_eve[dayIndex]);
+            binding.tvTempNight.setText(new WeatherData().arr_night[dayIndex]);
 
         }
         /**  =================================================================================================== **/

@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
-public class GetForecast {
+public class ForecastGetter {
 
 
     /**

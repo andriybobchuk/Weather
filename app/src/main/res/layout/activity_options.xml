@@ -85,9 +85,9 @@
                 <TextView
                         android:text="Annoying notifications every day, no matter how the weather looks like"
                         android:layout_width="312dp"
-                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:layout_height="46dp" android:id="@+id/textView101"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
-                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView91"
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
@@ -101,14 +101,14 @@
                 <TextView
                         android:text="Daily Overview"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:layout_height="wrap_content" android:id="@+id/textView91"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
                         android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/textView3"
                         android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp"/>
                 <CheckBox
                         android:layout_width="31dp"
-                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        android:layout_height="34dp" android:id="@+id/checkBox1"
                         android:layout_marginTop="34dp"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="30dp"
@@ -121,21 +121,21 @@
                 <TextView
                         android:text="We will tell you when you should take your  umbrella"
                         android:layout_width="312dp"
-                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:layout_height="46dp" android:id="@+id/textView102"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
-                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView92"
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
                         android:text="Rain"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:layout_height="wrap_content" android:id="@+id/textView92"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
                         android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
                 <CheckBox
                         android:layout_width="31dp"
-                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        android:layout_height="34dp" android:id="@+id/checkBox2"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="15dp"
@@ -148,21 +148,21 @@
                 <TextView
                         android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
                         android:layout_width="312dp"
-                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:layout_height="46dp" android:id="@+id/textView103"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
-                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView93"
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
                         android:text="Low/High temperatures"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:layout_height="wrap_content" android:id="@+id/textView93"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
                         android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
                 <CheckBox
                         android:layout_width="31dp"
-                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        android:layout_height="34dp" android:id="@+id/checkBox3"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="15dp"
@@ -175,21 +175,21 @@
                 <TextView
                         android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
                         android:layout_width="312dp"
-                        android:layout_height="46dp" android:id="@+id/textView10"
+                        android:layout_height="46dp" android:id="@+id/textView104"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
-                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/textView94"
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
                         android:text="Strong winds"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:layout_height="wrap_content" android:id="@+id/textView94"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
                         android:textSize="15sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"/>
                 <CheckBox
                         android:layout_width="31dp"
-                        android:layout_height="34dp" android:id="@+id/checkBox"
+                        android:layout_height="34dp" android:id="@+id/checkBox4"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="30dp" app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="15dp"

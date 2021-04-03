@@ -686,28 +686,28 @@
                             <TextView
                                     android:text="morning"
                                     android:layout_width="44dp"
-                                    android:layout_height="wrap_content" android:id="@+id/textView7"
+                                    android:layout_height="wrap_content" android:id="@+id/mornnn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
                             <TextView
                                     android:text="afternoon"
                                     android:layout_width="48dp"
-                                    android:layout_height="wrap_content" android:id="@+id/textView6"
+                                    android:layout_height="wrap_content" android:id="@+id/afternnn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
                             <TextView
                                     android:text="evening"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView5"
+                                    android:layout_height="wrap_content" android:id="@+id/evennn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
                             <TextView
                                     android:text="night"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView4"
+                                    android:layout_height="wrap_content" android:id="@+id/nighttt"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
