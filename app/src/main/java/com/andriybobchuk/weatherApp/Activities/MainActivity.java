@@ -1,6 +1,10 @@
 package com.andriybobchuk.weatherApp.Activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -8,12 +12,15 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.andriybobchuk.weatherApp.Location.UserLocation;
-import com.andriybobchuk.weatherApp.Network.ForecastGetter;
+import com.andriybobchuk.weatherApp.Services.UserLocationService;
+import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
-import com.andriybobchuk.weatherApp.Structures.WeatherData;
+import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
 /* This class updates User interface
@@ -21,8 +28,7 @@ import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
  * NOTE:
  * This class ONLY updates User interface */
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements UserLocationService.UserLocationCallback {
 
 
     /** Opens Options Activity on button click **/
@@ -33,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     //For enabling binding: Declare binding object from binding class
     ActivityMainBinding binding;
+
+
+    @Override
+    public void displayLat(Double lat) { binding.latlon.setText(String.valueOf(lat)); }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +67,29 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+        if (UserPreferencesService.getPrefCity(this) == "DEFAULT")
+        {
+            // Get user location
+            // call forecast
+
+
+            UserLocationService.setCallback(this);
+           // getUserLocation(this);
+            //binding.latlon.setText(String.valueOf(lat));
+            //TextView ll = findViewById(R.id.latlon);
+            //ll.setText(String.valueOf(UserLocationService.lat));
+
+
+        } else {
+            binding.latlon.setText("ELSE");
+            // convert to lat lon
+            // call forecast
+        }
+
+
+        /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
+
 //        // Passes variable "currentCity" to next class - UserPreferences
 //        UserLocation.getUserLocation(this);
 //        // ↓
@@ -67,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Gets the forecast for the given lon\lat
-        ForecastGetter.getForecast(this);
+        ForecastService.getForecast(this);
 
 
         /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
@@ -130,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
 
                 /** 2nd GETFORECAST() call out of 2 **/
-                ForecastGetter.getForecast(MainActivity.this);
+                ForecastService.getForecast(MainActivity.this);
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -156,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0; i<=6; i++)
         {
-            daysRadioButtons[i].setText(String.valueOf(new WeatherData().arr_date[i].charAt(0)));
+            daysRadioButtons[i].setText(String.valueOf(new ForecastService().arr_date[i].charAt(0)));
         }
     }
 
@@ -166,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     {
         TextView tv_myWeatherDescription = findViewById(R.id.tv_hint);
         ImageView iv_theme = findViewById(R.id.iv_theme);
-        switch(new WeatherData().arr_theme[dayIndex])
+        switch(new ForecastService().arr_theme[dayIndex])
         {
             case "Clouds":
                 tv_myWeatherDescription.setText("Just a bit of clouds");
@@ -204,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
         // Tuesday, Feb 13
-        binding.tvDay.setText(new WeatherData().arr_date[dayIndex]);
+        binding.tvDay.setText(new ForecastService().arr_date[dayIndex]);
 
 
         //TODO - deal with tv_region
@@ -214,49 +247,49 @@ public class MainActivity extends AppCompatActivity {
         // UserPreferences.getPrefCity(this);
 
 //        tv_region.setText(UserLocation.getUserLocation(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
-        UserLocation.getUserLocation(this);
+        UserLocationService.getUserLocation(this);
 
 
         //TODO there is a problem with finding user location. It appears from the second attemp ↑
 
         //  -9°C
         if (dayIndex == 0) {
-            binding.tvTemperature.setText(new WeatherData().today_temperature + "°C");
+            binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
         } else {
-            binding.tvTemperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+            binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
         }
 
         //TODO: I create a separate object WeatherData for every property. it
         // will be better to instantiate one obj and use its properties
         //-3°...0°
-        binding.tvMinMax.setText(new WeatherData().arr_min_max[dayIndex]);
+        binding.tvMinMax.setText(new ForecastService().arr_min_max[dayIndex]);
 
         // Feels like -5°, scattered clouds
-        binding.tvDetails.setText(new WeatherData().arr_details[dayIndex]);
+        binding.tvDetails.setText(new ForecastService().arr_details[dayIndex]);
 
         // POP
-        binding.tvPop.setText(new WeatherData().arr_pop[dayIndex]);
+        binding.tvPop.setText(new ForecastService().arr_pop[dayIndex]);
 
         // Wind
-        binding.tvWind.setText(new WeatherData().arr_wind[dayIndex]);
+        binding.tvWind.setText(new ForecastService().arr_wind[dayIndex]);
 
         // Humidity
-        binding.tvHumidity.setText(new WeatherData().arr_humidity[dayIndex]);
+        binding.tvHumidity.setText(new ForecastService().arr_humidity[dayIndex]);
 
         // UV
-        binding.tvUvi.setText(new WeatherData().arr_uvi[dayIndex]);
+        binding.tvUvi.setText(new ForecastService().arr_uvi[dayIndex]);
 
         // Pressure
-        binding.tvPressure.setText(new WeatherData().arr_pressure[dayIndex]);
+        binding.tvPressure.setText(new ForecastService().arr_pressure[dayIndex]);
 
         // Clouds
-        binding.tvClouds.setText(new WeatherData().arr_clouds[dayIndex]);
+        binding.tvClouds.setText(new ForecastService().arr_clouds[dayIndex]);
 
         // Sunrise
-        binding.tvSunrise.setText(new WeatherData().arr_sunrise[dayIndex]);
+        binding.tvSunrise.setText(new ForecastService().arr_sunrise[dayIndex]);
 
         // Sunset
-        binding.tvSunset.setText(new WeatherData().arr_sunset[dayIndex]);
+        binding.tvSunset.setText(new ForecastService().arr_sunset[dayIndex]);
 
 
         /**  =================================================================================================== **/
@@ -297,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (dayIndex == 0)
         {
-            binding.tvTemperature.setText(new WeatherData().today_temperature + "°C");
+            binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
 
             // Activate all 4 columns of big panel
             binding.llTime.setVisibility(View.VISIBLE);
@@ -318,11 +351,11 @@ public class MainActivity extends AppCompatActivity {
              *          - Column "icos" we assign depending on arr_descript, thus SWITCH.
              *          **/
             for(int i=0; i<=11; i++) {
-                timeColVals[i].setText(new WeatherData().arr_time[i]);
-                temperatureColVals[i].setText(new WeatherData().arr_temp[i]);
-                pressureColVals[i].setText(new WeatherData().arr_pres[i]);
+                timeColVals[i].setText(new ForecastService().arr_time[i]);
+                temperatureColVals[i].setText(new ForecastService().arr_temp[i]);
+                pressureColVals[i].setText(new ForecastService().arr_pres[i]);
 
-                switch (new WeatherData().arr_descript[i]) {
+                switch (new ForecastService().arr_descript[i]) {
                     case "Clouds":
                         icosColVals[i].setImageResource(R.drawable.clouds_icon);
                         break;
@@ -343,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
         else //  IF any other day (indexes (indices) 0-6):
         {
             // Temperature we get from array
-            binding.tvTemperature.setText(new WeatherData().arr_temperature[dayIndex] + "°C");
+            binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
 
             // Deactivate all 4 cols of big panel
             binding.llTime.setVisibility(View.GONE);
@@ -355,10 +388,10 @@ public class MainActivity extends AppCompatActivity {
             binding.llInsideTheDayShortened.setVisibility(View.VISIBLE);
 
             // Assign values to SMALL panel:
-            binding.tvTempMorning.setText(new WeatherData().arr_morning[dayIndex]);
-            binding.tvTempAfternoon.setText(new WeatherData().arr_afternoon[dayIndex]);
-            binding.tvTempEvening.setText(new WeatherData().arr_eve[dayIndex]);
-            binding.tvTempNight.setText(new WeatherData().arr_night[dayIndex]);
+            binding.tvTempMorning.setText(new ForecastService().arr_morning[dayIndex]);
+            binding.tvTempAfternoon.setText(new ForecastService().arr_afternoon[dayIndex]);
+            binding.tvTempEvening.setText(new ForecastService().arr_eve[dayIndex]);
+            binding.tvTempNight.setText(new ForecastService().arr_night[dayIndex]);
 
         }
         /**  =================================================================================================== **/
@@ -402,6 +435,5 @@ public class MainActivity extends AppCompatActivity {
         updateBackground(dayIndex);
 
     }
-
 
 }

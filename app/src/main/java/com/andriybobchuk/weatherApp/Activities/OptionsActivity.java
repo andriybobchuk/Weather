@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.andriybobchuk.weatherApp.Features.UserPreferences;
+import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.R;
 
 public class OptionsActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class OptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        UserPreferences.load_UI(this);
+        UserPreferencesService.load_UI(this);
 
         /* BackToMain */
         btn_back_from_options = findViewById((R.id.btn_back_from_options));
@@ -31,7 +31,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                UserPreferences.setUserPrefs(OptionsActivity.this);
+                UserPreferencesService.setUserPrefs(OptionsActivity.this);
                 openMain();
             }
         });
