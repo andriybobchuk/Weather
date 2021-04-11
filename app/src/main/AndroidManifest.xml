@@ -15,6 +15,8 @@
             android:roundIcon="@mipmap/icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Activities.SetupActivity">
+        </activity>
 
         <receiver android:name=".Widgets.Widget_B">
             <intent-filter>

@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimaryLightGrey">#242222</color>
     <color name="colorAccentGreen">#1ED760</color>
+    <color name="colorPressedGreen">#12873c</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorDarkGrey">#707070</color>
 </resources>

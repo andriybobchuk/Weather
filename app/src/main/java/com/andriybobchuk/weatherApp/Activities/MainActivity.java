@@ -12,11 +12,12 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.andriybobchuk.weatherApp.Services.UserLocationService;
+
 import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
+import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -28,7 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
  * NOTE:
  * This class ONLY updates User interface */
 
-public class MainActivity extends AppCompatActivity implements UserLocationService.UserLocationCallback {
+public class MainActivity extends AppCompatActivity /*implements UserLocationService.UserLocationCallback*/ {
 
 
     /** Opens Options Activity on button click **/
@@ -41,8 +42,13 @@ public class MainActivity extends AppCompatActivity implements UserLocationServi
     ActivityMainBinding binding;
 
 
-    @Override
-    public void displayLat(Double lat) { binding.latlon.setText(String.valueOf(lat)); }
+//    @Override
+//    public void displayLocationResult(String cityName) {
+//        binding.tvRegion.setText("N" + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
+//
+//
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,66 +58,29 @@ public class MainActivity extends AppCompatActivity implements UserLocationServi
         View view = binding.getRoot();
         setContentView(view);
 
-        /** =============== ↓ IMPORTANT ZONE ↓ =======================================================
-         * So, the plan is the following:
-         *      - Get User's Location - We will get LON & LAT Doubles.
-         *      - [PROBABLY: call converter from LON\LAT to CITY]
-         *      - [PROBABLY: send this CITY to UserPrefs to set default]
-         *
-         *      - Get User's Prefs for the city - we will get either ANY city or DEFAULT city name
-         *      - We take this city name and convert to LON\LAT
-         *      - Call GetForecast with those values
-         * */
 
-
-
-
-
-
-        if (UserPreferencesService.getPrefCity(this) == "DEFAULT")
+        if (UserPreferencesService.getPrefCity(this) == "DEFAULT"
+                || UserPreferencesService.getPrefUnits(this) == "DEFAULT")
         {
-            // Get user location
-            // call forecast
-
-
-            UserLocationService.setCallback(this);
-           // getUserLocation(this);
-            //binding.latlon.setText(String.valueOf(lat));
-            //TextView ll = findViewById(R.id.latlon);
-            //ll.setText(String.valueOf(UserLocationService.lat));
-
+            //UserLocationService.setCallback(this);
+            Intent intent = new Intent(this, SetupActivity.class);
+            startActivity(intent);
+            finish();
 
         } else {
-            binding.latlon.setText("ELSE");
-            // convert to lat lon
-            // call forecast
+            // Pass some parameters here to getForecast ↓
+            ForecastService.getForecast(this);
+            binding.latlon.setText("Called");
         }
 
 
-        /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
-
-//        // Passes variable "currentCity" to next class - UserPreferences
-//        UserLocation.getUserLocation(this);
-//        // ↓
-//
-//        // Uses "currentCity" as a default preference; returns lon\lat of either default or chosen city
-//        UserPreferences.getUserPrefs(this);
-//        // ↓
 
 
-        // Gets the forecast for the given lon\lat
-        ForecastService.getForecast(this);
+
+
 
 
         /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
-
-
-
-
-
-
-
-
         /* For button OPTIONS */
         ImageButton btn_options = findViewById((R.id.btn_options));
         btn_options.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements UserLocationServi
      */
     public void updateData(int dayIndex)
     {
+        binding.tvRegion.setText("N" + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         // Tuesday, Feb 13
         binding.tvDay.setText(new ForecastService().arr_date[dayIndex]);
@@ -247,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements UserLocationServi
         // UserPreferences.getPrefCity(this);
 
 //        tv_region.setText(UserLocation.getUserLocation(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
-        UserLocationService.getUserLocation(this);
+        //UserLocationService.getUserLocation(this);
 
 
         //TODO there is a problem with finding user location. It appears from the second attemp ↑

@@ -60,19 +60,15 @@ public class ForecastService {
 
     public static String today_temperature;
 
-    public static Double lat;
-    public static Double lon;
 
     public static void getForecast(final MainActivity mainActivity)
     {
-
-       // final TextView latlon = mainActivity.findViewById(R.id.latlon);
-        //latlon.setText(UserPreferences.prefCity);
 
 
 
         //API Call which is an important part of this block!!!
         String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+        //String URLbase = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
 
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
