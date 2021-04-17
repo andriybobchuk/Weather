@@ -1,16 +1,19 @@
 package com.andriybobchuk.weatherApp.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.R;
 
-public class OptionsActivity extends AppCompatActivity {
+public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ImageButton btn_back_from_options;
+    public static final String PREF_FILE = "new9SHARED_PREF";
 
     /**
      * So here on OptionsActivity start we update UI using userPrefs file;
@@ -23,7 +26,25 @@ public class OptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
+        // Display content of pref file in edit text field
         UserPreferencesService.load_UI(this);
+
+        // For Units Spinner
+        final Spinner spinner = (Spinner) findViewById(R.id.s_units);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.units_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        // Dispaly pre-selected unit from prefs
+        //spinner.setSelection(adapter.getPosition(String.valueOf(this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).getString("UNITS", "DEFAULT"))));
+        spinner.setSelection(adapter.getPosition(String.valueOf(this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).getString("UNITS", "DEFAULT"))));
+
+        spinner.setOnItemSelectedListener(this);
+
 
         /* BackToMain */
         btn_back_from_options = findViewById((R.id.btn_back_from_options));
@@ -37,12 +58,101 @@ public class OptionsActivity extends AppCompatActivity {
         });
 
 
+        Button btn_apply_options = findViewById(R.id.btn_apply_options);
+        final EditText et_city = findViewById(R.id.et_location);
+        btn_apply_options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newCity = String.valueOf(et_city.getText());
+                getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", newCity).apply();
+                Toast.makeText(OptionsActivity.this, "City was changed!", 3000).show();
+            }
+        });
+
+        CheckBox cb_daily = findViewById(R.id.cb_daily);
+        cb_daily.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if(isChecked) {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("DAILY", "true").apply();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("DAILY", "false").apply();
+                }
+            }
+        });
+        CheckBox cb_rain = findViewById(R.id.cb_rain);
+        cb_rain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if(isChecked) {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("RAIN", "true").apply();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("RAIN", "false").apply();
+                }
+            }
+        });
+        CheckBox cb_temp = findViewById(R.id.cb_temp);
+        cb_temp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if(isChecked) {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("TEMP", "true").apply();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("TEMP", "false").apply();
+                }
+            }
+        });
+        CheckBox cb_wind = findViewById(R.id.cb_wind);
+        cb_wind.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if(isChecked) {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIND", "true").apply();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIND", "false").apply();
+                }
+            }
+        });
+
     }
+
+
 
 
     public void openMain()
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+        String selected = parent.getItemAtPosition(position).toString();
+
+        if(selected.equals("Metric"))
+        {
+            // Do Preferences stuff
+            getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "metric").apply();
+            Toast.makeText(this, "M saved!", 3000).show();
+        }
+        if(selected.equals("Imperial"))
+        {
+            // Do Preferences stuff
+            getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "imperial").apply();
+            Toast.makeText(this, "F saved!", 3000).show();
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

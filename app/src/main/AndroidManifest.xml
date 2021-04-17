@@ -18,24 +18,7 @@
         <activity android:name=".Activities.SetupActivity">
         </activity>
 
-        <receiver android:name=".Widgets.Widget_B">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
 
-            <meta-data
-                    android:name="android.appwidget.provider"
-                    android:resource="@xml/widget__b_info"/>
-        </receiver>
-        <receiver android:name=".Widgets.Widget_A">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-
-            <meta-data
-                    android:name="android.appwidget.provider"
-                    android:resource="@xml/widget__a_info"/>
-        </receiver>
 
         <activity android:name=".Activities.OptionsActivity">
         </activity>

@@ -1,10 +1,14 @@
 package com.andriybobchuk.weatherApp.Services;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.view.View;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
@@ -23,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.List;
 
 /*
     ForecastService is an object template that has its properties - fields with weather data and things it can do -
@@ -61,17 +66,34 @@ public class ForecastService {
     public static String today_temperature;
 
 
-    public static void getForecast(final MainActivity mainActivity)
+    public static void getForecast(final MainActivity mainActivity, String city, String units)
     {
+        String lat = null, lon = null;
+
+        Geocoder coder = new Geocoder(mainActivity);
+        List<Address> address;
+
+        try {
+            address = coder.getFromLocationName(city, 5);
+            if (address == null) {
+
+            }
+            Address location = address.get(0);
+            lat = String.valueOf(location.getLatitude());
+            lon = String.valueOf(location.getLongitude());
 
 
+        } catch (Exception ex) {
 
-        //API Call which is an important part of this block!!!
-        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
-        //String URLbase = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+            ex.printStackTrace();
+        }
 
 
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+        //String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+        String URLbase = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=en";
+
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URLbase, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -87,6 +109,7 @@ public class ForecastService {
                         Date date = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("dt"))*1000);
                         arr_date[dayIndex] = String.valueOf(new TimeAndDate().getDateFormat().format(date));
 
+                        //new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
                         Date sunriseTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunrise"))*1000);
                         arr_sunrise[dayIndex] = String.valueOf(new TimeAndDate().getTimeFormat().format(sunriseTime));
 
@@ -116,7 +139,7 @@ public class ForecastService {
                     for(int time = 0; time <= 11; time++)
                     {
                         arr_time[time] = String.valueOf(new TimeAndDate().getTimeFormat().format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
-                        arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°C";
+                        arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°";
                         arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
                         arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
                     }
@@ -147,4 +170,9 @@ public class ForecastService {
         RequestQueue queue = Volley.newRequestQueue(mainActivity);
         queue.add(jor);
     }
+
+
+
+
+
 }

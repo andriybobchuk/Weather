@@ -10,7 +10,7 @@
             android:text="-°"
             android:textColor="#ffffff"
             android:textSize="50sp"
-            android:background="#BF000000"
+            android:background="#FF000000"
             android:fontFamily="@font/gotham_medium" android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:visibility="visible"

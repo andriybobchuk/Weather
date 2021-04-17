@@ -29,6 +29,25 @@ import com.google.android.gms.tasks.OnSuccessListener;
  * NOTE:
  * This class ONLY updates User interface */
 
+/**
+ * BUGS:
+ * TODO: Unit System: it is always METRIC
+ * TODO: Error msg if cannot find the written city
+ *
+ * TODOS:
+ * TODO: Animate buttons
+ * TODO: Make a loading screen
+ * TODO: Inside the day table
+ * TODO: MTWFSS panel: make shadow effect
+ *
+ * MUST:
+ * TODO: Widgets: Mechanics + layout on feed
+ * TODO: Notifications: Prefs + Mechanics
+ *
+ * LATER:
+ * TODO: Languages: Prefs + OnBoarding
+ */
+
 public class MainActivity extends AppCompatActivity /*implements UserLocationService.UserLocationCallback*/ {
 
 
@@ -41,13 +60,6 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     //For enabling binding: Declare binding object from binding class
     ActivityMainBinding binding;
 
-
-//    @Override
-//    public void displayLocationResult(String cityName) {
-//        binding.tvRegion.setText("N" + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
-//
-//
-//    }
 
 
     @Override
@@ -69,8 +81,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         } else {
             // Pass some parameters here to getForecast ↓
-            ForecastService.getForecast(this);
-            binding.latlon.setText("Called");
+            ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
+
         }
 
 
@@ -87,6 +99,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             @Override
             public void onClick(View v) {
                 openOptions();
+                finish();
             }
         });
 
@@ -132,7 +145,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             public void onRefresh() {
 
                 /** 2nd GETFORECAST() call out of 2 **/
-                ForecastService.getForecast(MainActivity.this);
+                ForecastService.getForecast(MainActivity.this, UserPreferencesService.getPrefCity(MainActivity.this), UserPreferencesService.getPrefUnits(MainActivity.this));
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -204,29 +217,32 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
      */
     public void updateData(int dayIndex)
     {
-        binding.tvRegion.setText("N" + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
-
         // Tuesday, Feb 13
         binding.tvDay.setText(new ForecastService().arr_date[dayIndex]);
 
-
-        //TODO - deal with tv_region
-        // Gliwice at 13:45
-        // TextView tv_region = findViewById(R.id.tv_region);
-        // UserLocation.getUserLocation(this);
-        // UserPreferences.getPrefCity(this);
-
-//        tv_region.setText(UserLocation.getUserLocation(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
-        //UserLocationService.getUserLocation(this);
-
-
-        //TODO there is a problem with finding user location. It appears from the second attemp ↑
+        // Gliwice at 10:53
+        binding.tvRegion.setText(UserPreferencesService.getPrefCity(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         //  -9°C
         if (dayIndex == 0) {
-            binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
+            if (UserPreferencesService.getPrefUnits(this).equals("metric"))
+            {
+                binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
+            }
+            if (UserPreferencesService.getPrefUnits(this).equals("imperial"))
+            {
+                binding.tvTemperature.setText(new ForecastService().today_temperature + "°F");
+            }
+
         } else {
-            binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
+            if (UserPreferencesService.getPrefUnits(this).equals("metric"))
+            {
+                binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
+            }
+            if (UserPreferencesService.getPrefUnits(this).equals("imperial"))
+            {
+                binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°F");
+            }
         }
 
         //TODO: I create a separate object WeatherData for every property. it
@@ -300,7 +316,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         if (dayIndex == 0)
         {
-            binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
+            //binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
 
             // Activate all 4 columns of big panel
             binding.llTime.setVisibility(View.VISIBLE);
@@ -346,7 +362,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         else //  IF any other day (indexes (indices) 0-6):
         {
             // Temperature we get from array
-            binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
+            //binding.tvTemperature.setText(new ForecastService().arr_temperature[dayIndex] + "°C");
 
             // Deactivate all 4 cols of big panel
             binding.llTime.setVisibility(View.GONE);

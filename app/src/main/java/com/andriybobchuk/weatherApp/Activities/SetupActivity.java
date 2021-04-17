@@ -17,7 +17,7 @@ import com.andriybobchuk.weatherApp.databinding.ActivitySetupBinding;
 public class SetupActivity extends AppCompatActivity {
 
     ActivitySetupBinding binding;
-    public static final String PREF_FILE = "newSHARED_PREF";
+    public static final String PREF_FILE = "new9SHARED_PREF";
 
 
     @Override
@@ -53,7 +53,6 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Save the text to prefs
                 String city = String.valueOf(binding.etCity.getText()); // TODO: FIX NULL SAFETY
-
                 getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", city).apply();
 
                 // +
@@ -70,8 +69,9 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Do Preferences stuff
-                // +
+                getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "metric").apply();
 
+                // +
                 binding.clPage2.setVisibility(View.GONE);
                 binding.clPage2Bottom.setVisibility(View.GONE);
                 binding.clPage3.setVisibility(View.VISIBLE);
@@ -85,8 +85,9 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Do Preferences stuff
-                // +
+                getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "imperial").apply();
 
+                // +
                 binding.clPage2.setVisibility(View.GONE);
                 binding.clPage2Bottom.setVisibility(View.GONE);
                 binding.clPage3.setVisibility(View.VISIBLE);

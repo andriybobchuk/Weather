@@ -2,6 +2,7 @@ package com.andriybobchuk.weatherApp.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferencesService {
 
 
-    public static final String PREF_FILE = "newSHARED_PREF";
+    public static final String PREF_FILE = "new9SHARED_PREF";
 
     public static String getPrefCity(MainActivity mainActivity)
     {
@@ -26,7 +27,7 @@ public class UserPreferencesService {
     {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
-        return sharedPreferences.getString("Units", "DEFAULT");
+        return sharedPreferences.getString("UNITS", "DEFAULT");
     }
 
     public static void setPrefCity(MainActivity mainActivity, String city)
@@ -48,18 +49,6 @@ public class UserPreferencesService {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
    //TODO: you can remove this function as getPrefCity works the same way
     /**
      * Loads the UI with all user's preferences which he has set
@@ -68,9 +57,8 @@ public class UserPreferencesService {
      * **/
     public static void load_UI(OptionsActivity optionsActivity)
     {
-
         // Define "preferences" as our file with user settings
-        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences("newSHARED_PREF", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = optionsActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         // Declare EditText for user's city (location)
         EditText et_location = optionsActivity.findViewById(R.id.et_location);
@@ -78,6 +66,18 @@ public class UserPreferencesService {
         // Initialise
         et_location.setText(sharedPreferences.getString("CITY", "DEFAULT"));
 
+
+        CheckBox cb_daily = optionsActivity.findViewById(R.id.cb_daily);
+        cb_daily.setChecked(Boolean.valueOf(sharedPreferences.getString("DAILY", "false")));
+
+        CheckBox cb_rain = optionsActivity.findViewById(R.id.cb_rain);
+        cb_rain.setChecked(Boolean.valueOf(sharedPreferences.getString("RAIN", "false")));
+
+        CheckBox cb_temp = optionsActivity.findViewById(R.id.cb_temp);
+        cb_temp.setChecked(Boolean.valueOf(sharedPreferences.getString("TEMP", "false")));
+
+        CheckBox cb_wind = optionsActivity.findViewById(R.id.cb_wind);
+        cb_wind.setChecked(Boolean.valueOf(sharedPreferences.getString("WIND", "false")));
     }
 
 
