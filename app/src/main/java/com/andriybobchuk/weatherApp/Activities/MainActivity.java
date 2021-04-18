@@ -19,6 +19,7 @@ import com.andriybobchuk.weatherApp.R;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         View view = binding.getRoot();
         setContentView(view);
 
+
+        binding.shimmer.startShimmer();
 
         if (UserPreferencesService.getPrefCity(this) == "DEFAULT"
                 || UserPreferencesService.getPrefUnits(this) == "DEFAULT")

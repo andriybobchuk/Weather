@@ -8,18 +8,15 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.view.View;
-import android.widget.RemoteViews;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.R;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,6 +82,7 @@ public class ForecastService {
 
         } catch (Exception ex) {
 
+            Toast.makeText(mainActivity, "Converting lat\\lon, wait..", Toast.LENGTH_SHORT);
             ex.printStackTrace();
         }
 
@@ -96,6 +94,22 @@ public class ForecastService {
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URLbase, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
+                ShimmerFrameLayout shimmer = mainActivity.findViewById(R.id.shimmer);
+                shimmer.stopShimmer();
+                shimmer.setVisibility(View.GONE);
+
+                HorizontalScrollView horizontalScrollView = mainActivity.findViewById(R.id.horizontalScrollView);
+                horizontalScrollView.setVisibility(View.VISIBLE);
+
+                LinearLayout ll_sunrise_sunset = mainActivity.findViewById(R.id.ll_sunrise_sunset);
+                ll_sunrise_sunset.setVisibility(View.VISIBLE);
+
+                TextView tv_insidetheday = mainActivity.findViewById(R.id.tv_insidetheday);
+                tv_insidetheday.setVisibility(View.VISIBLE);
+
+                ConstraintLayout cl_insideTheDaySimplified = mainActivity.findViewById(R.id.cl_insideTheDaySimplified);
+                cl_insideTheDaySimplified.setVisibility(View.VISIBLE);
 
                 try {
 
@@ -147,6 +161,8 @@ public class ForecastService {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(mainActivity, "Converting lat\\lon, wait..", 3000);
+
                 }
 
                 mainActivity.reloadUI();
@@ -159,6 +175,21 @@ public class ForecastService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                TextView tv_error = mainActivity.findViewById(R.id.tv_error);
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    tv_error.setText("No internet connection");
+
+                } else if (error instanceof ClientError) {
+                    tv_error.setText(String.valueOf("City does not exist"));
+
+
+                } else if (error instanceof ServerError) {
+                    tv_error.setText("Server's dead, try later");
+
+                } else if (error instanceof NetworkError) {
+                } else if (error instanceof ParseError) {
+                }
 
                 // Internet failure msg box
                 ConstraintLayout cl_internetError = mainActivity.findViewById(R.id.cl_internetError);

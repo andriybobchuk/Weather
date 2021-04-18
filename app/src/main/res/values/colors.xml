@@ -5,4 +5,7 @@
     <color name="colorPressedGreen">#12873c</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorDarkGrey">#707070</color>
+
+    <color name="colorPurpleShimmer">#5f5663</color>
+    <color name="colorGreyShimmer">#211C24</color>
 </resources>
