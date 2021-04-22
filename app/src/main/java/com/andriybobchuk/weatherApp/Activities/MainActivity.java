@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,11 +35,9 @@ import java.util.Calendar;
 /**
  * BUGS:
  * TODO: Unit System: it is always METRIC
- * TODO: Error msg if cannot find the written city
  *
  * TODOS:
  * TODO: Animate buttons
- * TODO: Make a loading screen
  * TODO: Inside the day table
  * TODO: MTWFSS panel: make shadow effect
  *
@@ -89,20 +88,26 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         View view = binding.getRoot();
         setContentView(view);
 
-        createNotificationChannel();
-        Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        //Remove the following two lines
-        calendar.set(Calendar.MINUTE, 05);
-        calendar.set(Calendar.SECOND, 0);
-        // With setInexactRepeating(), you have to use one of the AlarmManager interval
-        // constants--in this case, AlarmManager.INTERVAL_DAY.
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
+        if (UserPreferencesService.getDaily(this) == "false")
+        {
+            createNotificationChannel();
+            Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 20);
+            //Remove the following two lines
+            calendar.set(Calendar.MINUTE, 05);
+            calendar.set(Calendar.SECOND, 0);
+            // With setInexactRepeating(), you have to use one of the AlarmManager interval
+            // constants--in this case, AlarmManager.INTERVAL_DAY.
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                    AlarmManager.INTERVAL_DAY, alarmIntent);
+        }
+
 
 
 
@@ -218,6 +223,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     {
         TextView tv_myWeatherDescription = findViewById(R.id.tv_hint);
         ImageView iv_theme = findViewById(R.id.iv_theme);
+
+        tv_myWeatherDescription.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         switch(new ForecastService().arr_theme[dayIndex])
         {
             case "Clouds":
@@ -255,12 +262,15 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     public void updateData(int dayIndex)
     {
         // Tuesday, Feb 13
+        binding.tvDay.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvDay.setText(new ForecastService().arr_date[dayIndex]);
 
         // Gliwice at 10:53
+        binding.tvRegion.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvRegion.setText(StringUtils.capitalize(UserPreferencesService.getPrefCity(this)) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         //  -9°C
+        binding.tvTemperature.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         if (dayIndex == 0) {
             if (UserPreferencesService.getPrefUnits(this).equals("metric"))
             {
@@ -285,33 +295,47 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         //TODO: I create a separate object WeatherData for every property. it
         // will be better to instantiate one obj and use its properties
         //-3°...0°
+        binding.tvMinMax.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvMinMax.setText(new ForecastService().arr_min_max[dayIndex]);
 
         // Feels like -5°, scattered clouds
+        binding.tvDetails.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvDetails.setText(new ForecastService().arr_details[dayIndex]);
 
         // POP
+        binding.tvPop.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvPop.setText(new ForecastService().arr_pop[dayIndex]);
 
         // Wind
+        binding.tvWind.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvWind.setText(new ForecastService().arr_wind[dayIndex]);
 
         // Humidity
+        binding.tvHumidity.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvHumidity.setText(new ForecastService().arr_humidity[dayIndex]);
 
+
+
+
+
         // UV
+        binding.tvUvi.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvUvi.setText(new ForecastService().arr_uvi[dayIndex]);
 
         // Pressure
+        binding.tvPressure.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvPressure.setText(new ForecastService().arr_pressure[dayIndex]);
 
         // Clouds
+        binding.tvClouds.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvClouds.setText(new ForecastService().arr_clouds[dayIndex]);
 
         // Sunrise
+        binding.tvSunrise.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvSunrise.setText(new ForecastService().arr_sunrise[dayIndex]);
 
         // Sunset
+        binding.tvSunset.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
         binding.tvSunset.setText(new ForecastService().arr_sunset[dayIndex]);
 
 
@@ -356,9 +380,16 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             //binding.tvTemperature.setText(new ForecastService().today_temperature + "°C");
 
             // Activate all 4 columns of big panel
+            binding.llTime.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             binding.llTime.setVisibility(View.VISIBLE);
+
+            binding.llTemp.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             binding.llTemp.setVisibility(View.VISIBLE);
+
+            binding.llIcos.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             binding.llIcos.setVisibility(View.VISIBLE);
+
+            binding.llPres.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             binding.llPres.setVisibility(View.VISIBLE);
 
             // Deactivate small panel
@@ -377,6 +408,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 timeColVals[i].setText(new ForecastService().arr_time[i]);
                 temperatureColVals[i].setText(new ForecastService().arr_temp[i]);
                 pressureColVals[i].setText(new ForecastService().arr_pres[i]);
+
 
                 switch (new ForecastService().arr_descript[i]) {
                     case "Clouds":
@@ -408,6 +440,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             binding.llPres.setVisibility(View.GONE);
 
             // Activate small panel
+            binding.llInsideTheDayShortened.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
             binding.llInsideTheDayShortened.setVisibility(View.VISIBLE);
 
             // Assign values to SMALL panel:

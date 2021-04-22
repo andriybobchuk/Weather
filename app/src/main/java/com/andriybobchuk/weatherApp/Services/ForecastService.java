@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
@@ -176,6 +177,7 @@ public class ForecastService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 TextView tv_error = mainActivity.findViewById(R.id.tv_error);
+                tv_error.startAnimation(AnimationUtils.loadAnimation(mainActivity, R.anim.blinking));
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     tv_error.setText("No internet connection");

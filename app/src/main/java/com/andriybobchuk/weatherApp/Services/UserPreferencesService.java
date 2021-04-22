@@ -30,6 +30,13 @@ public class UserPreferencesService {
         return sharedPreferences.getString("UNITS", "DEFAULT");
     }
 
+    public static String getDaily(MainActivity mainActivity)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("DAILY", "false");
+    }
+
     public static void setPrefCity(MainActivity mainActivity, String city)
     {
         mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", city).apply();
