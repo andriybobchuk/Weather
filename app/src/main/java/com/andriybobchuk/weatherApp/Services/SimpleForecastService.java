@@ -1,6 +1,9 @@
 package com.andriybobchuk.weatherApp.Services;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -10,19 +13,43 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class SimpleForecastService {
 
 
     public static apiCallback callback;
-    public static String temp, desc;
+    public static String temp, desc, min_max;
 
     public static void setCallback(apiCallback newCallback) {
         callback = newCallback;
     }
 
-    public static void simpleGetForecaast(Context context) {
+    public static void getSimpleForecaast(final Context context, final String city, String units) {
 
-        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely,hourly,daily,alerts&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
+        String lat = null, lon = null;
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+
+        try {
+            address = coder.getFromLocationName(city, 5);
+            if (address == null) {
+
+            }
+            Address location = address.get(0);
+            lat = String.valueOf(location.getLatitude());
+            lon = String.valueOf(location.getLongitude());
+
+
+        } catch (Exception ex) {
+
+            Toast.makeText(context, "Converting lat\\lon, wait..", Toast.LENGTH_SHORT);
+            ex.printStackTrace();
+        }
+
+
+        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=en";
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -30,9 +57,10 @@ public class SimpleForecastService {
 
                 try {
                     temp = String.valueOf(response.getJSONObject("current").getInt("temp") + "°");
-                    desc = String.valueOf(response.getJSONObject("current").getInt("temp") + "r");
+                    desc = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description"));
+                    min_max = String.valueOf("Low " + response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("min") + "°, High " + response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("max")+"°");
 
-                    callback.displayResult(temp, desc);
+                    callback.displayResult(temp, desc, context, city, min_max);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -49,6 +77,6 @@ public class SimpleForecastService {
     }
 
     public interface apiCallback {
-        void displayResult(String temp, String desc);
+        void displayResult(String temp, String desc, Context context, String city, String min_max);
     }
 }

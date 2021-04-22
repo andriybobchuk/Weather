@@ -1,9 +1,10 @@
 package com.andriybobchuk.weatherApp.Activities;
 
-import android.Manifest;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -16,13 +17,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
+import com.andriybobchuk.weatherApp.Services.ReminderBroadcast;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
-import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Calendar;
 
 
 /* This class updates User interface
@@ -63,6 +64,23 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "mainChannel";
+            String description = "mainChannelDescription";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("alaska", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +88,26 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        createNotificationChannel();
+        Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        //Remove the following two lines
+        calendar.set(Calendar.MINUTE, 05);
+        calendar.set(Calendar.SECOND, 0);
+        // With setInexactRepeating(), you have to use one of the AlarmManager interval
+        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
+
+
+
 
 
         binding.shimmer.startShimmer();
@@ -87,10 +125,6 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
 
         }
-
-
-
-
 
 
 
@@ -224,7 +258,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         binding.tvDay.setText(new ForecastService().arr_date[dayIndex]);
 
         // Gliwice at 10:53
-        binding.tvRegion.setText(UserPreferencesService.getPrefCity(this) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
+        binding.tvRegion.setText(StringUtils.capitalize(UserPreferencesService.getPrefCity(this)) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         //  -9°C
         if (dayIndex == 0) {
