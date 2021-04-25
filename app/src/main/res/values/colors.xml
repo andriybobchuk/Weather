@@ -6,6 +6,11 @@
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorDarkGrey">#707070</color>
 
+    <color name="colorSetupSalad">#98C09B</color>
+    <color name="colorSetupSaladPressed">#82bf87</color>
+    <color name="colorSetupGreen">#54C05B</color>
+    <color name="colorSetupGreenPressed">#1d7523</color>
+
     <color name="colorPurpleShimmer">#5f5663</color>
     <color name="colorGreyShimmer">#211C24</color>
 </resources>

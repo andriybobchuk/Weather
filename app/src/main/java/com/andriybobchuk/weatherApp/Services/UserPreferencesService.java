@@ -14,7 +14,7 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferencesService {
 
 
-    public static final String PREF_FILE = "new9SHARED_PREF";
+    public static final String PREF_FILE = "new24SHARED_PREF";
 
     public static String getPrefCity(MainActivity mainActivity)
     {
@@ -28,13 +28,6 @@ public class UserPreferencesService {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         return sharedPreferences.getString("UNITS", "DEFAULT");
-    }
-
-    public static String getDaily(MainActivity mainActivity)
-    {
-        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
-
-        return sharedPreferences.getString("DAILY", "false");
     }
 
     public static void setPrefCity(MainActivity mainActivity, String city)

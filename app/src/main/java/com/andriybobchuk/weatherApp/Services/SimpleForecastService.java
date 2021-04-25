@@ -19,7 +19,7 @@ public class SimpleForecastService {
 
 
     public static apiCallback callback;
-    public static String temp, desc, min_max;
+    public static String temp, desc, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind;
 
     public static void setCallback(apiCallback newCallback) {
         callback = newCallback;
@@ -60,7 +60,16 @@ public class SimpleForecastService {
                     desc = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("description"));
                     min_max = String.valueOf("Low " + response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("min") + "°, High " + response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("max")+"°");
 
-                    callback.displayResult(temp, desc, context, city, min_max);
+                    //check if the next day rain is expected
+                    theme_tomorrow = response.getJSONArray("daily").getJSONObject(1).getJSONArray("weather").getJSONObject(0).getString("main");
+
+                    temp_today = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp").getInt("day"));
+                    temp_tomorrow = String.valueOf(response.getJSONArray("daily").getJSONObject(1).getJSONObject("temp").getInt("day"));
+
+                    wind = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getInt("wind_speed")+" kmh");
+
+
+                    callback.displayResult(temp, desc, context, city, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -77,6 +86,10 @@ public class SimpleForecastService {
     }
 
     public interface apiCallback {
-        void displayResult(String temp, String desc, Context context, String city, String min_max);
+        void displayResult(String temp, String desc,
+                           Context context, String city,
+                           String min_max, String theme_tomorrow,
+                           String temp_tomorrow, String temp_today,
+                           String wind);
     }
 }

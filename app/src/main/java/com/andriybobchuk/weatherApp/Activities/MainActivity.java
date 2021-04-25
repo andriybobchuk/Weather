@@ -87,35 +87,25 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-
-
-        if (UserPreferencesService.getDaily(this) == "false")
-        {
-            createNotificationChannel();
-            Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, 20);
-            //Remove the following two lines
-            calendar.set(Calendar.MINUTE, 05);
-            calendar.set(Calendar.SECOND, 0);
-            // With setInexactRepeating(), you have to use one of the AlarmManager interval
-            // constants--in this case, AlarmManager.INTERVAL_DAY.
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, alarmIntent);
-        }
-
-
-
-
-
-
-
-
         binding.shimmer.startShimmer();
+
+
+
+
+        // for the alarm which runs notifications
+        createNotificationChannel();
+        Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        // With setInexactRepeating(), you have to use one of the AlarmManager interval
+        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
 
         if (UserPreferencesService.getPrefCity(this) == "DEFAULT"
                 || UserPreferencesService.getPrefUnits(this) == "DEFAULT")

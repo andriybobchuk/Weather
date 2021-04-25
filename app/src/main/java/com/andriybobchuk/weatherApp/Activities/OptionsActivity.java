@@ -9,11 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.R;
+import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
 
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ImageButton btn_back_from_options;
-    public static final String PREF_FILE = "new9SHARED_PREF";
+    //public static final String PREF_FILE = "new9SHARED_PREF";
 
     /**
      * So here on OptionsActivity start we update UI using userPrefs file;
