@@ -66,7 +66,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
             if(theme_tomorrow.equalsIgnoreCase("Rain"))
             {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
-                        .setSmallIcon(R.drawable.clouds_icon)
+                        .setSmallIcon(R.drawable.umbrella_icon)
                         .setContentTitle("Tomorrow may be rainy in " + StringUtils.capitalize(city) + "!")
                         .setContentText(min_max + "  •  See the full forecast")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -84,7 +84,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
             if(difference >= 10)
             {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
-                        .setSmallIcon(R.drawable.clouds_icon)
+                        .setSmallIcon(R.drawable.temp_icon)
                         .setContentTitle("It's " + String.valueOf(difference) + "° different tomorrow!")
                         .setContentText(temp_tomorrow + "° on average  •  See the full forecast")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -98,36 +98,36 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
         }
         if(sharedPreferences.getString("WIND", "false").equals("true"))
         {
-            if(sharedPreferences.getString("UNITS", "metric").equals("metric"))
-            {
-                if(Integer.valueOf(wind) >= 20)
-                {
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
-                            .setSmallIcon(R.drawable.clouds_icon)
-                            .setContentTitle("It's windy" + " in " + StringUtils.capitalize(city))
-                            .setContentText(temp_today + "° on average  •  See the full forecast")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setContentIntent(pendingIntent);
-
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-                    notificationManager.notify(0011, builder.build());
-                }
-            } else {
-                if(Integer.valueOf(wind) >= 13)
-                {
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
-                            .setSmallIcon(R.drawable.clouds_icon)
-                            .setContentTitle("It's windy" + " in " + StringUtils.capitalize(city))
-                            .setContentText(temp_today + "° on average  •  See the full forecast")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setContentIntent(pendingIntent);
-
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-                    notificationManager.notify(0011, builder.build());
-                }
-            }
+//            if(sharedPreferences.getString("UNITS", "metric").equals("metric"))
+//            {
+//                if(Integer.valueOf(wind) >= 20)
+//                {
+//                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
+//                            .setSmallIcon(R.drawable.wind_icon)
+//                            .setContentTitle("It's windy" + " in " + StringUtils.capitalize(city))
+//                            .setContentText(temp_today + "° on average  •  See the full forecast")
+//                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                            .setContentIntent(pendingIntent);
+//
+//                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+//
+//                    notificationManager.notify(0011, builder.build());
+//                }
+//            } else {
+//                if(Integer.valueOf(wind) >= 13)
+//                {
+//                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
+//                            .setSmallIcon(R.drawable.clouds_icon)
+//                            .setContentTitle("It's windy" + " in " + StringUtils.capitalize(city))
+//                            .setContentText(temp_today + "° on average  •  See the full forecast")
+//                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                            .setContentIntent(pendingIntent);
+//
+//                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+//
+//                    notificationManager.notify(0100, builder.build());
+//                }
+//            }
 
 
 

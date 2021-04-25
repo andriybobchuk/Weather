@@ -43,7 +43,6 @@ import java.util.Calendar;
  *
  * MUST:
  * TODO: Widgets: Mechanics + layout on feed
- * TODO: Notifications: Prefs + Mechanics
  *
  * LATER:
  * TODO: Languages: Prefs + OnBoarding
@@ -405,7 +404,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                         icosColVals[i].setImageResource(R.drawable.clouds_icon);
                         break;
                     case "Clear":
-                        icosColVals[i].setImageResource(R.drawable.sun);
+                        icosColVals[i].setImageResource(R.drawable.sun_icon);
                         break;
                     case "Rain":
                         icosColVals[i].setImageResource(R.drawable.rain_icon);

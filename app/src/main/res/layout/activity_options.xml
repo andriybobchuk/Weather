@@ -84,7 +84,7 @@
                     android:layout_height="match_parent">
 
                 <TextView
-                        android:text="Choose Metric to see temperature in Celsius and Imperial - for Farenheits"
+                        android:text="Choose Metric to see temperature in Celsius and Imperial - for Fahrenheits"
                         android:layout_width="234dp"
                         android:layout_height="49dp" android:id="@+id/textView1044"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:text="Annoying notifications every day, no matter how the weather looks like"
+                        android:text="Annoying notifications every morning, no matter how the weather looks like, you'll know the details."
                         android:layout_width="312dp"
                         android:layout_height="46dp" android:id="@+id/textView101"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:text="We will tell you when you should take your  umbrella"
+                        android:text="You will receive this type of notification only if the next day it's going to rain."
                         android:layout_width="312dp"
                         android:layout_height="46dp" android:id="@+id/textView102"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
+                        android:text="If the next day the temperature will be significantly cooler or warmer you will get an alert."
                         android:layout_width="312dp"
                         android:layout_height="46dp" android:id="@+id/textView103"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
@@ -204,7 +204,7 @@
                     android:layout_height="match_parent">
 
                 <TextView
-                        android:text="Don't worry, you will be prepared for unexpected  sharp temperature changes"
+                        android:text="This one will let you know if this day the wind speed is really high."
                         android:layout_width="312dp"
                         android:layout_height="46dp" android:id="@+id/textView104"
                         android:textColor="#8B8B8B" android:fontFamily="@font/gotham_medium"
