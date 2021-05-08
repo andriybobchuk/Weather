@@ -27,6 +27,9 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.StrictMath.round;
+
+
 /*
     ForecastService is an object template that has its properties - fields with weather data and things it can do -
     get the weather forecast
@@ -131,7 +134,7 @@ public class ForecastService {
                         Date sunsetTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunset"))*1000);
                         arr_sunset[dayIndex] = String.valueOf(new TimeAndDate().getTimeFormat().format(sunsetTime));
 
-                        arr_pop[dayIndex]= String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pop") * 100 +"%");
+                        arr_pop[dayIndex]= String.valueOf(String.format("%.0f", response.getJSONArray("daily").getJSONObject(dayIndex).getDouble("pop") * 100) +"%");
                         arr_temperature[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day"));
                         arr_min_max[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("min")+"°... "+response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("max")+"°");
                         arr_details[dayIndex] = String.valueOf("Feels like " + String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("feels_like").getInt("day")) + "°, " + response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("description"));
@@ -183,7 +186,7 @@ public class ForecastService {
                     tv_error.setText("No internet connection");
 
                 } else if (error instanceof ClientError) {
-                    tv_error.setText(String.valueOf("City does not exist"));
+                    tv_error.setText(String.valueOf("Client error"));
 
 
                 } else if (error instanceof ServerError) {

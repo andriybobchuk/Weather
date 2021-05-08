@@ -32,21 +32,13 @@ import java.util.Calendar;
  * NOTE:
  * This class ONLY updates User interface */
 
-/**
- * BUGS:
- * TODO: Unit System: it is always METRIC
- *
- * TODOS:
- * TODO: Animate buttons
- * TODO: Inside the day table
- * TODO: MTWFSS panel: make shadow effect
- *
- * MUST:
- * TODO: Widgets: Mechanics + layout on feed
- *
- * LATER:
- * TODO: Languages: Prefs + OnBoarding
+/*
+TODO: 1 - remove linear layout in options activity
+      3 - fix this freaking metric-imperial bug
+      4 - think about more explicit slider for pane
+      5 - MOVE ON: shadow effect/language/widgets
  */
+
 
 public class MainActivity extends AppCompatActivity /*implements UserLocationService.UserLocationCallback*/ {
 
@@ -181,6 +173,12 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             }
         });
 
+        binding.ibScroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.horizontalScrollView.fullScroll(ScrollView.FOCUS_RIGHT);
+            }
+        });
 
     }
 
