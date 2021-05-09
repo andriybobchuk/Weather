@@ -24,6 +24,7 @@ import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
 import org.apache.commons.lang3.StringUtils;
+import android.view.animation.Animation;
 
 import java.util.Calendar;
 
@@ -34,10 +35,11 @@ import java.util.Calendar;
  * This class ONLY updates User interface */
 
 /*
-TODO: 1 - remove linear layout in options activity
-      3 - fix this freaking metric-imperial bug
-      4 - think about more explicit slider for pane
-      5 - MOVE ON: shadow effect/language/widgets
+TODO:
+      - fix this freaking metric-imperial bug
+      - date language bug
+      - block panel MTW until app is loaded
+      - MOVE ON: shadow effect/language/widgets
  */
 
 
@@ -140,24 +142,31 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 switch (id) {
                     case R.id.rb_Mon:
                         loadUI(0);
+                        binding.rbMon.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Tue:
                         loadUI(1);
+                        binding.rbTue.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Wed:
                         loadUI(2);
+                        binding.rbWed.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Thr:
                         loadUI(3);
+                        binding.rbThr.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Fri:
                         loadUI(4);
+                        binding.rbFri.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Sat:
                         loadUI(5);
+                        binding.rbSat.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Sun:
                         loadUI(6);
+                        binding.rbSun.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                 }
             }
@@ -192,7 +201,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         binding.horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                binding.latlon.setText(String.valueOf(scrollX));
+                //binding.latlon.setText(String.valueOf(scrollX));
 
                 if(scrollX == 0)
                 {

@@ -2,7 +2,6 @@ package com.andriybobchuk.weatherApp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -106,7 +105,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
-        CheckBox cb_wind = findViewById(R.id.cb_wind);
+        CheckBox cb_wind = findViewById(R.id.cb_real_wind);
         cb_wind.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {

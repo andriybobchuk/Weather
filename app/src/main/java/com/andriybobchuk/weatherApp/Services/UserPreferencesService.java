@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.Activities.OptionsActivity;
@@ -76,7 +75,7 @@ public class UserPreferencesService {
         CheckBox cb_temp = optionsActivity.findViewById(R.id.cb_temp);
         cb_temp.setChecked(Boolean.valueOf(sharedPreferences.getString("TEMP", "false")));
 
-        CheckBox cb_wind = optionsActivity.findViewById(R.id.cb_wind);
+        CheckBox cb_wind = optionsActivity.findViewById(R.id.cb_real_wind);
         cb_wind.setChecked(Boolean.valueOf(sharedPreferences.getString("WIND", "false")));
     }
 
