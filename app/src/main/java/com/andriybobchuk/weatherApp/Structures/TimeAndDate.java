@@ -1,6 +1,7 @@
 package com.andriybobchuk.weatherApp.Structures;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -25,7 +26,6 @@ public class TimeAndDate {
     private static SimpleDateFormat timeFormat;    // "6:25"
 
 
-
     public int getTimezone_offset() {
         return timezone_offset;
     }
@@ -46,7 +46,7 @@ public class TimeAndDate {
      * @return date format like "Tuesday, Feb 16" + a proper offset
      */
     public SimpleDateFormat getDateFormat() {
-        dateFormat = new SimpleDateFormat("EEEE, MMM d");
+        dateFormat = new SimpleDateFormat("EEEE, MMM d", Locale.ENGLISH);
         dateFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + timezone_offset)));
         return dateFormat;
     }
@@ -55,7 +55,7 @@ public class TimeAndDate {
      * @return time format like "6:27" + a proper offset
      */
     public SimpleDateFormat getTimeFormat() {
-        timeFormat = new SimpleDateFormat("H:mm");
+        timeFormat = new SimpleDateFormat("H:mm", Locale.ENGLISH);
         timeFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + timezone_offset)));
         return timeFormat;
     }

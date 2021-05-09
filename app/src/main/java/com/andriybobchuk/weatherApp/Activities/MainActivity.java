@@ -37,9 +37,8 @@ import java.util.Calendar;
 /*
 TODO:
       - fix this freaking metric-imperial bug
-      - date language bug
-      - block panel MTW until app is loaded
-      - MOVE ON: shadow effect/language/widgets
+      - pictures shades
+      - widgets
  */
 
 
@@ -205,12 +204,12 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
                 if(scrollX == 0)
                 {
-                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.left_to_right));
+                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScroll.setRotation(-90);
                 }
                 if(scrollX == 696)
                 {
-                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.right_to_left));
+                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScroll.setRotation(90);
                 }
             }
@@ -227,9 +226,9 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 int textSize = 24 * (100- scrollY)/100;
 
                 binding.tvDay.setTextSize(textSize);
-                if(textSize < 17)
+                if(textSize < 15)
                 {
-                    binding.tvDay.setTextSize(17);
+                    binding.tvDay.setTextSize(15);
                 }
                 if(textSize >= 24)
                 {

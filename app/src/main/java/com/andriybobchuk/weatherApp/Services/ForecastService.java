@@ -115,6 +115,15 @@ public class ForecastService {
                 ConstraintLayout cl_insideTheDaySimplified = mainActivity.findViewById(R.id.cl_insideTheDaySimplified);
                 cl_insideTheDaySimplified.setVisibility(View.VISIBLE);
 
+                mainActivity.findViewById(R.id.rb_Mon).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Tue).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Wed).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Thr).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Fri).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Sat).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.rb_Sun).setVisibility(View.VISIBLE);
+
+
                 try {
 
                     new TimeAndDate().setTimezone_offset(response.getInt("timezone_offset")/3600); // timezone offset in hours
