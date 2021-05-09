@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -173,10 +174,59 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             }
         });
 
+        // Horizontal scroll control arrow
         binding.ibScroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.horizontalScrollView.fullScroll(ScrollView.FOCUS_RIGHT);
+
+                if(binding.ibScroll.getRotation() == -90)
+                {
+                    binding.horizontalScrollView.fullScroll(ScrollView.FOCUS_RIGHT);
+                }
+                else
+                {
+                    binding.horizontalScrollView.fullScroll(ScrollView.FOCUS_LEFT);
+                }
+            }
+        });
+        binding.horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                binding.latlon.setText(String.valueOf(scrollX));
+
+                if(scrollX == 0)
+                {
+                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.left_to_right));
+                    binding.ibScroll.setRotation(-90);
+                }
+                if(scrollX == 696)
+                {
+                    binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.right_to_left));
+                    binding.ibScroll.setRotation(90);
+                }
+            }
+        });
+
+        // BEST HEADER ANIMATION IN THE WORLD
+        binding.scrollView2.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+                binding.clHeader.setAlpha((float)scrollY/100);
+                binding.tvRegion.setAlpha((float)(100-scrollY)/100);
+
+                int textSize = 24 * (100- scrollY)/100;
+
+                binding.tvDay.setTextSize(textSize);
+                if(textSize < 17)
+                {
+                    binding.tvDay.setTextSize(17);
+                }
+                if(textSize >= 24)
+                {
+                    binding.tvDay.setTextSize(24);
+                }
+
             }
         });
 
