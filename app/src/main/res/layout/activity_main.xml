@@ -28,7 +28,7 @@
                     android:scrollbarAlwaysDrawHorizontalTrack="false"
                     android:scrollbarSize="0dp" android:scrollbars="none"
                     android:descendantFocusability="beforeDescendants"
-                    tools:descendantFocusability="beforeDescendants">
+                    tools:descendantFocusability="beforeDescendants" android:id="@+id/cl_daddy">
 
                 <TextView
                         android:layout_width="345dp"
@@ -161,7 +161,7 @@
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter" android:rotation="-90"
                         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" android:visibility="invisible"/>
                 <TextView
                         android:layout_width="305dp"
                         android:layout_height="22dp"
@@ -791,30 +791,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/widggggg"
                         app:layout_constraintTop_toBottomOf="@+id/cl_insideTheDaySimplified"
-                        android:layout_marginTop="30dp" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="40dp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="18dp" android:textSize="17.5sp"
                         android:fontFamily="@font/gotham_medium" android:textColor="#FFF"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="407dp"
-                        android:layout_height="496dp"
+                <TextView
+                        android:layout_width="372dp"
+                        android:layout_height="33dp" android:id="@+id/tv_hint2"
+                        android:fontFamily="@font/gotham_medium"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="15dp" app:layout_constraintTop_toBottomOf="@+id/widggggg"
-                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="100dp">
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" app:srcCompat="@drawable/widgets_pane"
-                            android:id="@+id/imageView4"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-                    <Button
-                            android:text="ADD"
-                            android:layout_width="83dp"
-                            android:layout_height="40dp" android:id="@+id/ghjkppppp"
-                            tools:layout_editor_absoluteY="191dp" tools:layout_editor_absoluteX="68dp"
-                            android:background="@drawable/semi_transparent_background" android:textColor="#000"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintTop_toBottomOf="@+id/widggggg" android:layout_marginStart="18dp"
+                        android:layout_marginTop="10dp" android:textSize="14.5sp"
+                        android:text="Yeah, they're cool indeed. "
+                        android:lineSpacingExtra="4sp"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="230dp"
                         android:layout_height="41dp"
@@ -841,6 +830,89 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="140dp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="50dp" android:visibility="visible"/>
+                <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_hint2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="18dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="100dp"
+                            android:visibility="visible">
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        >
+                            <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" android:paddingRight="15dp">
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="180dp"
+                                        android:layout_height="180dp"
+                                        android:background="@drawable/widget_pane_small"
+                                        android:layout_marginBottom="15dp"
+                                        android:alpha="0.65">
+
+                                    <TextView
+                                            android:text="U gotta go to ur widgets selector and pick one you like"
+                                            android:layout_width="123dp"
+                                            android:layout_height="wrap_content" android:id="@+id/textView13"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            android:textColor="@color/colorWhite"
+                                            android:fontFamily="@font/gotham_medium" android:lineSpacingExtra="4dp"
+                                    />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="180dp"
+                                        android:layout_height="180dp"
+                                        android:background="@drawable/w_a">
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </LinearLayout>
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="180dp"
+                                    android:layout_height="375dp" android:background="@drawable/w_c"
+                                    android:layout_marginRight="15dp">
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="180dp"
+                                        android:layout_height="180dp"
+                                        android:background="@drawable/w_b" android:layout_marginBottom="15dp"
+                                        android:layout_marginRight="15dp">
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="180dp"
+                                        android:layout_height="180dp"
+                                        android:background="@drawable/w_a" android:layout_marginBottom="15dp"
+                                        android:layout_marginRight="15dp">
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </HorizontalScrollView>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="?android:attr/listChoiceIndicatorSingle"
+                        android:id="@+id/iv_circle" app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="16dp"
+                        android:layout_marginTop="20dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

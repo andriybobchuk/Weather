@@ -1,31 +1,44 @@
 package com.andriybobchuk.weatherApp.Activities;
 
-import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.*;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
+import com.andriybobchuk.weatherApp.Services.OnSwipeTouchListener;
 import com.andriybobchuk.weatherApp.Services.ReminderBroadcast;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
+import com.bumptech.glide.Glide;
 import org.apache.commons.lang3.StringUtils;
 import android.view.animation.Animation;
 
+import java.net.URLDecoder;
 import java.util.Calendar;
 
 
@@ -53,7 +66,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
     //For enabling binding: Declare binding object from binding class
     ActivityMainBinding binding;
-
+    Dialog dialog;
 
 
     private void createNotificationChannel() {
@@ -82,7 +95,31 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         setContentView(view);
         binding.shimmer.startShimmer();
 
+        dialog = new Dialog(this);
 
+        binding.clDaddy.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+
+            public void onSwipeRight() {
+
+
+                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
+
+                dialog.setContentView(R.layout.surprize_mf_a);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                ImageView sup_a = dialog.findViewById(R.id.iv_sup_a);
+                Glide.with(MainActivity.this)
+                        .load(R.drawable.sup_a)
+                        .into(sup_a);
+
+                dialog.show();
+            }
+
+
+        });
+
+
+       // binding.latlon.setText("\uDE00");
 
 
         // for the alarm which runs notifications
@@ -117,12 +154,15 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
 
+
         /** =============== ↑ IMPORTANT ZONE ↑ =======================================================*/
         /* For button OPTIONS */
         ImageButton btn_options = findViewById((R.id.btn_options));
         btn_options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 openOptions();
                 finish();
             }
@@ -498,6 +538,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         /**  =================================================================================================== **/
         /**               END OF INSIDE THE DAY PANELS                                                           **/
         /**  =================================================================================================== **/
+
+        binding.tvHint2.setText("Yeah, they're cool indeed " + Html.fromHtml(URLDecoder.decode("&#128561")));
 
     }
 

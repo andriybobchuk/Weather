@@ -3,9 +3,8 @@
                     android:minWidth="110dp"
                     android:minHeight="40dp"
                     android:updatePeriodMillis="1800000"
-                    android:previewImage="@drawable/example_appwidget_preview"
+                    android:previewImage="@drawable/w_a"
                     android:initialLayout="@layout/widget__a"
-                    android:resizeMode="horizontal|vertical"
                     android:widgetCategory="home_screen"
                     android:initialKeyguardLayout="@layout/widget__a">
 </appwidget-provider>

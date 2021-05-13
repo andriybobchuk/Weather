@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.Html;
+import android.text.Spanned;
 import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -13,6 +15,7 @@ import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.R;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Math;
+import java.net.URLDecoder;
 
 import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
 
@@ -65,9 +68,12 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
         {
             if(theme_tomorrow.equalsIgnoreCase("Rain"))
             {
+                Spanned water_emoji;
+                water_emoji = Html.fromHtml(URLDecoder.decode("&#128166"));
+
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                         .setSmallIcon(R.drawable.umbrella_icon)
-                        .setContentTitle("Tomorrow may be rainy in " + StringUtils.capitalize(city) + "!")
+                        .setContentTitle("Tomorrow may be rainy in " + StringUtils.capitalize(city) + "!  " + water_emoji)
                         .setContentText(min_max + "  •  See the full forecast")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent);
@@ -83,9 +89,12 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
             int difference = Math.abs(Integer.valueOf(temp_today) - Integer.valueOf(temp_tomorrow));
             if(difference >= 10)
             {
+                Spanned pokerface_emoji;
+                pokerface_emoji = Html.fromHtml(URLDecoder.decode("&#x1F5FF"));
+
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                         .setSmallIcon(R.drawable.temp_icon)
-                        .setContentTitle("It's " + String.valueOf(difference) + "° different tomorrow!")
+                        .setContentTitle("It's " + String.valueOf(difference) + "° different tomorrow!  " + pokerface_emoji)
                         .setContentText(temp_tomorrow + "° on average  •  See the full forecast")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent);

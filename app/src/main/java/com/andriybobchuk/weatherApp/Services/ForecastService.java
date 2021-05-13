@@ -123,6 +123,8 @@ public class ForecastService {
                 mainActivity.findViewById(R.id.rb_Sat).setVisibility(View.VISIBLE);
                 mainActivity.findViewById(R.id.rb_Sun).setVisibility(View.VISIBLE);
 
+                mainActivity.findViewById(R.id.ib_scroll).setVisibility(View.VISIBLE);
+
 
                 try {
 

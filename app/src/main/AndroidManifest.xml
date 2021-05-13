@@ -15,20 +15,23 @@
             android:roundIcon="@mipmap/icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <receiver android:name=".Widgets.Widget_A">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
 
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/widget__a_info"/>
+        </receiver>
 
         <activity android:name=".Activities.SetupActivity">
         </activity>
-
-
         <activity android:name=".Activities.OptionsActivity">
         </activity>
-
-
         <activity
                 android:name=".Activities.MainActivity"
                 android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -36,9 +39,7 @@
             </intent-filter>
         </activity>
 
-        <receiver
-                android:name=".Services.ReminderBroadcast"></receiver>
-
+        <receiver android:name=".Services.ReminderBroadcast"/>
     </application>
 
 </manifest>

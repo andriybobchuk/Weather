@@ -1,8 +1,12 @@
 package com.andriybobchuk.weatherApp.Activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +29,23 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+
+        final View background = findViewById(R.id.cl_main);
+        if(savedInstanceState == null)
+        {
+            background.setVisibility(View.INVISIBLE);
+            final ViewTreeObserver viewTreeObserver = background.getViewTreeObserver();
+            if(viewTreeObserver.isAlive())
+            {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        circularReveal(background);
+                        background.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        }
 
         // Display content of pref file in edit text field
         UserPreferencesService.load_UI(this);
@@ -121,6 +142,18 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
     }
 
 
+    public void circularReveal (final View background)
+    {
+        int cx = (int)background.getRight();
+        int cy = (int)background.getTop();
+
+        float finalRadius = (float)Math.hypot(background.getWidth(), background.getHeight());
+        Animator anim = ViewAnimationUtils.createCircularReveal(background,cx,cy,0,finalRadius);
+        background.setVisibility(View.VISIBLE);
+        anim.setDuration(1000);
+        anim.start();
+
+    }
 
 
     public void openMain()
