@@ -831,15 +831,15 @@
                         android:layout_marginTop="140dp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="50dp" android:visibility="visible"/>
                 <HorizontalScrollView
-                        android:layout_width="match_parent"
+                        android:layout_width="375dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/tv_hint2"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="18dp">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/horizontalScrollView2" android:scrollbarSize="0dp">
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="100dp"
                             android:visibility="visible">
                         <LinearLayout
                                 android:orientation="horizontal"
@@ -856,32 +856,25 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
                                         android:layout_height="180dp"
-                                        android:background="@drawable/widget_pane_small"
+                                        android:background="@drawable/w1"
                                         android:layout_marginBottom="15dp"
-                                        android:alpha="0.65">
-
-                                    <TextView
-                                            android:text="U gotta go to ur widgets selector and pick one you like"
-                                            android:layout_width="123dp"
-                                            android:layout_height="wrap_content" android:id="@+id/textView13"
-                                            app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintEnd_toEndOf="parent"
-                                            android:textColor="@color/colorWhite"
-                                            android:fontFamily="@font/gotham_medium" android:lineSpacingExtra="4dp"
-                                    />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
+                                        android:alpha="1"/>
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
                                         android:layout_height="180dp"
-                                        android:background="@drawable/w_a">
+                                        android:background="@drawable/w2">
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </LinearLayout>
                             <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="180dp"
-                                    android:layout_height="375dp" android:background="@drawable/w_c"
+                                    android:layout_height="375dp" android:background="@drawable/w4"
+                                    android:layout_marginRight="15dp">
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="180dp"
+                                    android:layout_height="375dp" android:background="@drawable/w8"
                                     android:layout_marginRight="15dp">
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -892,15 +885,15 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
                                         android:layout_height="180dp"
-                                        android:background="@drawable/w_b" android:layout_marginBottom="15dp"
-                                        android:layout_marginRight="15dp">
+                                        android:background="@drawable/w3" android:layout_marginBottom="15dp"
+                                >
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
                                         android:layout_height="180dp"
-                                        android:background="@drawable/w_a" android:layout_marginBottom="15dp"
-                                        android:layout_marginRight="15dp">
+                                        android:background="@drawable/w6" android:layout_marginBottom="15dp"
+                                >
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </LinearLayout>
@@ -913,6 +906,25 @@
                         android:id="@+id/iv_circle" app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="16dp"
                         android:layout_marginTop="20dp"/>
+                <ImageButton
+                        android:layout_width="64dp"
+                        android:layout_height="22dp" app:srcCompat="@drawable/rightarrow"
+                        android:id="@+id/ib_scroll_b"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitCenter" android:rotation="-90"
+                        android:visibility="invisible"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_insideTheDaySimplified"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="40dp"
+                        android:layout_marginEnd="18dp"/>
+                <Button
+                        android:text="Collapse forever"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/button"
+                        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
+                        style="@style/Widget.AppCompat.Button.Borderless" android:textAllCaps="false"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="400dp"
+                        android:textColor="@color/colorWhite" android:fontFamily="@font/gotham_light"
+                        android:layout_marginEnd="18dp" app:layout_constraintEnd_toEndOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

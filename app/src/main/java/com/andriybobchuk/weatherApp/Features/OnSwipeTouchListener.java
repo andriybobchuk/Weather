@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weatherApp.Features;
 
 import android.content.Context;
 import android.view.GestureDetector;

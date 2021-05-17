@@ -34,7 +34,7 @@ public class TimeAndDate {
         this.timezone_offset = timezone_offset;
     }
 
-    public Long getCurrentDateAndTime() {
+    public static Long getCurrentDateAndTime() {
         return currentDateAndTime;
     }
 

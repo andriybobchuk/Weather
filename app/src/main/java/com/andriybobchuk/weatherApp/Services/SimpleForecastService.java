@@ -19,7 +19,7 @@ public class SimpleForecastService {
 
 
     public static apiCallback callback;
-    public static String temp, desc, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind;
+    public static String temp, desc, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind, main;
 
     public static void setCallback(apiCallback newCallback) {
         callback = newCallback;
@@ -68,8 +68,10 @@ public class SimpleForecastService {
 
                     wind = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getInt("wind_speed")+" kmh");
 
+                    main = response.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("main");
 
-                    callback.displayResult(temp, desc, context, city, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind);
+
+                    callback.displayResult(temp, desc, context, city, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind, main);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -90,6 +92,6 @@ public class SimpleForecastService {
                            Context context, String city,
                            String min_max, String theme_tomorrow,
                            String temp_tomorrow, String temp_today,
-                           String wind);
+                           String wind, String main);
     }
 }

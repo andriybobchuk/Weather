@@ -12,18 +12,32 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" tools:srcCompat="@tools:sample/avatars"
-                android:id="@+id/iv_sup_a"
-                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/iv_sup_a" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" android:scaleType="fitCenter"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView14"/>
         <TextView
                 android:text="Viktor's unlocked!"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/textView14"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/gotham_bold" android:textSize="30sp" android:layout_marginBottom="15dp"
-                tools:textColor="@color/colorPrimaryLightGrey" app:layout_constraintTop_toTopOf="@+id/iv_sup_a"/>
+                android:fontFamily="@font/gotham_medium" android:textSize="25sp"
+                android:textColor="@color/colorPrimaryLightGrey" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView15" android:layout_marginBottom="15dp"/>
+        <TextView
+                android:text="Find all the secret characters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView15"
+                android:fontFamily="@font/gotham_light" android:textSize="17sp"
+                android:textColor="@color/colorPrimaryLightGrey" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/button2" android:layout_marginBottom="25dp"/>
+        <Button
+                android:text="Try 'em out"
+                android:layout_width="143dp"
+                android:layout_height="51dp" android:id="@+id/button2"
+                android:background="@drawable/intro_btn_pt_style"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="45dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

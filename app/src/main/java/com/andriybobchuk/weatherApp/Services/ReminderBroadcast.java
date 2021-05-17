@@ -42,7 +42,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
                               String theme_tomorrow,
                               String temp_tomorrow,
                               String temp_today,
-                              String wind) {
+                              String wind, String main) {
 
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(context, MainActivity.class);
@@ -55,7 +55,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
         {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                     .setSmallIcon(R.drawable.clouds_icon)
-                    .setContentTitle(StringUtils.capitalize(desc) + " in " + StringUtils.capitalize(city) + " today.")
+                    .setContentTitle(StringUtils.capitalize(desc) + " in " + StringUtils.capitalize(city) )
                     .setContentText(min_max + "  •  See the full forecast")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent);

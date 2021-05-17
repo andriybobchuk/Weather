@@ -1,11 +1,6 @@
 package com.andriybobchuk.weatherApp.Activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.*;
-import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProviderInfo;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,32 +8,27 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
-import com.andriybobchuk.weatherApp.Services.OnSwipeTouchListener;
+import com.andriybobchuk.weatherApp.Features.OnSwipeTouchListener;
 import com.andriybobchuk.weatherApp.Services.ReminderBroadcast;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
 import com.bumptech.glide.Glide;
 import org.apache.commons.lang3.StringUtils;
-import android.view.animation.Animation;
 
 import java.net.URLDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -48,10 +38,19 @@ import java.util.Calendar;
  * This class ONLY updates User interface */
 
 /*
-TODO:
+TODO: - Redesign notifications
+      - Refactor code
+      - hide widgets + all the userprefs stuff
+      - Add new pictures(moon) + improve old(bottom shades)
+      +
+      - write UNIVERSAL code for recognizing day and night for those images and widgets(moon\sun) ↑
+      -
+      -
+      - Make those surprises
+      +
       - fix this freaking metric-imperial bug
       - pictures shades
-      - widgets
+
  */
 
 
@@ -180,31 +179,59 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 int id = group.getCheckedRadioButtonId();
                 switch (id) {
                     case R.id.rb_Mon:
-                        loadUI(0);
+                        try {
+                            loadUI(0);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbMon.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Tue:
-                        loadUI(1);
+                        try {
+                            loadUI(1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbTue.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Wed:
-                        loadUI(2);
+                        try {
+                            loadUI(2);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbWed.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Thr:
-                        loadUI(3);
+                        try {
+                            loadUI(3);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbThr.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Fri:
-                        loadUI(4);
+                        try {
+                            loadUI(4);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbFri.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Sat:
-                        loadUI(5);
+                        try {
+                            loadUI(5);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbSat.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                     case R.id.rb_Sun:
-                        loadUI(6);
+                        try {
+                            loadUI(6);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         binding.rbSun.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                         break;
                 }
@@ -251,6 +278,39 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 {
                     binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScroll.setRotation(90);
+                }
+            }
+        });
+
+        // Horizontal scroll control arrow (FOR WIDGETS)
+        binding.ibScrollB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(binding.ibScrollB.getRotation() == -90)
+                {
+                    binding.horizontalScrollView2.fullScroll(ScrollView.FOCUS_RIGHT);
+                }
+                else
+                {
+                    binding.horizontalScrollView2.fullScroll(ScrollView.FOCUS_LEFT);
+                }
+            }
+        });
+        binding.horizontalScrollView2.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+               // binding.widggggg.setText(String.valueOf(scrollX));
+
+                if(scrollX == 0)
+                {
+                    binding.ibScrollB.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
+                    binding.ibScrollB.setRotation(-90);
+                }
+                if(scrollX == 682)
+                {
+                    binding.ibScrollB.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
+                    binding.ibScrollB.setRotation(90);
                 }
             }
         });
@@ -304,8 +364,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
     /** Sets background Zing image and description label */
-    public  void updateBackground(int dayIndex)
-    {
+    public  void updateBackground(int dayIndex) throws ParseException {
         TextView tv_myWeatherDescription = findViewById(R.id.tv_hint);
         ImageView iv_theme = findViewById(R.id.iv_theme);
 
@@ -314,11 +373,33 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         {
             case "Clouds":
                 tv_myWeatherDescription.setText("Just a bit of clouds");
-                iv_theme.setImageResource(R.drawable.clouds);
+                iv_theme.setImageResource(R.drawable.theme_clouds);
                 break;
             case "Clear":
-                tv_myWeatherDescription.setText("The weather's just perfect!");
-                iv_theme.setImageResource(R.drawable.theme_sunny);
+
+
+                /** CHECKING WHETHER WE SHOULD PUT MOON OR THE SUN IMAGE
+                 * so listen, we put sun if the curent tme is between sunrise and sunset, so at the day time
+                 * so current time is after (>) sunrise and before (<) sunset
+                 *
+                 * if you think this if statement is complicated you are correct
+                 */
+                if(dayIndex == 0)
+                {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    if(sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() < sdf.parse(new ForecastService().arr_sunset[dayIndex]).getTime() && sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() > sdf.parse(new ForecastService().arr_sunrise[dayIndex]).getTime())
+                    {
+                        tv_myWeatherDescription.setText("The weather's just perfect!");
+                        iv_theme.setImageResource(R.drawable.theme_sun);
+                    } else {
+                        tv_myWeatherDescription.setText("Pretty cool night!");
+                        iv_theme.setImageResource(R.drawable.theme_moon);
+                    }
+                } else {
+                    tv_myWeatherDescription.setText("The weather's just perfect!");
+                    iv_theme.setImageResource(R.drawable.theme_sun);
+                }
+
                 break;
             case "Rain":
                 tv_myWeatherDescription.setText("Take ur umbrella with you!");
@@ -326,11 +407,11 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 break;
             case "Snow":
                 tv_myWeatherDescription.setText("All the weather outside is frightful..");
-                iv_theme.setImageResource(R.drawable.d);
+                iv_theme.setImageResource(R.drawable.theme_snow);
                 break;
             default:
                 tv_myWeatherDescription.setText("It's kinda strange outside");
-                iv_theme.setImageResource(R.drawable.clouds);
+                iv_theme.setImageResource(R.drawable.theme_clouds);
         }
     }
 
@@ -456,7 +537,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
          *      - set BIG "Inside the day panel" as it's more precise.
          *
          * if the day is any other (indices 1-6):
-         *      - use "arr_temperature" as we have accessto it.
+         *      - use "arr_temperature" as we have access to it.
          *      - use SMALL "inside the day panel" as we have access only to it.
          */
 
@@ -545,7 +626,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
     /** Updates UI on RESTART **/
-    public void reloadUI() {
+    public void reloadUI() throws ParseException {
 
         /**
          * Runs ONLY on app START or RESTART. (getForecast() calls it)
@@ -564,7 +645,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
     /**  Updates UI ANYTIME **/
-    public void loadUI(int dayIndex) {
+    public void loadUI(int dayIndex) throws ParseException {
 
         /**
          * Runs EVERY TIME you change the day. (called after button clicks)

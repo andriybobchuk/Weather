@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -124,6 +125,7 @@ public class ForecastService {
                 mainActivity.findViewById(R.id.rb_Sun).setVisibility(View.VISIBLE);
 
                 mainActivity.findViewById(R.id.ib_scroll).setVisibility(View.VISIBLE);
+                mainActivity.findViewById(R.id.ib_scroll_b).setVisibility(View.VISIBLE);
 
 
                 try {
@@ -180,7 +182,11 @@ public class ForecastService {
 
                 }
 
-                mainActivity.reloadUI();
+                try {
+                    mainActivity.reloadUI();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 // Remove internet failure msg box
                 ConstraintLayout cl_internetError = mainActivity.findViewById(R.id.cl_internetError);
