@@ -73,8 +73,8 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                         .setSmallIcon(R.drawable.umbrella_icon)
-                        .setContentTitle("Tomorrow may be rainy in " + StringUtils.capitalize(city) + "!  " + water_emoji)
-                        .setContentText(min_max + "  •  See the full forecast")
+                        .setContentTitle("Expect rain tomorrow  " + water_emoji)
+                        .setContentText("See the full forecast for " + StringUtils.capitalize(city))
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent);
 
@@ -95,7 +95,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                         .setSmallIcon(R.drawable.temp_icon)
                         .setContentTitle("It's " + String.valueOf(difference) + "° different tomorrow!  " + pokerface_emoji)
-                        .setContentText(temp_tomorrow + "° on average  •  See the full forecast")
+                        .setContentText(temp_tomorrow + "° on average")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent);
 

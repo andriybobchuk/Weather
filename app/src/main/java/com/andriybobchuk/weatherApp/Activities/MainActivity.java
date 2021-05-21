@@ -8,9 +8,12 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Html;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,7 +21,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.R;
 
-import com.andriybobchuk.weatherApp.Features.OnSwipeTouchListener;
 import com.andriybobchuk.weatherApp.Services.ReminderBroadcast;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
@@ -32,17 +34,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
+
 /* This class updates User interface
  *
  * NOTE:
  * This class ONLY updates User interface */
 
 /*
-TODO: - Redesign notifications
-      - Refactor code
+TODO: - add all ready pics of Vik
+      -
+      - Redesign notifications(!!!!) They are stupid now (+ settings) + sound notific
+      - Refactor code (NO JOKES, DO IT)
       - hide widgets + all the userprefs stuff
-      - Add new pictures(moon) + improve old(bottom shades)
-      +
+      - MERGE ALL OF THAT WITH USERS PREFS (PICS + ACHUIEVEMENT + NOTIFICATIONS + )
+      =
       - write UNIVERSAL code for recognizing day and night for those images and widgets(moon\sun) ↑
       -
       -
@@ -68,7 +73,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     Dialog dialog;
 
 
-    private void createNotificationChannel() {
+
+    private static void createNotificationChannel(MainActivity mainActivity) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -79,12 +85,64 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = mainActivity.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
+    private void callNotificationGenerator(){
+        Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+    }
+
+    /* Calls SetupActivity if we do not have city name and units specified */
+    private void prefsGetter(){
+
+        // Checks if on app start we have city and units set. If no - open SetupActivity
+        if (UserPreferencesService.getPrefCity(this) == "DEFAULT"
+                || UserPreferencesService.getPrefUnits(this) == "DEFAULT") {
+            Intent intent = new Intent(this, SetupActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // Pass some parameters here to getForecast ↓
+            ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
+        }
+
+    }
+
+    /* Shows and hides Viktor dialog */
+    private void showViktorDialog() {
+        dialog.setContentView(R.layout.surprize_mf_a);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //stuff for rendering gif:
+        ImageView sup_a = dialog.findViewById(R.id.iv_sup_a);
+        Glide.with(MainActivity.this)
+                .load(R.drawable.sup_a)
+                .into(sup_a);
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //animation
+
+        // close button click
+        dialog.findViewById(R.id.btn_tryem).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //style id
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,61 +152,14 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         setContentView(view);
         binding.shimmer.startShimmer();
 
-        dialog = new Dialog(this);
+        // Calls the Notification Generator every day at 8 AM
+        createNotificationChannel(this);
+        callNotificationGenerator();
 
-        binding.clDaddy.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-
-            public void onSwipeRight() {
-
-
-                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-
-                dialog.setContentView(R.layout.surprize_mf_a);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                ImageView sup_a = dialog.findViewById(R.id.iv_sup_a);
-                Glide.with(MainActivity.this)
-                        .load(R.drawable.sup_a)
-                        .into(sup_a);
-
-                dialog.show();
-            }
-
-
-        });
-
-
-       // binding.latlon.setText("\uDE00");
-
-
-        // for the alarm which runs notifications
-        createNotificationChannel();
-        Intent aalarmIntent = new Intent(MainActivity.this, ReminderBroadcast.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, aalarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        // With setInexactRepeating(), you have to use one of the AlarmManager interval
-        // constants--in this case, AlarmManager.INTERVAL_DAY.
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
+        prefsGetter();
 
 
 
-        if (UserPreferencesService.getPrefCity(this) == "DEFAULT"
-                || UserPreferencesService.getPrefUnits(this) == "DEFAULT")
-        {
-            //UserLocationService.setCallback(this);
-            Intent intent = new Intent(this, SetupActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else {
-            // Pass some parameters here to getForecast ↓
-            ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
-
-        }
 
 
 
@@ -167,9 +178,25 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             }
         });
 
+        // After Double tap on Zing a Viktor dialog will appear:
+        dialog = new Dialog(this);
+        findViewById(R.id.iv_theme).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+            private GestureDetector gestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    showViktorDialog();
+                    return super.onDoubleTap(e);
+                }
+            });
+        });
 
         final RadioGroup group = (RadioGroup) findViewById(R.id.rg_dayOfTheWeek);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
@@ -264,6 +291,8 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 }
             }
         });
+
+
         binding.horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {

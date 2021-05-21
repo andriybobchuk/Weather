@@ -31,11 +31,11 @@
                 android:fontFamily="@font/gotham_light" android:textSize="17sp"
                 android:textColor="@color/colorPrimaryLightGrey" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/button2" android:layout_marginBottom="25dp"/>
+                app:layout_constraintBottom_toTopOf="@+id/btn_tryem" android:layout_marginBottom="25dp"/>
         <Button
                 android:text="Try 'em out"
                 android:layout_width="143dp"
-                android:layout_height="51dp" android:id="@+id/button2"
+                android:layout_height="51dp" android:id="@+id/btn_tryem"
                 android:background="@drawable/intro_btn_pt_style"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="45dp"/>
