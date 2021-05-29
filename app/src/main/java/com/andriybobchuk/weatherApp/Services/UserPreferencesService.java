@@ -13,7 +13,7 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferencesService {
 
 
-    public static final String PREF_FILE = "new24SHARED_PREF";
+    public static final String PREF_FILE = "new28SHARED_PREF";
 
     public static String getPrefCity(MainActivity mainActivity)
     {
@@ -76,7 +76,7 @@ public class UserPreferencesService {
 
 
     // For Char settings
-    public static void setCharactersSettingsVisibility(MainActivity mainActivity, String condition)
+    public static void setViktorUnlocked(MainActivity mainActivity, String condition)
     {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -84,13 +84,29 @@ public class UserPreferencesService {
         editor.apply();
     }
 
-    public static String getCharactersSettingsVisibility(MainActivity mainActivity)
+    public static String isViktorUnlocked(MainActivity mainActivity)
     {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         return sharedPreferences.getString("CHARACTERS_SET", "false");
     }
 
+
+    // For Notification sound
+    public static void setSound(MainActivity mainActivity, String condition)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("SOUND", condition);
+        editor.apply();
+    }
+
+    public static String isSound(MainActivity mainActivity)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("SOUND", "false");
+    }
 
 
 
@@ -118,10 +134,13 @@ public class UserPreferencesService {
         cb_daily.setChecked(Boolean.valueOf(sharedPreferences.getString("DAILY", "false")));
 
         CheckBox cb_rain = optionsActivity.findViewById(R.id.cb_rain);
-        cb_rain.setChecked(Boolean.valueOf(sharedPreferences.getString("RAIN", "false")));
+        cb_rain.setChecked(Boolean.valueOf(sharedPreferences.getString("RAIN", "true")));
 
         CheckBox cb_temp = optionsActivity.findViewById(R.id.cb_temp);
         cb_temp.setChecked(Boolean.valueOf(sharedPreferences.getString("TEMP", "false")));
+
+        CheckBox cb_sound = optionsActivity.findViewById(R.id.cb_sound);
+        cb_sound.setChecked(Boolean.valueOf(sharedPreferences.getString("SOUND", "false")));
 
         CheckBox cb_widgets = optionsActivity.findViewById(R.id.cb_widgets);
         cb_widgets.setChecked(Boolean.valueOf(sharedPreferences.getString("WIDGETS", "true")));

@@ -91,12 +91,12 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
     @SuppressLint("ClickableViewAccessibility")
-    private void displayCharactersSettings() {
-        if(UserPreferencesService.getCharactersSettingsVisibility(this).equals("true")) {
-            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
-        }
+    private void checkViktor() {
+//        if(UserPreferencesService.getCharactersSettingsVisibility(this).equals("true")) {
+//            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
+//        } else {
+//            findViewById(R.id.cl_characters).setVisibility(View.GONE);
+//        }
 
 
         // After Double tap on Zing a Viktor dialog will appear:
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
 
-                    if(UserPreferencesService.getCharactersSettingsVisibility(MainActivity.this).equals("false")) {
+                    if(UserPreferencesService.isViktorUnlocked(MainActivity.this).equals("false")) {
                         showViktorDialog();
-                        UserPreferencesService.setCharactersSettingsVisibility(MainActivity.this, "true");
+                        UserPreferencesService.setViktorUnlocked(MainActivity.this, "true");
                     }
                     return super.onDoubleTap(e);
                 }
@@ -126,12 +126,20 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     }
 
     private static void createNotificationChannel(MainActivity mainActivity) {
+
+
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "mainChannel";
             String description = "mainChannelDescription";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            // Check from prefs if we want notification sound
+            int importance;
+            if(UserPreferencesService.isSound(mainActivity).equals("true")) {
+                importance = NotificationManager.IMPORTANCE_DEFAULT;
+            } else {
+                importance = NotificationManager.IMPORTANCE_LOW;
+            }
             NotificationChannel channel = new NotificationChannel("alaska", name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
@@ -191,6 +199,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         dialog.show();
         UserPreferencesService.setPrefTheme(this, "Viktor");
+        //UserPreferencesService.setCharactersSettingsVisibility(this, "true");
         ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
     }
 
@@ -215,6 +224,10 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         // Check if we should show widgets pane
         displayWidgets();
+
+
+        //Check if we should show you character settings, viktor congrats pane on DC etc.
+        checkViktor();
 
 
 
@@ -342,7 +355,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                     binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScroll.setRotation(-90);
                 }
-                if(scrollX == 696)
+                if(scrollX == binding.horizontalScrollView.getChildAt(0).getWidth() - binding.horizontalScrollView.getWidth())
                 {
                     binding.ibScroll.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScroll.setRotation(90);
@@ -375,7 +388,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                     binding.ibScrollB.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScrollB.setRotation(-90);
                 }
-                if(scrollX == 682)
+                if(scrollX == binding.horizontalScrollView2.getChildAt(0).getWidth() - binding.horizontalScrollView2.getWidth())
                 {
                     binding.ibScrollB.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation));
                     binding.ibScrollB.setRotation(90);

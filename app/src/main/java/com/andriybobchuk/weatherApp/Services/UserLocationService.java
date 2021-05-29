@@ -76,6 +76,7 @@ public class UserLocationService extends Activity {
 
                                     } catch (IOException e) {
                                         e.printStackTrace();
+                                        Toast.makeText(context, String.valueOf(e.getMessage()), Toast.LENGTH_LONG).show();
                                     }
 
 
@@ -112,6 +113,7 @@ public class UserLocationService extends Activity {
 
                                     } catch (IOException e) {
                                         e.printStackTrace();
+                                        Toast.makeText(context, String.valueOf(e.getMessage()), Toast.LENGTH_LONG).show();
                                     }
 
                                 }

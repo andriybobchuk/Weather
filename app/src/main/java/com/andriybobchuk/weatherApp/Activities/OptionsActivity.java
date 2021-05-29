@@ -120,6 +120,18 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
+        CheckBox cb_sound = findViewById(R.id.cb_sound);
+        cb_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if(isChecked) {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("SOUND", "true").apply();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("SOUND", "false").apply();
+                }
+            }
+        });
         CheckBox cb_widgets = findViewById(R.id.cb_widgets);
         cb_widgets.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -132,6 +144,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
+
 
 
     }

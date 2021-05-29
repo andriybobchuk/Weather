@@ -56,8 +56,6 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
         setContentView(view);
 
 
-//        ActivityCompat.requestPermissions( this,
-//                new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         binding.clPageB.setVisibility(View.VISIBLE);
         binding.clPageB.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
@@ -65,14 +63,6 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
         binding.clPageD.setVisibility(View.GONE);
         binding.clPageA.setVisibility(View.GONE);
 
-//        binding.btnA.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                binding.clPageA.setVisibility(View.GONE);
-//                binding.clPageB.setVisibility(View.VISIBLE);
-//                //animateI();
-//            }
-//        });
 
         binding.btnGps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,12 +82,17 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String city = String.valueOf(binding.etCity.getText()); // TODO: FIX NULL SAFETY
-                getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", city).apply();
-                binding.clPageB.setVisibility(View.GONE);
-                binding.clPageC.setVisibility(View.VISIBLE);
-               // animateI();
-                binding.clPageC.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.left_to_right));
+                String city = String.valueOf(binding.etCity.getText());
+
+                if(binding.etCity.getText().length() == 0) {
+                    Toast.makeText(SetupActivity.this, "Maybe write city first?", Toast.LENGTH_SHORT).show();
+                } else {
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", city).apply();
+                    binding.clPageB.setVisibility(View.GONE);
+                    binding.clPageC.setVisibility(View.VISIBLE);
+                    // animateI();
+                    binding.clPageC.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.left_to_right));
+                }
 
             }
         });
@@ -148,12 +143,6 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
     @Override
     public void displayLocation(String cityName) {
         getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", cityName).apply();
-        if(cityName.equals(""))
-        {
-            Toast.makeText(this, "NaH", Toast.LENGTH_SHORT).show();
-
-        }
-        Toast.makeText(this, cityName, Toast.LENGTH_SHORT).show();
         binding.clPageB.setVisibility(View.GONE);
         binding.clPageC.setVisibility(View.VISIBLE);
         //animateI();
