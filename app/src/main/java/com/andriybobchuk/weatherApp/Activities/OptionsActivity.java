@@ -5,14 +5,22 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
 import com.andriybobchuk.weatherApp.R;
+
+import java.text.ParseException;
+
 import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
 
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -145,7 +153,23 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
+        final RadioGroup rg_character = (RadioGroup) findViewById(R.id.rg_character);
+        rg_character.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
+                int id = rg_character.getCheckedRadioButtonId();
+                switch (id) {
+                    case R.id.rb_gnome:
+                        getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("THEME", "gnome").apply();
+                        break;
+                    case R.id.rb_alien:
+                        getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("THEME", "alien").apply();
+                        break;
+                }
+            }
+        });
 
     }
 

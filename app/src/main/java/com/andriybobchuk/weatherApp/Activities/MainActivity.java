@@ -198,10 +198,11 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         });
 
         dialog.show();
-        UserPreferencesService.setPrefTheme(this, "Viktor");
+        UserPreferencesService.setPrefTheme(this, "alien");
         //UserPreferencesService.setCharactersSettingsVisibility(this, "true");
         ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
     }
+
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -453,7 +454,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         switch(new ForecastService().arr_theme[dayIndex]) {
 
             case "Clouds":
-                if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
                     tv_myWeatherDescription.setText("Just a bit of clouds");
                     iv_theme.setImageResource(R.drawable.theme_clouds);
                 } else {
@@ -475,7 +476,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     if(sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() < sdf.parse(new ForecastService().arr_sunset[dayIndex]).getTime() && sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() > sdf.parse(new ForecastService().arr_sunrise[dayIndex]).getTime())
                     {
-                        if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                        if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
                             tv_myWeatherDescription.setText("The weather's just perfect!");
                             iv_theme.setImageResource(R.drawable.theme_sun);
                         } else {
@@ -483,7 +484,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                             iv_theme.setImageResource(R.drawable.theme_sun_vik);
                         }
                     } else {
-                        if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                        if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
                             tv_myWeatherDescription.setText("Pretty cool night!");
                             iv_theme.setImageResource(R.drawable.theme_moon);
                         } else {
@@ -493,7 +494,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
                     }
                 } else {
-                    if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                    if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
                         tv_myWeatherDescription.setText("The weather's just perfect!");
                         iv_theme.setImageResource(R.drawable.theme_sun);
                     } else {
@@ -504,7 +505,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
                 break;
             case "Rain":
-                if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
                     tv_myWeatherDescription.setText("Take ur umbrella with you!");
                     iv_theme.setImageResource(R.drawable.theme_rain);
                 } else {

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import android.widget.RadioButton;
 import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.Activities.OptionsActivity;
 import com.andriybobchuk.weatherApp.R;
@@ -13,7 +14,7 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferencesService {
 
 
-    public static final String PREF_FILE = "new28SHARED_PREF";
+    public static final String PREF_FILE = "SHARED_PREFv32";
 
     public static String getPrefCity(MainActivity mainActivity)
     {
@@ -33,7 +34,7 @@ public class UserPreferencesService {
     {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
-        return sharedPreferences.getString("THEME", "DEFAULT");
+        return sharedPreferences.getString("THEME", "alien");
     }
 
     public static void setPrefCity(MainActivity mainActivity, String city)
@@ -144,6 +145,14 @@ public class UserPreferencesService {
 
         CheckBox cb_widgets = optionsActivity.findViewById(R.id.cb_widgets);
         cb_widgets.setChecked(Boolean.valueOf(sharedPreferences.getString("WIDGETS", "true")));
+
+        if(sharedPreferences.getString("THEME", "alien").equals("alien")) {
+            RadioButton rb = optionsActivity.findViewById(R.id.rb_alien);
+            rb.setChecked(true);
+        } else {
+            RadioButton rb = optionsActivity.findViewById(R.id.rb_gnome);
+            rb.setChecked(true);
+        }
 
     }
 
