@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
@@ -30,21 +31,15 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        final View background = findViewById(R.id.cl_main);
-        if(savedInstanceState == null)
-        {
-            background.setVisibility(View.INVISIBLE);
-            final ViewTreeObserver viewTreeObserver = background.getViewTreeObserver();
-            if(viewTreeObserver.isAlive())
-            {
-                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        circularReveal(background);
-                        background.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                });
-            }
+
+        // Define "preferences" as our file with user settings
+        SharedPreferences sharedPreferences = getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        // Check whether to display meteorologists pane or not
+        if(sharedPreferences.getString("CHARACTERS_SET", "false").equals("true")) {
+            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.cl_characters).setVisibility(View.GONE);
         }
 
         // Display content of pref file in edit text field
@@ -86,7 +81,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             public void onClick(View v) {
                 String newCity = String.valueOf(et_city.getText());
                 getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", newCity).apply();
-                Toast.makeText(OptionsActivity.this, "City was changed!", 3000).show();
             }
         });
 
@@ -126,34 +120,24 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         });
-        CheckBox cb_wind = findViewById(R.id.cb_real_wind);
-        cb_wind.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        CheckBox cb_widgets = findViewById(R.id.cb_widgets);
+        cb_widgets.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
 
                 if(isChecked) {
-                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIND", "true").apply();
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIDGETS", "true").apply();
                 } else {
-                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIND", "false").apply();
+                    getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("WIDGETS", "false").apply();
                 }
             }
         });
 
-    }
-
-
-    public void circularReveal (final View background)
-    {
-        int cx = (int)background.getRight();
-        int cy = (int)background.getTop();
-
-        float finalRadius = (float)Math.hypot(background.getWidth(), background.getHeight());
-        Animator anim = ViewAnimationUtils.createCircularReveal(background,cx,cy,0,finalRadius);
-        background.setVisibility(View.VISIBLE);
-        anim.setDuration(1000);
-        anim.start();
 
     }
+
+
+
 
 
     public void openMain()
@@ -173,13 +157,11 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         {
             // Do Preferences stuff
             getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "metric").apply();
-            Toast.makeText(this, "M saved!", 3000).show();
         }
         if(selected.equals("Imperial"))
         {
             // Do Preferences stuff
             getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "imperial").apply();
-            Toast.makeText(this, "F saved!", 3000).show();
         }
 
     }

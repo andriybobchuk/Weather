@@ -58,7 +58,8 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
                     .setContentTitle(StringUtils.capitalize(desc) + " in " + StringUtils.capitalize(city) )
                     .setContentText(min_max + "  •  See the full forecast")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent);
+                    .setContentIntent(pendingIntent)
+                    .setSound(null);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
@@ -74,7 +75,7 @@ public class ReminderBroadcast extends BroadcastReceiver implements SimpleForeca
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alaska")
                         .setSmallIcon(R.drawable.umbrella_icon)
                         .setContentTitle("Expect rain tomorrow  " + water_emoji)
-                        .setContentText("See the full forecast for " + StringUtils.capitalize(city))
+                        .setContentText("In " + StringUtils.capitalize(city))
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(pendingIntent);
 

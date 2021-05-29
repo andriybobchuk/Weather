@@ -1,5 +1,6 @@
 package com.andriybobchuk.weatherApp.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.Intent;
 import android.graphics.Color;
@@ -72,7 +73,57 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
     ActivityMainBinding binding;
     Dialog dialog;
 
+    private void displayWidgets() {
+        if(UserPreferencesService.getWidgets(this).equals("true")) {
+            binding.clWidgets.setVisibility(View.VISIBLE);
+        } else {
+            binding.clWidgets.setVisibility(View.GONE);
+        }
 
+        binding.btnCollapseWidgets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.clWidgets.setVisibility(View.GONE);
+                UserPreferencesService.setWidgets(MainActivity.this, "false");
+            }
+        });
+    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void displayCharactersSettings() {
+        if(UserPreferencesService.getCharactersSettingsVisibility(this).equals("true")) {
+            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.cl_characters).setVisibility(View.VISIBLE);
+        }
+
+
+        // After Double tap on Zing a Viktor dialog will appear:
+        dialog = new Dialog(this);
+        binding.ivTheme.setOnTouchListener(new View.OnTouchListener() {
+            private GestureDetector gestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+
+                    if(UserPreferencesService.getCharactersSettingsVisibility(MainActivity.this).equals("false")) {
+                        showViktorDialog();
+                        UserPreferencesService.setCharactersSettingsVisibility(MainActivity.this, "true");
+                    }
+                    return super.onDoubleTap(e);
+                }
+            });
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
+
+
+    }
 
     private static void createNotificationChannel(MainActivity mainActivity) {
         // Create the NotificationChannel, but only on API 26+ because
@@ -100,7 +151,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 AlarmManager.INTERVAL_DAY, alarmIntent);
     }
 
-    /* Calls SetupActivity if we do not have city name and units specified */
+    /* Calls SetupActivity if we do not have city name and units specified or weather forecast otherwise*/
     private void prefsGetter(){
 
         // Checks if on app start we have city and units set. If no - open SetupActivity
@@ -139,9 +190,12 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         });
 
         dialog.show();
+        UserPreferencesService.setPrefTheme(this, "Viktor");
+        ForecastService.getForecast(this, UserPreferencesService.getPrefCity(this), UserPreferencesService.getPrefUnits(this));
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,12 +210,11 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         createNotificationChannel(this);
         callNotificationGenerator();
 
+        // Calls weather forecast or SetupActivity
         prefsGetter();
 
-
-
-
-
+        // Check if we should show widgets pane
+        displayWidgets();
 
 
 
@@ -178,21 +231,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
             }
         });
 
-        // After Double tap on Zing a Viktor dialog will appear:
-        dialog = new Dialog(this);
-        findViewById(R.id.iv_theme).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-            private GestureDetector gestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onDoubleTap(MotionEvent e) {
-                    showViktorDialog();
-                    return super.onDoubleTap(e);
-                }
-            });
-        });
+
 
         final RadioGroup group = (RadioGroup) findViewById(R.id.rg_dayOfTheWeek);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -393,16 +432,21 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
 
     /** Sets background Zing image and description label */
-    public  void updateBackground(int dayIndex) throws ParseException {
+    public  void themePicker(int dayIndex) throws ParseException {
         TextView tv_myWeatherDescription = findViewById(R.id.tv_hint);
         ImageView iv_theme = findViewById(R.id.iv_theme);
 
         tv_myWeatherDescription.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
-        switch(new ForecastService().arr_theme[dayIndex])
-        {
+        switch(new ForecastService().arr_theme[dayIndex]) {
+
             case "Clouds":
-                tv_myWeatherDescription.setText("Just a bit of clouds");
-                iv_theme.setImageResource(R.drawable.theme_clouds);
+                if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                    tv_myWeatherDescription.setText("Just a bit of clouds");
+                    iv_theme.setImageResource(R.drawable.theme_clouds);
+                } else {
+                    tv_myWeatherDescription.setText("Clouds, u know");
+                    iv_theme.setImageResource(R.drawable.theme_clouds_vik);
+                }
                 break;
             case "Clear":
 
@@ -418,21 +462,43 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     if(sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() < sdf.parse(new ForecastService().arr_sunset[dayIndex]).getTime() && sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() > sdf.parse(new ForecastService().arr_sunrise[dayIndex]).getTime())
                     {
+                        if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                            tv_myWeatherDescription.setText("The weather's just perfect!");
+                            iv_theme.setImageResource(R.drawable.theme_sun);
+                        } else {
+                            tv_myWeatherDescription.setText("Go grab some taco with bros");
+                            iv_theme.setImageResource(R.drawable.theme_sun_vik);
+                        }
+                    } else {
+                        if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                            tv_myWeatherDescription.setText("Pretty cool night!");
+                            iv_theme.setImageResource(R.drawable.theme_moon);
+                        } else {
+                            tv_myWeatherDescription.setText("Go ut Jimmy");
+                            iv_theme.setImageResource(R.drawable.theme_moon_vik);
+                        }
+
+                    }
+                } else {
+                    if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
                         tv_myWeatherDescription.setText("The weather's just perfect!");
                         iv_theme.setImageResource(R.drawable.theme_sun);
                     } else {
-                        tv_myWeatherDescription.setText("Pretty cool night!");
-                        iv_theme.setImageResource(R.drawable.theme_moon);
+                        tv_myWeatherDescription.setText("Go grab some taco with bros");
+                        iv_theme.setImageResource(R.drawable.theme_sun_vik);
                     }
-                } else {
-                    tv_myWeatherDescription.setText("The weather's just perfect!");
-                    iv_theme.setImageResource(R.drawable.theme_sun);
                 }
 
                 break;
             case "Rain":
-                tv_myWeatherDescription.setText("Take ur umbrella with you!");
-                iv_theme.setImageResource(R.drawable.theme_rain);
+                if(UserPreferencesService.getPrefTheme(this).equals("DEFAULT")) {
+                    tv_myWeatherDescription.setText("Take ur umbrella with you!");
+                    iv_theme.setImageResource(R.drawable.theme_rain);
+                } else {
+                    tv_myWeatherDescription.setText("Quite wet here, u know");
+                    iv_theme.setImageResource(R.drawable.theme_rain_vik);
+                }
+
                 break;
             case "Snow":
                 tv_myWeatherDescription.setText("All the weather outside is frightful..");
@@ -667,7 +733,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         updateData(0);
 
-        updateBackground(0);
+        themePicker(0);
 
         updateButtonPanel();
     }
@@ -685,7 +751,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         updateData(dayIndex);
 
-        updateBackground(dayIndex);
+        themePicker(dayIndex);
 
     }
 

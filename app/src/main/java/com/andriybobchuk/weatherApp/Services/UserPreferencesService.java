@@ -29,6 +29,13 @@ public class UserPreferencesService {
         return sharedPreferences.getString("UNITS", "DEFAULT");
     }
 
+    public static String getPrefTheme(MainActivity mainActivity)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("THEME", "DEFAULT");
+    }
+
     public static void setPrefCity(MainActivity mainActivity, String city)
     {
         mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("CITY", city).apply();
@@ -42,6 +49,47 @@ public class UserPreferencesService {
         editor.apply();
     }
 
+    public static void setPrefTheme(MainActivity mainActivity, String theme)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("THEME", theme);
+        editor.apply();
+    }
+
+
+    //For widgets pane
+    public static void setWidgets(MainActivity mainActivity, String condition)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("WIDGETS", condition);
+        editor.apply();
+    }
+
+    public static String getWidgets(MainActivity mainActivity)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("WIDGETS", "true");
+    }
+
+
+    // For Char settings
+    public static void setCharactersSettingsVisibility(MainActivity mainActivity, String condition)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("CHARACTERS_SET", condition);
+        editor.apply();
+    }
+
+    public static String getCharactersSettingsVisibility(MainActivity mainActivity)
+    {
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("CHARACTERS_SET", "false");
+    }
 
 
 
@@ -75,8 +123,9 @@ public class UserPreferencesService {
         CheckBox cb_temp = optionsActivity.findViewById(R.id.cb_temp);
         cb_temp.setChecked(Boolean.valueOf(sharedPreferences.getString("TEMP", "false")));
 
-        CheckBox cb_wind = optionsActivity.findViewById(R.id.cb_real_wind);
-        cb_wind.setChecked(Boolean.valueOf(sharedPreferences.getString("WIND", "false")));
+        CheckBox cb_widgets = optionsActivity.findViewById(R.id.cb_widgets);
+        cb_widgets.setChecked(Boolean.valueOf(sharedPreferences.getString("WIDGETS", "true")));
+
     }
 
 
