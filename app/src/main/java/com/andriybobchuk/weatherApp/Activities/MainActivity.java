@@ -41,23 +41,6 @@ import java.util.Calendar;
  * NOTE:
  * This class ONLY updates User interface */
 
-/*
-TODO: - add all ready pics of Vik
-      -
-      - Redesign notifications(!!!!) They are stupid now (+ settings) + sound notific
-      - Refactor code (NO JOKES, DO IT)
-      - hide widgets + all the userprefs stuff
-      - MERGE ALL OF THAT WITH USERS PREFS (PICS + ACHUIEVEMENT + NOTIFICATIONS + )
-      =
-      - write UNIVERSAL code for recognizing day and night for those images and widgets(moon\sun) ↑
-      -
-      -
-      - Make those surprises
-      +
-      - fix this freaking metric-imperial bug
-      - pictures shades
-
- */
 
 
 public class MainActivity extends AppCompatActivity /*implements UserLocationService.UserLocationCallback*/ {

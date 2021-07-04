@@ -14,6 +14,7 @@ import com.andriybobchuk.weatherApp.R;
 public class UserPreferencesService {
 
 
+
     public static final String PREF_FILE = "SHARED_PREFv32";
 
     public static String getPrefCity(MainActivity mainActivity)

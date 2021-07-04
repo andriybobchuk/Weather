@@ -189,21 +189,20 @@ public class ForecastService {
                 }
 
                 // Remove internet failure msg box
-                ConstraintLayout cl_internetError = mainActivity.findViewById(R.id.cl_internetError);
-                cl_internetError.setVisibility(View.GONE);
+                ConstraintLayout cl_error_msg = mainActivity.findViewById(R.id.cl_error_msg);
+                cl_error_msg.setVisibility(View.GONE);
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 TextView tv_error = mainActivity.findViewById(R.id.tv_error);
-                tv_error.startAnimation(AnimationUtils.loadAnimation(mainActivity, R.anim.blinking));
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     tv_error.setText("No internet connection");
 
                 } else if (error instanceof ClientError) {
-                    tv_error.setText(String.valueOf("Client error"));
+                    tv_error.setText(String.valueOf("Hold on a minute"));
 
 
                 } else if (error instanceof ServerError) {
@@ -214,8 +213,8 @@ public class ForecastService {
                 }
 
                 // Internet failure msg box
-                ConstraintLayout cl_internetError = mainActivity.findViewById(R.id.cl_internetError);
-                cl_internetError.setVisibility(View.VISIBLE);
+                ConstraintLayout cl_error_msg = mainActivity.findViewById(R.id.cl_error_msg);
+                cl_error_msg.setVisibility(View.VISIBLE);
             }
         });
 
