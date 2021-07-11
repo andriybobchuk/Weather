@@ -838,16 +838,6 @@
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="15dp">
 
                     <TextView
-                            android:layout_width="372dp"
-                            android:layout_height="33dp" android:id="@+id/tv_hint2"
-                            android:fontFamily="@font/gotham_medium"
-                            android:textSize="14.5sp"
-                            android:text="Yeah, they're cool indeed. "
-                            android:lineSpacingExtra="4sp"
-                            android:layout_marginTop="10dp"
-                            app:layout_constraintTop_toBottomOf="@+id/widggggg"
-                            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="3dp"/>
-                    <TextView
                             android:text="Widgets"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/widggggg"
@@ -859,7 +849,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/horizontalScrollView2" android:scrollbarSize="0dp"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_hint2" android:layout_marginTop="4dp">
+                            android:layout_marginTop="30dp" app:layout_constraintTop_toBottomOf="@+id/widggggg">
                         <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -880,25 +870,25 @@
                                     <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="180dp"
                                             android:layout_height="180dp"
-                                            android:background="@drawable/w1"
+                                            android:background="@drawable/widgets_pane_like"
                                             android:layout_marginBottom="15dp"
                                             android:alpha="1"/>
                                     <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="180dp"
                                             android:layout_height="180dp"
-                                            android:background="@drawable/w2">
+                                            android:background="@drawable/widgets_pane_gradient">
 
                                     </androidx.constraintlayout.widget.ConstraintLayout>
                                 </LinearLayout>
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
-                                        android:layout_height="375dp" android:background="@drawable/w4"
+                                        android:layout_height="375dp" android:background="@drawable/widgets_pane_ugly"
                                         android:layout_marginRight="15dp">
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="180dp"
-                                        android:layout_height="375dp" android:background="@drawable/w8"
+                                        android:layout_height="375dp" android:background="@drawable/widgets_pane_cool"
                                         android:layout_marginRight="15dp">
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -909,14 +899,15 @@
                                     <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="180dp"
                                             android:layout_height="180dp"
-                                            android:background="@drawable/w3" android:layout_marginBottom="15dp"
+                                            android:background="@drawable/widgets_pane_insta"
+                                            android:layout_marginBottom="15dp"
                                     >
 
                                     </androidx.constraintlayout.widget.ConstraintLayout>
                                     <androidx.constraintlayout.widget.ConstraintLayout
                                             android:layout_width="180dp"
                                             android:layout_height="180dp"
-                                            android:background="@drawable/w6"
+                                            android:background="@drawable/widgets_pane_coming"
                                     >
 
                                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -941,7 +932,7 @@
                             android:visibility="invisible"
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="3dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"/>
+                    />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

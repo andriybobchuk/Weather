@@ -3,7 +3,7 @@
                     android:minWidth="110dp"
                     android:minHeight="40dp"
                     android:updatePeriodMillis="1800000"
-                    android:previewImage="@drawable/w_a"
+                    android:previewImage="@drawable/widgets_preview_insta"
                     android:initialLayout="@layout/widget__a"
                     android:widgetCategory="home_screen"
                     android:initialKeyguardLayout="@layout/widget__a">

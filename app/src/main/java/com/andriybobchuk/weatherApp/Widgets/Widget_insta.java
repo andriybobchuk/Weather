@@ -6,30 +6,20 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.os.Handler;
 import android.widget.RemoteViews;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.Services.SimpleForecastService;
-import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Calendar;
 
 import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
 
 
 /**
- * Implementation of App Widget functionality.
+ * Insta Style Widget
  */
-public class Widget_d extends AppWidgetProvider implements SimpleForecastService.apiCallback{
+public class Widget_insta extends AppWidgetProvider implements SimpleForecastService.apiCallback{
 
     // Construct the RemoteViews object
-    RemoteViews views = new RemoteViews("com.example.weather2", R.layout.widget_d);
+    RemoteViews views = new RemoteViews("com.example.weather2", R.layout.widget__a);
     Context c;
     AppWidgetManager awm;
     int awid;
@@ -44,12 +34,12 @@ public class Widget_d extends AppWidgetProvider implements SimpleForecastService
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
         SimpleForecastService.getSimpleForecaast(context, sharedPreferences.getString("CITY", "London"), sharedPreferences.getString("UNITS", "METRIC"));
-        SimpleForecastService.setCallback(Widget_d.this);
+        SimpleForecastService.setCallback(Widget_insta.this);
 
 
 
         // Setup update button to send an update request as a pending intent.
-        Intent intentUpdate = new Intent(context, Widget_d.class);
+        Intent intentUpdate = new Intent(context, Widget_insta.class);
 
         // The intent action must be an app widget update.
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -72,9 +62,8 @@ public class Widget_d extends AppWidgetProvider implements SimpleForecastService
         // Construct the RemoteViews object
         //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget__a);
 
-        views.setTextViewText(R.id.appwidget_text_temp, "13°");
-        views.setTextViewText(R.id.appwidget_text_description, "19:37\nGliwice");
-        views.setImageViewResource(R.id.iv_ico, R.drawable.c_clouds);
+        views.setTextViewText(R.id.appwidget_text_temp, "JFGI");
+        views.setTextViewText(R.id.appwidget_text_description, "Loading");
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -110,32 +99,11 @@ public class Widget_d extends AppWidgetProvider implements SimpleForecastService
                               String theme_tomorrow,
                               String temp_tomorrow,
                               String temp_today,
-                              String wind,
-                              String main) {
+                              String wind, String main) {
 
 
         views.setTextViewText(R.id.appwidget_text_temp, temp);
-        views.setTextViewText(R.id.appwidget_text_description, StringUtils.capitalize(city) + "\nUpdated " + new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime()));
-
-        switch(main)
-        {
-            case "Clouds":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.c_clouds);
-                break;
-            case "Clear":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.c_sun);
-                break;
-            case "Rain":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.c_rain);
-                break;
-            case "Snow":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.c_snow);
-                break;
-            default:
-                views.setImageViewResource(R.id.iv_ico, R.drawable.c_clouds);
-        }
-
-
+        views.setTextViewText(R.id.appwidget_text_description, "#" + main);
 
         awm.updateAppWidget(awid, views);
 

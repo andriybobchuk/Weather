@@ -6,14 +6,8 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.os.Handler;
 import android.widget.RemoteViews;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
 import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Services.ForecastService;
 import com.andriybobchuk.weatherApp.Services.SimpleForecastService;
 import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
 import org.apache.commons.lang3.StringUtils;
@@ -24,12 +18,12 @@ import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_
 
 
 /**
- * Implementation of App Widget functionality.
+ * Cute Style longer
  */
-public class Widget_b extends AppWidgetProvider implements SimpleForecastService.apiCallback{
+public class Widget_cute extends AppWidgetProvider implements SimpleForecastService.apiCallback{
 
     // Construct the RemoteViews object
-    RemoteViews views = new RemoteViews("com.example.weather2", R.layout.widget_b);
+    RemoteViews views = new RemoteViews("com.example.weather2", R.layout.widget_c);
     Context c;
     AppWidgetManager awm;
     int awid;
@@ -44,12 +38,12 @@ public class Widget_b extends AppWidgetProvider implements SimpleForecastService
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
         SimpleForecastService.getSimpleForecaast(context, sharedPreferences.getString("CITY", "London"), sharedPreferences.getString("UNITS", "METRIC"));
-        SimpleForecastService.setCallback(Widget_b.this);
+        SimpleForecastService.setCallback(Widget_cute.this);
 
 
 
         // Setup update button to send an update request as a pending intent.
-        Intent intentUpdate = new Intent(context, Widget_b.class);
+        Intent intentUpdate = new Intent(context, Widget_cute.class);
 
         // The intent action must be an app widget update.
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -73,8 +67,8 @@ public class Widget_b extends AppWidgetProvider implements SimpleForecastService
         //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget__a);
 
         views.setTextViewText(R.id.appwidget_text_temp, "13°");
-        views.setTextViewText(R.id.appwidget_text_description, "Gliwice\nUpdated 17:41");
-        views.setImageViewResource(R.id.iv_ico, R.drawable.b_sun);
+        views.setTextViewText(R.id.appwidget_text_description, "19:37\nGliwice");
+        views.setImageViewResource(R.id.iv_ico, R.drawable.a_clouds);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -120,22 +114,20 @@ public class Widget_b extends AppWidgetProvider implements SimpleForecastService
         switch(main)
         {
             case "Clouds":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.b_clouds);
+                views.setImageViewResource(R.id.iv_ico, R.drawable.a_clouds);
                 break;
             case "Clear":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.b_sun);
+                views.setImageViewResource(R.id.iv_ico, R.drawable.a_sun);
                 break;
             case "Rain":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.b_rain);
+                views.setImageViewResource(R.id.iv_ico, R.drawable.a_rain);
                 break;
             case "Snow":
-                views.setImageViewResource(R.id.iv_ico, R.drawable.b_snow);
+                views.setImageViewResource(R.id.iv_ico, R.drawable.a_snow);
                 break;
             default:
-                views.setImageViewResource(R.id.iv_ico, R.drawable.b_clouds);
+                views.setImageViewResource(R.id.iv_ico, R.drawable.a_clouds);
         }
-
-        Toast.makeText(context, "Widget b updated " + awid, Toast.LENGTH_SHORT).show();
 
 
 

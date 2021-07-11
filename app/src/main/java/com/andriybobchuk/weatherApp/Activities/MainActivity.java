@@ -712,7 +712,6 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
         /**               END OF INSIDE THE DAY PANELS                                                           **/
         /**  =================================================================================================== **/
 
-        binding.tvHint2.setText("Yeah, they're cool indeed " + Html.fromHtml(URLDecoder.decode("&#128561")));
 
     }
 

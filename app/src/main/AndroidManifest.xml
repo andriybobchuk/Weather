@@ -15,7 +15,8 @@
             android:roundIcon="@mipmap/icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <receiver android:name=".Widgets.Widget_d">
+
+        <receiver android:name=".Widgets.Widget_rough">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -24,7 +25,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_d_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_c">
+        <receiver android:name=".Widgets.Widget_cute">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -33,7 +34,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_c_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_b">
+        <receiver android:name=".Widgets.Widget_gradient">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -42,7 +43,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_b_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_A">
+        <receiver android:name=".Widgets.Widget_insta">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
