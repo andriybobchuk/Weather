@@ -471,7 +471,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                             tv_myWeatherDescription.setText("Pretty cool night!");
                             iv_theme.setImageResource(R.drawable.theme_moon);
                         } else {
-                            tv_myWeatherDescription.setText("Go ut Jimmy");
+                            tv_myWeatherDescription.setText("Pretty clear sky");
                             iv_theme.setImageResource(R.drawable.theme_moon_vik);
                         }
 

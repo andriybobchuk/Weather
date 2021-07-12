@@ -93,7 +93,7 @@
                         android:id="@+id/shimmer"
                         app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" android:visibility="gone">
+                        app:layout_constraintBottom_toBottomOf="parent" android:visibility="visible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                                 android:layout_width="117dp"
                                 android:layout_height="148dp"
                                 android:background="@drawable/bgrate"
-                                android:id="@+id/ll_pop" android:layout_marginLeft="15dp">
+                                android:id="@+id/ll_pop" android:layout_marginLeft="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -235,7 +235,7 @@
                                 android:layout_width="117dp"
                                 android:layout_height="148dp"
                                 android:background="@drawable/bgrate"
-                                android:id="@+id/ll_wind" android:layout_marginLeft="15dp">
+                                android:id="@+id/ll_wind" android:layout_marginLeft="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -261,7 +261,7 @@
                                 android:layout_width="117dp"
                                 android:layout_height="148dp"
                                 android:background="@drawable/bgrate"
-                                android:id="@+id/ll_humidity" android:layout_marginLeft="15dp">
+                                android:id="@+id/ll_humidity" android:layout_marginLeft="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -287,7 +287,7 @@
                                 android:layout_width="117dp"
                                 android:layout_height="148dp"
                                 android:background="@drawable/bgrate"
-                                android:id="@+id/ll_uvi" android:layout_marginLeft="15dp">
+                                android:id="@+id/ll_uvi" android:layout_marginLeft="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -313,7 +313,7 @@
                                 android:layout_width="117dp"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/bgrate"
-                                android:id="@+id/ll_pressure" android:layout_marginLeft="15dp">
+                                android:id="@+id/ll_pressure" android:layout_marginLeft="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -340,7 +340,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/bgrate"
                                 android:id="@+id/ll_clouds" android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp">
+                                android:layout_marginRight="15dp" android:layout_weight="1">
                             <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="32dp"
@@ -739,7 +739,7 @@
                                     android:layout_height="wrap_content" android:id="@+id/tv_temp_morning"
                                     android:layout_weight="1" android:textSize="25sp" android:textColor="#FFFF"
                                     android:fontFamily="@font/gotham_medium" android:paddingTop="25dp"
-                                    android:gravity="center_horizontal"/>
+                                    android:gravity="center_horizontal" android:layout_marginStart="15dp"/>
                             <TextView
                                     android:text="-t°"
                                     android:layout_width="wrap_content"
@@ -760,7 +760,7 @@
                                     android:layout_height="wrap_content" android:id="@+id/tv_temp_night"
                                     android:layout_weight="1" android:textSize="25sp" android:textColor="#FFFF"
                                     android:fontFamily="@font/gotham_medium" android:paddingTop="25dp"
-                                    android:gravity="center_horizontal"/>
+                                    android:gravity="center_horizontal" android:layout_marginEnd="15dp"/>
                         </LinearLayout>
                         <LinearLayout
                                 android:orientation="horizontal"
@@ -782,7 +782,8 @@
                                     android:layout_height="wrap_content" android:id="@+id/mornnn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
-                                    android:gravity="center_horizontal" android:textColor="#FFF"/>
+                                    android:gravity="center_horizontal" android:textColor="#FFF"
+                                    android:layout_marginStart="15dp"/>
                             <TextView
                                     android:text="afternoon"
                                     android:layout_width="48dp"
@@ -803,7 +804,8 @@
                                     android:layout_height="wrap_content" android:id="@+id/nighttt"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
-                                    android:gravity="center_horizontal" android:textColor="#FFF"/>
+                                    android:gravity="center_horizontal" android:textColor="#FFF"
+                                    android:paddingEnd="15dp" android:layout_marginEnd="15dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -821,7 +823,7 @@
                         android:layout_height="wrap_content" android:id="@+id/latlon"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="140dp" app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="50dp" android:visibility="visible"/>
+                        android:layout_marginStart="50dp" android:visibility="gone"/>
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" app:srcCompat="?android:attr/listChoiceIndicatorSingle"
@@ -999,7 +1001,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:checked="true"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="O"
                     android:layout_width="56dp"
@@ -1012,7 +1014,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="A"
                     android:layout_width="56dp"
@@ -1025,7 +1027,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="D"
                     android:layout_width="56dp"
@@ -1038,7 +1040,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="I"
                     android:layout_width="56dp"
@@ -1051,7 +1053,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="N"
                     android:layout_width="56dp"
@@ -1064,7 +1066,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
             <RadioButton
                     android:text="G"
                     android:layout_width="56dp"
@@ -1077,7 +1079,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/gotham_medium"
                     android:state_checked="false"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" android:layout_weight="1"/>
         </RadioGroup>
     </LinearLayout>
 

@@ -15,7 +15,7 @@ public class UserPreferencesService {
 
 
 
-    public static final String PREF_FILE = "SHARED_PREFv32";
+    public static final String PREF_FILE = "SHARED_PREFv35";
 
     public static String getPrefCity(MainActivity mainActivity)
     {
@@ -35,7 +35,7 @@ public class UserPreferencesService {
     {
         SharedPreferences sharedPreferences = mainActivity.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
-        return sharedPreferences.getString("THEME", "alien");
+        return sharedPreferences.getString("THEME", "gnome");
     }
 
     public static void setPrefCity(MainActivity mainActivity, String city)

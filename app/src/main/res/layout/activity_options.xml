@@ -361,7 +361,7 @@
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="60dp">
 
                 <TextView
-                        android:text="Version: May 2021\nAuthor: Andrii Bobchuk"
+                        android:text="Version: July 2021\nAuthor: Andrii Bobchuk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView18"
                         android:fontFamily="@font/gotham_book"
