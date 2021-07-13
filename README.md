@@ -5,10 +5,10 @@ Just some GORGEOUS design weather application written using java
 Excepting the gnome there is another meteorologist character, you should find him somehow and then you will be able to switch between then anytime
 
 ## Screenshots
-![](/Screenshots/s1.png)
-![](/Screenshots/s2.png)
-![](/Screenshots/s3.png)
-![](/Screenshots/s4.png)
+![](/screenshots/s1.png)
+![](/screenshots/s2.png)
+![](/screenshots/s3.png)
+![](/screenshots/s4.png)
 
 
 ## Technical part
