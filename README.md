@@ -5,8 +5,8 @@ Just some GORGEOUS design weather application written using java
 Excepting the gnome there is another meteorologist character, you should find him somehow and then you will be able to switch between then anytime
 
 ## Screenshots
-![](/screenshots/s.png)
 ![](/screenshots/s0.png)
+![](/screenshots/s.png)
 
 
 ## Technical part
