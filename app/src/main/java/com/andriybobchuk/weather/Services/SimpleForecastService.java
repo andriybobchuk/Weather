@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weather.Services;
 
 import android.content.Context;
 import android.location.Address;

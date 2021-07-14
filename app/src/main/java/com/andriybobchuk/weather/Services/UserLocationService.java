@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weather.Services;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,10 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.*;
 import android.os.Build;
-import android.os.Handler;
 import android.widget.Toast;
-import androidx.core.app.ActivityCompat;
-import com.andriybobchuk.weatherApp.Activities.SetupActivity;
+import com.andriybobchuk.weather.Activities.SetupActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;

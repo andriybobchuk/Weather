@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Activities;
+package com.andriybobchuk.weather.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.*;
@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.text.Html;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,17 +18,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.andriybobchuk.weatherApp.Services.ForecastService;
-import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weather.Services.ForecastService;
+import com.andriybobchuk.weather.R;
 
-import com.andriybobchuk.weatherApp.Services.ReminderBroadcast;
-import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
-import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
-import com.andriybobchuk.weatherApp.databinding.ActivityMainBinding;
+import com.andriybobchuk.weather.Services.ReminderBroadcast;
+import com.andriybobchuk.weather.Services.UserPreferencesService;
+import com.andriybobchuk.weather.Structures.TimeAndDate;
+import com.andriybobchuk.weather.databinding.ActivityMainBinding;
 import com.bumptech.glide.Glide;
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

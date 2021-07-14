@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Structures;
+package com.andriybobchuk.weather.Structures;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

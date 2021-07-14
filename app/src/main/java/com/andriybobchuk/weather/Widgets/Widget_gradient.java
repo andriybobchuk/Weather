@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Widgets;
+package com.andriybobchuk.weather.Widgets;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,14 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
-import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Services.SimpleForecastService;
-import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
+import com.andriybobchuk.weather.R;
+import com.andriybobchuk.weather.Services.SimpleForecastService;
+import com.andriybobchuk.weather.Structures.TimeAndDate;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
 
-import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
+import static com.andriybobchuk.weather.Services.UserPreferencesService.PREF_FILE;
 
 
 /**

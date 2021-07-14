@@ -1,26 +1,17 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weather.Services;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.os.Build;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
-import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Structures.TimeAndDate;
+import com.andriybobchuk.weather.Activities.MainActivity;
+import com.andriybobchuk.weather.R;
+import com.andriybobchuk.weather.Structures.TimeAndDate;
 import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 

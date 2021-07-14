@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.andriybobchuk.weatherApp">
+          package="com.andriybobchuk.weather">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <receiver android:name=".Widgets.Widget_rough">
+        <receiver android:name="com.andriybobchuk.weather.Widgets.Widget_rough">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -25,7 +25,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_d_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_cute">
+        <receiver android:name="com.andriybobchuk.weather.Widgets.Widget_cute">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -34,7 +34,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_c_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_gradient">
+        <receiver android:name="com.andriybobchuk.weather.Widgets.Widget_gradient">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -43,7 +43,7 @@
                     android:name="android.appwidget.provider"
                     android:resource="@xml/widget_b_info"/>
         </receiver>
-        <receiver android:name=".Widgets.Widget_insta">
+        <receiver android:name="com.andriybobchuk.weather.Widgets.Widget_insta">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -53,12 +53,12 @@
                     android:resource="@xml/widget__a_info"/>
         </receiver>
 
-        <activity android:name=".Activities.SetupActivity">
+        <activity android:name="com.andriybobchuk.weather.Activities.SetupActivity">
         </activity>
-        <activity android:name=".Activities.OptionsActivity">
+        <activity android:name="com.andriybobchuk.weather.Activities.OptionsActivity">
         </activity>
         <activity
-                android:name=".Activities.MainActivity"
+                android:name="com.andriybobchuk.weather.Activities.MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -67,7 +67,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Services.ReminderBroadcast"/>
+        <receiver android:name="com.andriybobchuk.weather.Services.ReminderBroadcast"/>
 
         <meta-data
                 android:name="preloaded_fonts"

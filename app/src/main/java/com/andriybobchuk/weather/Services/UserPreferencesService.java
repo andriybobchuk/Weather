@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weather.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,16 +6,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import android.widget.RadioButton;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
-import com.andriybobchuk.weatherApp.Activities.OptionsActivity;
-import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weather.Activities.MainActivity;
+import com.andriybobchuk.weather.Activities.OptionsActivity;
+import com.andriybobchuk.weather.R;
 
 
 public class UserPreferencesService {
 
 
 
-    public static final String PREF_FILE = "SHARED_PREFv35";
+    public static final String PREF_FILE = "SHARED_PREFv42";
 
     public static String getPrefCity(MainActivity mainActivity)
     {

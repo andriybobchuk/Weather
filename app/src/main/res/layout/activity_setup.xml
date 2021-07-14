@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.andriybobchuk.weatherApp.Activities.SetupActivity"
+        tools:context="com.andriybobchuk.weather.Activities.SetupActivity"
         android:background="#202020">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/cl_pageC"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
@@ -104,17 +104,17 @@
 
             <Button
                     android:layout_width="320dp"
-                    android:layout_height="52dp" android:id="@+id/btn_imperial"
+                    android:layout_height="52dp" android:id="@+id/btn_metric"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/intro_btn_pt_style" app:layout_constraintHorizontal_bias="0.0"
-                    android:text="Imperial" android:fontFamily="@font/gotham_medium"/>
+                    android:text="METRIC" android:fontFamily="@font/gotham_medium"/>
             <Button
                     android:layout_width="320dp"
-                    android:layout_height="52dp" android:id="@+id/btn_metric"
+                    android:layout_height="52dp" android:id="@+id/btn_imperial"
                     android:background="@drawable/intro_btn_pt_style"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_imperial"
-                    android:layout_marginTop="20dp" android:text="Metric" android:fontFamily="@font/gotham_medium"/>
+                    app:layout_constraintTop_toBottomOf="@+id/btn_metric"
+                    android:layout_marginTop="20dp" android:text="IMPERIAL" android:fontFamily="@font/gotham_medium"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -202,7 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/cl_pageD"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"

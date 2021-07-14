@@ -1,35 +1,20 @@
-package com.andriybobchuk.weatherApp.Activities;
+package com.andriybobchuk.weather.Activities;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowInsets;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import com.andriybobchuk.weatherApp.R;
-import com.andriybobchuk.weatherApp.Services.UserLocationService;
-import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
-import com.andriybobchuk.weatherApp.databinding.ActivitySetupBinding;
-import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import com.andriybobchuk.weather.R;
+import com.andriybobchuk.weather.Services.UserLocationService;
+import com.andriybobchuk.weather.databinding.ActivitySetupBinding;
+import static com.andriybobchuk.weather.Services.UserPreferencesService.PREF_FILE;
 
 import static android.location.LocationManager.*;
 

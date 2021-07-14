@@ -1,6 +1,5 @@
-package com.andriybobchuk.weatherApp.Services;
+package com.andriybobchuk.weather.Services;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,16 +7,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Html;
 import android.text.Spanned;
-import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import com.andriybobchuk.weatherApp.Activities.MainActivity;
-import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weather.Activities.MainActivity;
+import com.andriybobchuk.weather.R;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Math;
 import java.net.URLDecoder;
 
-import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
+import static com.andriybobchuk.weather.Services.UserPreferencesService.PREF_FILE;
 
 /**
  * This class listens to the timer set from MainActivity, runs getSimpleForecast and makes the notification

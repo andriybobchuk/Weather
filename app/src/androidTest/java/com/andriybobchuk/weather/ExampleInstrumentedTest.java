@@ -1,4 +1,4 @@
-package com.andriybobchuk.weatherApp;
+package com.andriybobchuk.weather;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

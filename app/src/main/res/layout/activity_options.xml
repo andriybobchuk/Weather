@@ -130,7 +130,7 @@
                         android:theme="@style/MyEditTextTheme"
                         app:layout_constraintStart_toEndOf="@+id/textView10435"/>
                 <TextView
-                        android:text="You can Show/Hide the widgets promotional layout from your app's main page"
+                        android:text="You can Show/Hide the widgets  layout from your app's main page"
                         android:layout_width="312dp"
                         android:layout_height="wrap_content" android:id="@+id/textView10435"
                         android:fontFamily="@font/gotham_book"
@@ -330,7 +330,7 @@
                     android:id="@+id/constraintLayout9">
 
                 <TextView
-                        android:text="Well, I suggest that you keep it turned off (Just my preference, you do whatever the _ you want)"
+                        android:text="Well, I suggest that you keep it turned off (Just my preference, you do whatever you want)"
                         android:layout_width="312dp"
                         android:layout_height="50dp" android:id="@+id/textView104"
                         android:fontFamily="@font/gotham_book"

@@ -1,14 +1,11 @@
-package com.andriybobchuk.weatherApp.Features;
+package com.andriybobchuk.weather.Features;
 
 import android.text.Html;
 import android.text.Spanned;
-import com.andriybobchuk.weatherApp.R;
-import com.bumptech.glide.load.engine.Resource;
+import com.andriybobchuk.weather.R;
 
 import java.net.URLDecoder;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class ThemePicker {
 

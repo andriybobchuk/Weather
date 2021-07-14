@@ -3,7 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="380dp"
+            android:layout_width="340dp"
             android:layout_height="553dp" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="15dp" android:background="@android:color/transparent"
@@ -23,21 +23,13 @@
                 android:fontFamily="@font/gotham_medium" android:textSize="25sp"
                 android:textColor="@color/colorPrimaryLightGrey" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/textView15" android:layout_marginBottom="15dp"/>
-        <TextView
-                android:text="Find all the secret characters"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView15"
-                android:fontFamily="@font/gotham_light" android:textSize="17sp"
-                android:textColor="@color/colorPrimaryLightGrey" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/btn_tryem" android:layout_marginBottom="25dp"/>
+                app:layout_constraintBottom_toTopOf="@+id/btn_tryem" android:layout_marginBottom="40dp"/>
         <Button
                 android:text="Try 'em out"
                 android:layout_width="143dp"
                 android:layout_height="51dp" android:id="@+id/btn_tryem"
                 android:background="@drawable/intro_btn_pt_style"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="45dp"/>
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="65dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

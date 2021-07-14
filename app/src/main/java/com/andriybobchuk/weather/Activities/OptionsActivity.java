@@ -1,27 +1,18 @@
-package com.andriybobchuk.weatherApp.Activities;
+package com.andriybobchuk.weather.Activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.andriybobchuk.weatherApp.Services.UserPreferencesService;
-import com.andriybobchuk.weatherApp.R;
+import com.andriybobchuk.weather.Services.UserPreferencesService;
+import com.andriybobchuk.weather.R;
 
-import java.text.ParseException;
-
-import static com.andriybobchuk.weatherApp.Services.UserPreferencesService.PREF_FILE;
+import static com.andriybobchuk.weather.Services.UserPreferencesService.PREF_FILE;
 
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
