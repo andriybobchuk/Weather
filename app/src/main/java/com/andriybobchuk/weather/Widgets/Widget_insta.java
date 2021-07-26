@@ -19,7 +19,7 @@ import static com.andriybobchuk.weather.Services.UserPreferencesService.PREF_FIL
 public class Widget_insta extends AppWidgetProvider implements SimpleForecastService.apiCallback{
 
     // Construct the RemoteViews object
-    RemoteViews views = new RemoteViews("com.example.weather2", R.layout.widget__a);
+    RemoteViews views = new RemoteViews("com.andriybobchuk.weather", R.layout.widget__a);
     Context c;
     AppWidgetManager awm;
     int awid;

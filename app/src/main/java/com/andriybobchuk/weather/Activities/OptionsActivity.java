@@ -3,6 +3,7 @@ package com.andriybobchuk.weather.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.widget.*;
@@ -72,6 +73,15 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
+        Button btn_policy = findViewById(R.id.btn_privacy);
+        btn_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://sites.google.com/view/weatherprivacy/home"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
         Button btn_apply_options = findViewById(R.id.btn_apply_options);
         final EditText et_city = findViewById(R.id.et_location);

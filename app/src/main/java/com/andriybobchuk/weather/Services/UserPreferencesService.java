@@ -15,7 +15,7 @@ public class UserPreferencesService {
 
 
 
-    public static final String PREF_FILE = "SHARED_PREFv42";
+    public static final String PREF_FILE = "SHARED_PREFv50";
 
     public static String getPrefCity(MainActivity mainActivity)
     {

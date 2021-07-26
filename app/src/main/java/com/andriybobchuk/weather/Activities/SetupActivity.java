@@ -37,7 +37,7 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySetupBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        final View view = binding.getRoot();
         setContentView(view);
 
 
@@ -47,11 +47,14 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
         binding.clPageC.setVisibility(View.GONE);
         binding.clPageD.setVisibility(View.GONE);
         binding.clPageA.setVisibility(View.GONE);
+        binding.clPrivacy.setVisibility(View.GONE);
+
 
 
         binding.btnGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Do GPS stuff
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (locationManager.isProviderEnabled(GPS_PROVIDER)) {
@@ -61,6 +64,14 @@ public class SetupActivity extends AppCompatActivity implements UserLocationServ
                     //OnGPS();
                 }
 
+//                binding.clPrivacy.setVisibility(View.VISIBLE);
+//                binding.btnFine.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        binding.clPrivacy.setVisibility(View.GONE);
+//
+//                    }
+//                });
             }
         });
 

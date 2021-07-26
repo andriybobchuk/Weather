@@ -5,11 +5,11 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.weather2"
+        applicationId "com.andriybobchuk.weather"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "5.2.0r"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
