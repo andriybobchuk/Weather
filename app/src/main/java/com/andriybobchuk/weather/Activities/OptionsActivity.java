@@ -191,12 +191,12 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
 
         String selected = parent.getItemAtPosition(position).toString();
 
-        if(selected.equals("Metric"))
+        if(selected.equals(getResources().getString(R.string.metric)))
         {
             // Do Preferences stuff
             getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "metric").apply();
         }
-        if(selected.equals("Imperial"))
+        if(selected.equals(getResources().getString(R.string.imperial)))
         {
             // Do Preferences stuff
             getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit().putString("UNITS", "imperial").apply();

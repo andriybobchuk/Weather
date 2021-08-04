@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Locale;
 
 public class SimpleForecastService {
 
@@ -49,7 +50,7 @@ public class SimpleForecastService {
         }
 
 
-        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=en";
+        String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=" + Locale.getDefault().getLanguage();
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -68,7 +69,7 @@ public class SimpleForecastService {
 
                     wind = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getInt("wind_speed")+" kmh");
 
-                    main = response.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("main");
+                    main = String.valueOf(response.getJSONArray("daily").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("main"));
 
 
                     callback.displayResult(temp, desc, context, city, min_max, theme_tomorrow, temp_tomorrow, temp_today, wind, main);

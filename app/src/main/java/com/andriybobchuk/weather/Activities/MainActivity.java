@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         for(int i=0; i<=6; i++)
         {
-            daysRadioButtons[i].setText(String.valueOf(new ForecastService().arr_date[i].charAt(0)));
+            daysRadioButtons[i].setText(StringUtils.capitalize(String.valueOf(new ForecastService().arr_date[i].charAt(0))));
         }
     }
 
@@ -436,10 +436,10 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
             case "Clouds":
                 if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
-                    tv_myWeatherDescription.setText("Just a bit of clouds");
+                    tv_myWeatherDescription.setText(getResources().getString(R.string.Just_a_bit_of_clouds));
                     iv_theme.setImageResource(R.drawable.theme_clouds);
                 } else {
-                    tv_myWeatherDescription.setText("Clouds, u know");
+                    tv_myWeatherDescription.setText(getResources().getString(R.string.Clouds_u_know));
                     iv_theme.setImageResource(R.drawable.theme_clouds_vik);
                 }
                 break;
@@ -458,28 +458,28 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                     if(sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() < sdf.parse(new ForecastService().arr_sunset[dayIndex]).getTime() && sdf.parse(new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime())).getTime() > sdf.parse(new ForecastService().arr_sunrise[dayIndex]).getTime())
                     {
                         if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
-                            tv_myWeatherDescription.setText("The weather's just perfect!");
+                            tv_myWeatherDescription.setText(getResources().getString(R.string.The_weathers_just_perfect));
                             iv_theme.setImageResource(R.drawable.theme_sun);
                         } else {
-                            tv_myWeatherDescription.setText("Go grab some taco with bros");
+                            tv_myWeatherDescription.setText(getResources().getString(R.string.Go_grab_some_taco_with_bros));
                             iv_theme.setImageResource(R.drawable.theme_sun_vik);
                         }
                     } else {
                         if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
-                            tv_myWeatherDescription.setText("Pretty cool night!");
+                            tv_myWeatherDescription.setText(getResources().getString(R.string.Pretty_cool_night));
                             iv_theme.setImageResource(R.drawable.theme_moon);
                         } else {
-                            tv_myWeatherDescription.setText("Pretty clear sky");
+                            tv_myWeatherDescription.setText(getResources().getString(R.string.Pretty_clear_sky));
                             iv_theme.setImageResource(R.drawable.theme_moon_vik);
                         }
 
                     }
                 } else {
                     if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
-                        tv_myWeatherDescription.setText("The weather's just perfect!");
+                        tv_myWeatherDescription.setText(getResources().getString(R.string.The_weathers_just_perfect));
                         iv_theme.setImageResource(R.drawable.theme_sun);
                     } else {
-                        tv_myWeatherDescription.setText("Go grab some taco with bros");
+                        tv_myWeatherDescription.setText(getResources().getString(R.string.Go_grab_some_taco_with_bros));
                         iv_theme.setImageResource(R.drawable.theme_sun_vik);
                     }
                 }
@@ -487,20 +487,20 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
                 break;
             case "Rain":
                 if(UserPreferencesService.getPrefTheme(this).equals("gnome")) {
-                    tv_myWeatherDescription.setText("Take ur umbrella with you!");
+                    tv_myWeatherDescription.setText(getResources().getString(R.string.Take_ur_umbrella_with_you));
                     iv_theme.setImageResource(R.drawable.theme_rain);
                 } else {
-                    tv_myWeatherDescription.setText("Quite wet here, u know");
+                    tv_myWeatherDescription.setText(getResources().getString(R.string.Quite_wet_here_u_know));
                     iv_theme.setImageResource(R.drawable.theme_rain_vik);
                 }
 
                 break;
             case "Snow":
-                tv_myWeatherDescription.setText("All the weather outside is frightful..");
+                tv_myWeatherDescription.setText(getResources().getString(R.string.All_the_weather_outside_is_frightful));
                 iv_theme.setImageResource(R.drawable.theme_snow);
                 break;
             default:
-                tv_myWeatherDescription.setText("It's kinda strange outside");
+                tv_myWeatherDescription.setText(getResources().getString(R.string.Its_kinda_strange_outside));
                 iv_theme.setImageResource(R.drawable.theme_clouds);
         }
     }
@@ -523,7 +523,7 @@ public class MainActivity extends AppCompatActivity /*implements UserLocationSer
 
         // Gliwice at 10:53
         binding.tvRegion.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
-        binding.tvRegion.setText(StringUtils.capitalize(UserPreferencesService.getPrefCity(this)) + " at " + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
+        binding.tvRegion.setText(StringUtils.capitalize(UserPreferencesService.getPrefCity(this)) + getResources().getString(R.string._at_) + String.valueOf(new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
 
         //  -9°C
         binding.tvTemperature.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));

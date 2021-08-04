@@ -17,11 +17,100 @@
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="hello">Hello!</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="confirm">Confirm</string>
+    <string name="or">OR</string>
+    <string name="enable_gps">Enable GPS</string>
+    <string name="units">Units?</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+    <string name="great">Great!</string>
+    <string name="you_re_now_all_set_up_you_can_always_change_preferences_in_options">"You're now all set up. You can
+        always change preferences in Options "
+    </string>
+    <string name="start">Start</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="inside_the_day">Inside the day</string>
+    <string name="hm">Hm..</string>
+    <string name="pop">POP</string>
+    <string name="filled">filled</string>
+    <string name="wind">Wind</string>
+    <string name="with">with</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv">UV</string>
+    <string name="pressure">Pressure</string>
+    <string name="clouds">Clouds</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="morning">morning</string>
+    <string name="afternoon">afternoon</string>
+    <string name="evening">evening</string>
+    <string name="night">night</string>
+    <string name="widgets">Widgets</string>
+    <string name="collapse_forever">Collapse forever</string>
+    <string name="options">Options</string>
+    <string name="here_you_can_choose_who_do_you_want_to_show_you_the_weather_forecast">"Here you can choose who do you want to show you the weather forecast "
+    </string>
+    <string name="pick_ur_character">Pick ur character</string>
+    <string name="meteorologists">Meteorologists</string>
+    <string name="gnome">GNOME</string>
+    <string name="alien">ALIEN</string>
+    <string name="you_can_show_hide_the_widgets_layout_from_your_app_s_main_page">"You can Show/Hide the widgets layout from your app's main page "
+    </string>
+    <string name="widgets_module">Widgets module</string>
+    <string name="layouts">Layouts</string>
+    <string name="change_location">Change location</string>
+    <string name="apply">Apply</string>
+    <string name="choose_metric_to_see_temperature_in_celsius_and_imperial_for_fahrenheits">Choose Metric to see
+        temperature in Celsius and Imperial - for Fahrenheits
+    </string>
+    <string name="unit_system">Unit system</string>
+    <string name="annoying_notifications_every_morning_no_matter_how_the_weather_looks_like_you_ll_know_the_details">
+        Annoying notifications every morning, no matter how the weather looks like, you\'ll know the details.
+    </string>
+    <string name="notifications">Notifications</string>
+    <string name="daily_overview">Daily Overview</string>
+    <string name="you_will_receive_this_type_of_notification_only_if_the_next_day_it_s_going_to_rain">You will receive
+        this type of notification only if the next day it\'s going to rain.
+    </string>
+    <string name="rain">Rain</string>
+    <string name="if_the_next_day_the_temperature_will_be_significantly_cooler_or_warmer_you_will_get_an_alert">If the
+        next day the temperature will be significantly cooler or warmer you will get an alert.
+    </string>
+    <string name="low_high_temperatures">Low/High temperatures</string>
+    <string name="well_i_suggest_that_you_keep_it_turned_off_just_my_preference_you_do_whatever_you_want">Well, I
+        suggest that you keep it turned off (Just my preference, you do whatever you want)
+    </string>
+    <string name="notification_sound">Notification sound</string>
+    <string name="version_july_2021_nauthor_andrii_bobchuk">Version: August 2021\nAuthor: Andrii Bobchuk</string>
+    <string name="about">About</string>
+    <string name="best_weather_app_ever">Best weather app ever</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="viktor_s_unlocked">Viktor\'s unlocked!</string>
+    <string name="try_em_out">Try \'em out</string>
+    <string name="_at_"> at </string>
+    <string name="Feels_like_">Feels like </string>
+    <string name="_kmh"> kmh</string>
+    <string name="_mb"> mb</string>
+
+    <string name="The_weathers_just_perfect">The weather\'s just perfect!</string>
+    <string name="Go_grab_some_taco_with_bros">Go grab some taco with bros</string>
+    <string name="Pretty_cool_night">Pretty cool night!</string>
+    <string name="Pretty_clear_sky">Pretty clear sky</string>
+    <string name="Take_ur_umbrella_with_you">Take ur umbrella with you!</string>
+    <string name="Quite_wet_here_u_know">Quite wet here, u know</string>
+    <string name="All_the_weather_outside_is_frightful">All the weather outside is frightful..</string>
+    <string name="Its_kinda_strange_outside">It\'s kinda strange outside</string>
+    <string name="Just_a_bit_of_clouds">Just a bit of clouds</string>
+    <string name="Clouds_u_know">Clouds, u know</string>
+
+    <string name="Updated_">Updated </string>
 
     <!-- Unit Spinner -->
     <string-array name="units_array">
-        <item>Metric</item>
-        <item>Imperial</item>
+        <item>@string/metric</item>
+        <item>@string/imperial</item>
     </string-array>
 
 </resources>

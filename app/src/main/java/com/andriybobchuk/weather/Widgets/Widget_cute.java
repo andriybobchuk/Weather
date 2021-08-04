@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
+import com.andriybobchuk.weather.Activities.MainActivity;
 import com.andriybobchuk.weather.R;
 import com.andriybobchuk.weather.Services.SimpleForecastService;
 import com.andriybobchuk.weather.Structures.TimeAndDate;
@@ -109,7 +110,7 @@ public class Widget_cute extends AppWidgetProvider implements SimpleForecastServ
 
 
         views.setTextViewText(R.id.appwidget_text_temp, temp);
-        views.setTextViewText(R.id.appwidget_text_description, StringUtils.capitalize(city) + "\nUpdated " + new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime()));
+        views.setTextViewText(R.id.appwidget_text_description, StringUtils.capitalize(city) + "\n" + context.getResources().getString(R.string.Updated_) + new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime()));
 
         switch(main)
         {

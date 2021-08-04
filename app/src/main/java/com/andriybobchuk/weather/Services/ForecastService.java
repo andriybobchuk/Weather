@@ -12,12 +12,14 @@ import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.StrictMath.round;
 
@@ -84,7 +86,7 @@ public class ForecastService {
 
 
         //String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=50.29761&lon=18.67658&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=metric&lang=en";
-        String URLbase = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=en";
+        String URLbase = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=ace729200f31ff6473436ef39ad854ea&units=" + units + "&lang=" + Locale.getDefault().getLanguage();
 
 
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, URLbase, null, new Response.Listener<JSONObject>() {
@@ -129,7 +131,7 @@ public class ForecastService {
                     {
 
                         Date date = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("dt"))*1000);
-                        arr_date[dayIndex] = String.valueOf(new TimeAndDate().getDateFormat().format(date));
+                        arr_date[dayIndex] = StringUtils.capitalize(String.valueOf(new TimeAndDate().getDateFormat().format(date)));
 
                         //new TimeAndDate().getTimeFormat().format(new TimeAndDate().getCurrentDateAndTime())));
                         Date sunriseTime = new Date((response.getJSONArray("daily").getJSONObject(dayIndex).getLong("sunrise"))*1000);
@@ -141,12 +143,12 @@ public class ForecastService {
                         arr_pop[dayIndex]= String.valueOf(String.format("%.0f", response.getJSONArray("daily").getJSONObject(dayIndex).getDouble("pop") * 100) + "%");
                         arr_temperature[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("day"));
                         arr_min_max[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("min")+"°... "+response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("max")+"°");
-                        arr_details[dayIndex] = String.valueOf("Feels like " + String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("feels_like").getInt("day")) + "°, " + response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("description"));
+                        arr_details[dayIndex] = String.valueOf(mainActivity.getResources().getString(R.string.Feels_like_) + String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("feels_like").getInt("day")) + "°, " + response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("description"));
                         arr_humidity[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("humidity")+"%");
                         arr_clouds[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("clouds")+"%");
                         arr_uvi[dayIndex]= String.valueOf(String.format("%.0f", response.getJSONArray("daily").getJSONObject(dayIndex).getDouble("uvi")) + "%");
-                        arr_wind[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("wind_speed")+" kmh");
-                        arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+" mb");
+                        arr_wind[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("wind_speed")+mainActivity.getResources().getString(R.string._kmh));
+                        arr_pressure[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getInt("pressure")+mainActivity.getResources().getString(R.string._mb));
                         arr_theme[dayIndex] = response.getJSONArray("daily").getJSONObject(dayIndex).getJSONArray("weather").getJSONObject(0).getString("main");
 
                         arr_morning[dayIndex] = String.valueOf(response.getJSONArray("daily").getJSONObject(dayIndex).getJSONObject("temp").getInt("morn") + "°");
@@ -163,13 +165,13 @@ public class ForecastService {
                         arr_time[time] = String.valueOf(new TimeAndDate().getTimeFormat().format((response.getJSONArray("hourly").getJSONObject(time).getLong("dt"))*1000));
                         arr_temp[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("temp") +"°";
                         arr_descript[time] = response.getJSONArray("hourly").getJSONObject(time).getJSONArray("weather").getJSONObject(0).getString("main");
-                        arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") +" mb";
+                        arr_pres[time] = response.getJSONArray("hourly").getJSONObject(time).getInt("pressure") + mainActivity.getResources().getString(R.string._mb);
                     }
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(mainActivity, "Converting lat\\lon, wait..", 3000);
+                    Toast.makeText(mainActivity, "Converting lat\\lon, wait..", Toast.LENGTH_SHORT);
 
                 }
 

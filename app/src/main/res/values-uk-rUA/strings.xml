@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Додати віджет</string>
+    <string name="hello">Привіт!</string>
+    <string name="enter_your_city">Твоє місто</string>
+    <string name="confirm">Підтвердити</string>
+    <string name="or">АБО</string>
+    <string name="enable_gps">Увімкни геолокацію</string>
+    <string name="units">Температура?</string>
+    <string name="metric">Цельсій</string>
+    <string name="imperial">Фаренгейт</string>
+    <string name="great">Чудово!</string>
+    <string name="you_re_now_all_set_up_you_can_always_change_preferences_in_options">Все готово! Пам\'ятай що завжди
+        можеш змінити усі налаштування пізніше
+    </string>
+    <string name="start">Розпочати</string>
+    <string name="no_internet_connection">Відсутній інтернет зв\'язок</string>
+    <string name="inside_the_day">Детальний прогноз</string>
+    <string name="hm">Хм..</string>
+    <string name="pop">Опади</string>
+    <string name="wind">Вітер</string>
+    <string name="humidity">Вологість</string>
+    <string name="uv">УФ індекс</string>
+    <string name="pressure">Тиск</string>
+    <string name="clouds">Хмари</string>
+    <string name="sunrise">Схід</string>
+    <string name="morning">Ранок</string>
+    <string name="afternoon">Обід</string>
+    <string name="evening">Вечір</string>
+    <string name="night">Ніч</string>
+    <string name="widgets">Віджети</string>
+    <string name="collapse_forever">Сховати</string>
+    <string name="options">Налаштування</string>
+    <string name="here_you_can_choose_who_do_you_want_to_show_you_the_weather_forecast">"Тут ти можеш вибрати хто
+        показуватиме тобі прогноз погоди \n \n \n \n \n \n \n \n \n \n "
+    </string>
+    <string name="pick_ur_character">Вибір персонажа</string>
+    <string name="meteorologists">Метеорологи</string>
+    <string name="gnome">ГНОМ</string>
+    <string name="alien">ВІКТОР</string>
+    <string name="you_can_show_hide_the_widgets_layout_from_your_app_s_main_page">"Ти можеш відобразити/сховати панель з
+        віджетами на головному екрані \n \n \n \n \n "
+    </string>
+    <string name="widgets_module">Модуль віджетів</string>
+    <string name="layouts">Головний екран</string>
+    <string name="change_location">Змінити місто</string>
+    <string name="apply">ОК</string>
+    <string name="choose_metric_to_see_temperature_in_celsius_and_imperial_for_fahrenheits">Тут ти можеш змінити одиниці
+        вимірювання в програмі
+    </string>
+    <string name="unit_system">Одиниці вимірювання</string>
+    <string name="annoying_notifications_every_morning_no_matter_how_the_weather_looks_like_you_ll_know_the_details">
+        Надокучливі сповіщення кожного ранку, без різниці яка там погода, ти знатимеш все в деталях.
+    </string>
+    <string name="notifications">Сповіщення</string>
+    <string name="daily_overview">Щоденний огляд</string>
+    <string name="you_will_receive_this_type_of_notification_only_if_the_next_day_it_s_going_to_rain">Ти отримуватимеш
+        сповіщення цього типу лише якщо наступного дня очікується дощ.
+    </string>
+    <string name="rain">Зливи</string>
+    <string name="if_the_next_day_the_temperature_will_be_significantly_cooler_or_warmer_you_will_get_an_alert">Якщо
+        наступного дня температура повітря буде значно холоднішою або теплішою, ти отримаєш попередження
+    </string>
+    <string name="low_high_temperatures">Високі/Низькі температури</string>
+    <string name="well_i_suggest_that_you_keep_it_turned_off_just_my_preference_you_do_whatever_you_want">Рекомендую
+        тобі не трогати цей прапорець (З мого досвіду краще щоб не пілікало)
+    </string>
+    <string name="notification_sound">Звук сповіщень</string>
+    <string name="version_july_2021_nauthor_andrii_bobchuk">Версія: Серпень 2021 \nАвтор: Андрій Бобчук</string>
+    <string name="about">Про додаток</string>
+    <string name="best_weather_app_ever">Найкраща програма прогнозу погоди</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="viktor_s_unlocked">Віктор розблокований!</string>
+    <string name="try_em_out">Спробувати</string>
+    <string name="_at_">" в "</string>
+    <string name="_kmh">" км/год"</string>
+    <string name="_mb">" мб"</string>
+    <string name="Feels_like_">"Схоже на "</string>
+    <string name="The_weathers_just_perfect">Чудова погода!</string>
+    <string name="Go_grab_some_taco_with_bros">Не забудь крем для засмаги</string>
+    <string name="Pretty_cool_night">Прям кожну зірочку видно</string>
+    <string name="Pretty_clear_sky">Жодної хмаринки, правда</string>
+    <string name="Take_ur_umbrella_with_you">Не забудь парасольку!</string>
+    <string name="Quite_wet_here_u_know">Все ж таки бери парасольку</string>
+    <string name="All_the_weather_outside_is_frightful">Прям Новий рік якийсь</string>
+    <string name="Its_kinda_strange_outside">Ще такої погоди не бачив</string>
+    <string name="Just_a_bit_of_clouds">Ці хмари мене депресують :(</string>
+    <string name="Clouds_u_know">І знову хмари...</string>
+    <string name="Updated_">"Оновлено "</string>
+</resources>

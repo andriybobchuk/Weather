@@ -15,7 +15,7 @@
             android:background="#D32F2F" android:id="@+id/cl_error_msg" android:visibility="gone">
 
         <TextView
-                android:text="No internet connection"
+                android:text="@string/no_internet_connection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/tv_error"
                 app:layout_constraintStart_toStartOf="parent" android:textColor="@color/colorWhite"
@@ -51,7 +51,7 @@
                         android:layout_width="345dp"
                         android:layout_height="22dp"
                         app:fontFamily="@font/gotham_medium" android:fontFamily="@font/gotham_medium"
-                        android:text="Inside the day"
+                        android:text="@string/inside_the_day"
                         android:textSize="17.5sp" android:textColor="#FFFFFF"
                         android:id="@+id/tv_insidetheday"
                         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.797"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="272dp"
-                        android:text="Hm.."/>
+                        android:text="@string/hm"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/tv_hint"
@@ -212,13 +212,13 @@
                                     app:srcCompat="@drawable/rain_icon" android:id="@+id/doesntmater11"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="POP"
+                                    android:text="@string/pop"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmpatter12"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
                                     android:gravity="center"/>
                             <TextView
-                                    android:text="filled"
+                                    android:text="@string/filled"
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp" android:id="@+id/tv_pop"
                                     android:textAlignment="gravity" android:layout_gravity="center"
@@ -238,13 +238,13 @@
                                     app:srcCompat="@drawable/wind2_icon" android:id="@+id/doesntmatter5"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="Wind"
+                                    android:text="@string/wind"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmatter6"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
                                     android:gravity="center"/>
                             <TextView
-                                    android:text="with"
+                                    android:text="@string/with"
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp" android:id="@+id/tv_wind"
                                     android:textAlignment="gravity" android:layout_gravity="center"
@@ -264,7 +264,7 @@
                                     app:srcCompat="@drawable/drop_icon" android:id="@+id/iv_humidity"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="Humidity"
+                                    android:text="@string/humidity"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmatter1"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
@@ -290,7 +290,7 @@
                                     app:srcCompat="@drawable/summer_icon" android:id="@+id/doesntmatter8"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="UV"
+                                    android:text="@string/uv"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmatter9"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
@@ -316,7 +316,7 @@
                                     app:srcCompat="@drawable/temp_icon" android:id="@+id/doesntmatter2"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="Pressure"
+                                    android:text="@string/pressure"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmatter3"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
@@ -343,7 +343,7 @@
                                     app:srcCompat="@drawable/clouds_icon" android:id="@+id/doesntmatter11"
                                     android:layout_marginTop="15dp" android:layout_marginBottom="10dp"/>
                             <TextView
-                                    android:text="Clouds"
+                                    android:text="@string/clouds"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp" android:id="@+id/doesntmatter12"
                                     android:textAlignment="center" android:fontFamily="@font/gotham_medium"
@@ -376,7 +376,7 @@
                             android:id="@+id/imageView2" android:layout_weight="1"
                             android:layout_gravity="center_vertical"/>
                     <TextView
-                            android:text="Sunrise"
+                            android:text="@string/sunrise"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/tv_sunrise" android:layout_weight="1"
                             android:fontFamily="@font/gotham_medium" android:gravity="center_vertical"
@@ -387,7 +387,7 @@
                             android:id="@+id/imageView" android:layout_weight="1"
                             android:layout_gravity="center_vertical"/>
                     <TextView
-                            android:text="Sunset"
+                            android:text="@string/sunset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/tv_sunset" android:layout_weight="1"
                             android:fontFamily="@font/gotham_medium" android:layout_gravity="center_vertical"
@@ -773,7 +773,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="29dp">
                             <TextView
-                                    android:text="morning"
+                                    android:text="@string/morning"
                                     android:layout_width="44dp"
                                     android:layout_height="wrap_content" android:id="@+id/mornnn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
@@ -781,21 +781,21 @@
                                     android:gravity="center_horizontal" android:textColor="#FFF"
                                     android:layout_marginStart="15dp"/>
                             <TextView
-                                    android:text="afternoon"
+                                    android:text="@string/afternoon"
                                     android:layout_width="48dp"
                                     android:layout_height="wrap_content" android:id="@+id/afternnn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
                             <TextView
-                                    android:text="evening"
+                                    android:text="@string/evening"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" android:id="@+id/evennn"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
                                     android:textSize="13sp"
                                     android:gravity="center_horizontal" android:textColor="#FFF"/>
                             <TextView
-                                    android:text="night"
+                                    android:text="@string/night"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" android:id="@+id/nighttt"
                                     android:layout_weight="1" android:fontFamily="@font/gotham_medium"
@@ -832,7 +832,7 @@
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="15dp">
 
                     <TextView
-                            android:text="Widgets"
+                            android:text="@string/widgets"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/widggggg"
                             android:textSize="17.5sp"
@@ -910,7 +910,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </HorizontalScrollView>
                     <Button
-                            android:text="Collapse forever"
+                            android:text="@string/collapse_forever"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/btn_collapse_widgets"
                             style="@style/Widget.AppCompat.Button.Borderless" android:textAllCaps="false"
@@ -926,7 +926,7 @@
                             android:visibility="invisible"
                             app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="3dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                    />
+                            android:contentDescription="TODO"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

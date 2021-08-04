@@ -109,7 +109,7 @@ public class Widget_gradient extends AppWidgetProvider implements SimpleForecast
 
 
         views.setTextViewText(R.id.appwidget_text_temp, temp);
-        views.setTextViewText(R.id.appwidget_text_description, StringUtils.capitalize(city) + "\nUpdated " + new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime()));
+        views.setTextViewText(R.id.appwidget_text_description, StringUtils.capitalize(city) + "\n" + context.getResources().getString(R.string.Updated_) + new TimeAndDate().getTimeFormat().format(Calendar.getInstance().getTime()));
 
         switch(main)
         {

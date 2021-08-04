@@ -32,7 +32,7 @@
                 android:layout_marginBottom="17dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp" app:layout_constraintVertical_bias="0.857"/>
         <TextView
-                android:text="Options"
+                android:text="@string/options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="1"
                 android:fontFamily="@font/gotham_bold" android:textSize="15sp" android:textColor="#FFFFFF"
@@ -58,7 +58,7 @@
                     android:layout_marginTop="1dp" app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
                 <TextView
-                        android:text="Here you can choose who do you want to show you the weather forecast"
+                        android:text="@string/here_you_can_choose_who_do_you_want_to_show_you_the_weather_forecast"
                         android:layout_width="348dp"
                         android:layout_height="55dp" android:id="@+id/textView1043"
                         android:fontFamily="@font/gotham_book"
@@ -67,7 +67,7 @@
                         android:lineSpacingExtra="4sp" app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.301"/>
                 <TextView
-                        android:text="Pick ur character"
+                        android:text="@string/pick_ur_character"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView943"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -75,7 +75,7 @@
                         android:layout_marginStart="19dp"
                         android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/textView13"/>
                 <TextView
-                        android:text="Meteorologists"
+                        android:text="@string/meteorologists"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView13"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -98,7 +98,7 @@
                             app:layout_constraintBottom_toBottomOf="parent" android:orientation="horizontal"
                             android:id="@+id/rg_character">
                         <RadioButton
-                                android:text="GNOME"
+                                android:text="@string/gnome"
                                 android:layout_width="123dp"
                                 android:layout_height="42dp" android:id="@+id/rb_gnome"
                                 android:background="@drawable/bgrate" android:button="@android:color/transparent"
@@ -107,7 +107,7 @@
                                 android:layout_marginLeft="17dp" android:textColor="@drawable/radio_text_colors"
                                 android:checked="false"/>
                         <RadioButton
-                                android:text="ALIEN"
+                                android:text="@string/alien"
                                 android:layout_width="89dp"
                                 android:layout_height="42dp" android:id="@+id/rb_alien"
                                 android:background="@drawable/bgrate" android:button="@android:color/transparent"
@@ -130,7 +130,7 @@
                         android:theme="@style/MyEditTextTheme"
                         app:layout_constraintStart_toEndOf="@+id/textView10435"/>
                 <TextView
-                        android:text="You can Show/Hide the widgets  layout from your app's main page"
+                        android:text="@string/you_can_show_hide_the_widgets_layout_from_your_app_s_main_page"
                         android:layout_width="312dp"
                         android:layout_height="wrap_content" android:id="@+id/textView10435"
                         android:fontFamily="@font/gotham_book"
@@ -138,7 +138,7 @@
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
-                        android:text="Widgets module"
+                        android:text="@string/widgets_module"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView9435"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -146,7 +146,7 @@
                         android:layout_marginStart="19dp"
                         android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/textView135"/>
                 <TextView
-                        android:text="Layouts"
+                        android:text="@string/layouts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView135"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -162,7 +162,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                        android:text="Change location"
+                        android:text="@string/change_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView"
                         android:fontFamily="@font/gotham_medium" android:textSize="17sp"
@@ -182,7 +182,7 @@
                         android:theme="@style/MyEditTextTheme" android:background="@drawable/options_btn_style"
                         android:textAlignment="center"/>
                 <Button
-                        android:text="Apply"
+                        android:text="@string/apply"
                         android:layout_width="96dp"
                         android:layout_height="45dp" android:id="@+id/btn_apply_options"
                         android:background="@drawable/options_btn_style"
@@ -198,7 +198,7 @@
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
-                        android:text="Choose Metric to see temperature in Celsius and Imperial - for Fahrenheits"
+                        android:text="@string/choose_metric_to_see_temperature_in_celsius_and_imperial_for_fahrenheits"
                         android:layout_width="234dp"
                         android:layout_height="49dp" android:id="@+id/textView1044"
                         android:fontFamily="@font/gotham_book"
@@ -206,7 +206,7 @@
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
-                        android:text="Unit system"
+                        android:text="@string/unit_system"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView944"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -228,7 +228,7 @@
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
-                        android:text="Annoying notifications every morning, no matter how the weather looks like, you'll know the details."
+                        android:text="@string/annoying_notifications_every_morning_no_matter_how_the_weather_looks_like_you_ll_know_the_details"
                         android:layout_width="312dp"
                         android:layout_height="wrap_content" android:id="@+id/textView101"
                         android:fontFamily="@font/gotham_book"
@@ -237,7 +237,7 @@
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
                 <TextView
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView3"
                         android:fontFamily="@font/gotham_medium" android:textSize="17sp"
@@ -245,7 +245,7 @@
                         android:layout_marginStart="19dp" app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="40dp"/>
                 <TextView
-                        android:text="Daily Overview"
+                        android:text="@string/daily_overview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView91"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -266,7 +266,7 @@
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
-                        android:text="You will receive this type of notification only if the next day it's going to rain."
+                        android:text="@string/you_will_receive_this_type_of_notification_only_if_the_next_day_it_s_going_to_rain"
                         android:layout_width="312dp"
                         android:layout_height="wrap_content" android:id="@+id/textView102"
                         android:fontFamily="@font/gotham_book"
@@ -275,7 +275,7 @@
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
                 <TextView
-                        android:text="Rain"
+                        android:text="@string/rain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView92"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -298,7 +298,7 @@
                     android:id="@+id/constraintLayout7">
 
                 <TextView
-                        android:text="If the next day the temperature will be significantly cooler or warmer you will get an alert."
+                        android:text="@string/if_the_next_day_the_temperature_will_be_significantly_cooler_or_warmer_you_will_get_an_alert"
                         android:layout_width="312dp"
                         android:layout_height="wrap_content" android:id="@+id/textView103"
                         android:fontFamily="@font/gotham_book"
@@ -307,7 +307,7 @@
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
                 <TextView
-                        android:text="Low/High temperatures"
+                        android:text="@string/low_high_temperatures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView93"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -330,7 +330,7 @@
                     android:id="@+id/constraintLayout9">
 
                 <TextView
-                        android:text="Well, I suggest that you keep it turned off (Just my preference, you do whatever you want)"
+                        android:text="@string/well_i_suggest_that_you_keep_it_turned_off_just_my_preference_you_do_whatever_you_want"
                         android:layout_width="312dp"
                         android:layout_height="50dp" android:id="@+id/textView104"
                         android:fontFamily="@font/gotham_book"
@@ -338,7 +338,7 @@
                         android:textSize="12.5sp" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:lineSpacingExtra="4sp"/>
                 <TextView
-                        android:text="Notification sound"
+                        android:text="@string/notification_sound"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView94"
                         android:textColor="#FFFFFF" android:fontFamily="@font/gotham_medium"
@@ -361,7 +361,7 @@
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="60dp">
 
                 <TextView
-                        android:text="Version: July 2021\nAuthor: Andrii Bobchuk"
+                        android:text="@string/version_july_2021_nauthor_andrii_bobchuk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView18"
                         android:fontFamily="@font/gotham_book"
@@ -370,7 +370,7 @@
                         android:layout_marginStart="19dp" android:layout_marginTop="10dp"
                         app:layout_constraintTop_toBottomOf="@+id/textView16" android:lineSpacingExtra="6dp"/>
                 <TextView
-                        android:text="About"
+                        android:text="@string/about"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView17"
                         android:fontFamily="@font/gotham_medium"
@@ -378,7 +378,7 @@
                         app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="19dp" android:layout_marginTop="40dp"/>
                 <TextView
-                        android:text="Best weather app ever"
+                        android:text="@string/best_weather_app_ever"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView16"
                         android:fontFamily="@font/gotham_medium"
@@ -387,13 +387,13 @@
                         android:layout_marginStart="19dp" android:layout_marginTop="20dp"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"/>
                 <Button
-                        android:text="Privacy Policy"
-                        android:layout_width="186dp"
-                        android:layout_height="42dp" android:id="@+id/btn_privacy"
+                        android:text="@string/privacy_policy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/btn_privacy"
                         app:layout_constraintTop_toBottomOf="@+id/textView18"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="17dp"
                         android:layout_marginTop="25dp" android:background="@drawable/bgrate"
-                        android:fontFamily="@font/gotham_medium"/>
+                        android:fontFamily="@font/gotham_medium" android:padding="15dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -46,7 +46,7 @@ public class TimeAndDate {
      * @return date format like "Tuesday, Feb 16" + a proper offset
      */
     public SimpleDateFormat getDateFormat() {
-        dateFormat = new SimpleDateFormat("EEEE, MMM d", Locale.ENGLISH);
+        dateFormat = new SimpleDateFormat("EEEE, MMM d"); //TODO: Add Locale.ENGLISH to show only English
         dateFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + timezone_offset)));
         return dateFormat;
     }
@@ -55,7 +55,7 @@ public class TimeAndDate {
      * @return time format like "6:27" + a proper offset
      */
     public SimpleDateFormat getTimeFormat() {
-        timeFormat = new SimpleDateFormat("H:mm", Locale.ENGLISH);
+        timeFormat = new SimpleDateFormat("H:mm"); //TODO: Add Locale.ENGLISH to show only English
         timeFormat.setTimeZone(TimeZone.getTimeZone(String.valueOf("GMT+" + timezone_offset)));
         return timeFormat;
     }
