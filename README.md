@@ -1,18 +1,43 @@
-# About
-Just some GORGEOUS design weather application written using java
+# The Weather
 
-# Easter egg
-Excepting the gnome there is another meteorologist character, you should find him somehow and then you will be able to switch between then anytime
+This was my very first Android app. The first and the last app I wrote in Java.
 
-## Screenshots
+A simple weather app with primitive architecture but interesting and unique design idea.
+
+The main feature is in its design - a funny character who changes his behaviour based on the weather/time of the year is the base of an application. It feels like this tail gnome just tells you everything about the weather. He also sends you notifications as you set it up in the settings. 
+
 ![](/screenshots/s0.png)
 ![](/screenshots/s.png)
 
+## What have I learned during the development?
 
-## Technical part
-Sooo, it's on Java, SDK 15 & API level 30 (so the target android version is 11 to catch all the newest features but it also supports down to 21(android lollipop 5.0)).
+* Basics of Java for Android Development including collections, lambdas, higher-order functions;
+* Intents and Stages of the Activity Lifecycle;
+* How to work with APIs - sending requests and processing responses on the background thread;
+* Sending notifications;
+* Setting up widgets;
+* UI Localization. 
+
+## Getting Started
+
+You can download the latest version of this app on Google Play: [Weather](https://play.google.com/store/apps/details?id=com.andriybobchuk.weather)
+
+### Permissions
+
+- Internet - to access API
+- Location - to get the weather data for your city
+
+## Built with
+
+* [Java](https://www.java.com/en/) - The programming language used.
+* Android Studio, SDK 15 & API level 30
+* Adobe XD - For the UI designing.
+* [OpenWeatherMap](https://openweathermap.org/api) - For weather data
+
+## Author
+
+* **Andriy Bobchuk** - [andriybobchuk.com](https://andriybobchuk.com)
 
 ## License
-Apache License
-Version 2.0, January 2004
-Copyright 2021 Andrii Bobchuk
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
